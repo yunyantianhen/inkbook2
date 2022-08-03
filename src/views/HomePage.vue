@@ -32,7 +32,7 @@
           <el-button @click="submit_all" type="primary" style="height: 40px; width: 70px; margin-left: 10px">提交</el-button>
         </div>
         <div>
-          <el-button type="danger" @click="open">登!录!</el-button>
+          <router-link to="/register"><el-button type="danger" @click="open">登!录!</el-button></router-link>
         </div>
       </el-tab-pane>
       <el-tab-pane label="团队管理">

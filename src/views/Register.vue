@@ -3,7 +3,7 @@
     <div>
       <div style="height: 1000px">
         <div class="warp" style="width: 400px; height: 280px; margin: auto;">
-          <div style="font-size: 25px; position: relative; top: 20px">登录</div>
+          <div style="font-size: 25px; position: relative; top: 20px">登&nbsp;&nbsp;录</div>
           <el-form ref="form" :model="form" style="position: relative; top: 30px">
             <el-form-item prop="username">
               <el-input placeholder="用户名" type="username" v-model="form.username" autocomplete="off" clearable></el-input>
@@ -16,7 +16,7 @@
             </el-form-item>
           </el-form>
           <div class="suffix">
-            <p @click="toRegister">注册帐号</p>
+            <router-link to="/logonpage"><p style="color: gray">注册帐号</p></router-link>
           </div>
         </div>
       </div>
@@ -37,7 +37,7 @@ export default {
   },
   methods: {
     login() {
-
+      this.$router.push('/');
     }
   }
 }
