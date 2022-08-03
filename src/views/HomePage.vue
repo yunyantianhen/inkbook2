@@ -107,7 +107,7 @@
           <el-tabs>
             <el-tab-pane label="我参与的">
             </el-tab-pane>
-            <el-tab-pane label="我创建的">
+            <el-tab-pane label="回收站">
             </el-tab-pane>
           </el-tabs>
         </div>
