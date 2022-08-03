@@ -113,8 +113,20 @@
         </div>
         <div class="item_right">
           <el-row>
-            <el-button type="primary">创建项目</el-button>
+            <el-button type="primary" @click="addDialogVisible = true">创建项目</el-button>
           </el-row>
+          <el-dialog title="创建项目" :visible.sync="addDialogVisible" width="50%" @close="addDialogClosed">
+            <el-form :model="addForm" :rules="addFormRules" ref="addFormRef" label-width="150px">
+              <el-form-item label="项目名" prop="name">
+                <el-input v-model="addForm.name"></el-input>
+              </el-form-item>
+            </el-form>
+            <!--底部区域-->
+            <span slot="footer" class="dialog-footer">
+            <el-button @click="addDialogVisible = false">取 消</el-button>
+            <el-button type="primary" @click="addUser">确 定</el-button>
+          </span>
+          </el-dialog>>
         </div>
       </el-tab-pane>
     </el-tabs>
@@ -142,6 +154,16 @@ export default {
       old_name: '',
       old_mail: '',
       old_identity: '',
+      addDialogVisible:false,
+      addForm:{
+        name:''
+      },
+      addFormRules:{
+        name:[
+          { required : true, message:'请输入用户名' ,trigger:'blur'},
+          { min :1 ,max:15, message: '项目名的长度在1~15个字符之间', trigger: 'blur'}
+        ]
+      },
     };
   },
   created() {
@@ -172,7 +194,10 @@ export default {
           identity: this.form.identity,
         })
       })
-    }
+    },
+    addDialogClosed(){
+      this.$refs.addFormRef.resetFields()
+    },
   },
 }
 </script>
