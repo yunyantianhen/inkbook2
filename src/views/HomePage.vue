@@ -164,21 +164,14 @@ export default {
           { min :1 ,max:15, message: '项目名的长度在1~15个字符之间', trigger: 'blur'}
         ]
       },
+      teamList:[],
+      projectList:[]
     };
   },
   created() {
-    this.$axios.get().then(
-        res =>{
-          this.old_nickname=res.data.nickname;
-          this.old_name=res.data.name;
-          this.old_mail=res.data.mail;
-          this.old_identity=res.data.identity;
-        }
-    );
   },
   methods: {
     open(){
-
     },
     handleChange(val) {
       console.log(val);
@@ -198,6 +191,27 @@ export default {
     addDialogClosed(){
       this.$refs.addFormRef.resetFields()
     },
+    getPersonalInformation(){
+    },
+    getTeamlist(){
+      this.$axios.post('/team/showTeam',[this.$store.state.UserId]).then(
+          res => {
+            this.teamList.push({
+              teamId: res.data.teamId
+            })
+          }
+      )
+    },
+    getProjectlist(team_id){
+      this.$axios.post('/team/showTeam',team_id).then(
+          res => {
+            this.projectList.push({
+              projectId: res.data.projectId
+            })
+          }
+      )
+    },
+
   },
 }
 </script>
