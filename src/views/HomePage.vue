@@ -3,18 +3,25 @@
   <body style="width: 1400px; margin: auto">
     <el-tabs :tab-position="tabPosition" style="height: 1000px;">
       <el-tab-pane label="个人资料">
-        <div class="information">
+        <div class="information" >
+          <br/><br/>
           <div style="height: 100px">
             <img class="head" src="../img/img.png">
           </div>
+          <br>
           <div style="height: 200px">
-            <div class="small">云烟</div>
-            <div class="small">高进</div>
-            <div class="small">809816252@qq.com</div>
-            <div class="small">管理员</div>
+            <div class="small"><span style="font-weight: bold">昵称:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>{{this.old_nickname}}</div>
+            <div class="small"><span style="font-weight: bold">姓名:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>{{this.old_name}}</div>
+            <div class="small"><span style="font-weight: bold">邮箱:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>{{this.old_mail}}</div>
+            <div class="small"><span style="font-weight: bold">身份:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>{{this.old_identity}}</div>
           </div>
         </div>
         <div class="submit_information">
+          <br/><br/><br/>
+          <div style="text-align: left; margin-left: 150px; font-size: 20px; font-weight: bold">
+            请在以下区域修改个人信息：
+            <br/><br/>
+          </div>
           <el-form ref="form" :model="form">
             <el-form-item label="昵称" style="margin-bottom: 20px; display: inline-block">
               <el-input  v-model="form.nickname" style="width: 500px;"></el-input>
@@ -31,8 +38,8 @@
           </el-form>
           <el-button @click="submit_all" type="primary" style="height: 40px; width: 70px; margin-left: 10px">提交</el-button>
         </div>
-        <div>
-          <el-button type="danger" @click="open">登!录!</el-button>
+        <div style="position: absolute; right: 100px; top: 50px">
+          <router-link to="/register"><el-button type="danger" @click="open">登&nbsp;录</el-button></router-link>
         </div>
       </el-tab-pane>
       <el-tab-pane label="团队管理">
@@ -107,7 +114,7 @@
           <el-tabs>
             <el-tab-pane label="我参与的">
             </el-tab-pane>
-            <el-tab-pane label="我创建的">
+            <el-tab-pane label="回收站">
             </el-tab-pane>
           </el-tabs>
         </div>
@@ -150,10 +157,10 @@ export default {
         mail: '',
         identity: '',
       },
-      old_nickname: '',
-      old_name: '',
-      old_mail: '',
-      old_identity: '',
+      old_nickname: '云烟',
+      old_name: '高进',
+      old_mail: '809816252@qq.com',
+      old_identity: '管理员',
       addDialogVisible:false,
       addForm:{
         name:''
@@ -249,10 +256,12 @@ export default {
 .small{
   width: 400px;
   height: 40px;
+  text-align: left;
+  margin-left: 100px;
 }
 .submit_information{
   width: 800px;
-  height: 1000px;
+  height: 1200px;
   font-size: 15px;
   float: left;
 }

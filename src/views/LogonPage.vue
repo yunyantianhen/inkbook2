@@ -3,8 +3,8 @@
   <body>
   <div>
     <div class="wrap">
-      <div style="font-size: 25px; position: absolute; top: 15px">注册</div>
-      <el-form :model="form" ref="form" class="form" style="position: relative; top: 15px;">
+      <div style="font-size: 22px; position: absolute; top: 15px; right: 150px">注&nbsp;&nbsp;册</div>
+      <el-form :model="form" ref="form" class="form" style="position: relative; top: 70px;">
         <el-form-item prop="username">
           <el-input placeholder="用户名" type="username" v-model="form.username" autocomplete="off" clearable></el-input>
         </el-form-item>
@@ -53,7 +53,10 @@ export default {
   methods:{
     toRegister: function () {
       // 跳转注册的路由
-      this.$router.push('/');
+      this.$router.push('/register');
+    },
+    register() {
+      this.$router.push('/register');
     }
   }
 }
