@@ -2,7 +2,9 @@
 <html>
 <body style="width: 800px; margin: auto">
 <br/>
-<div style="width: 800px; font-size: 30px; font-weight: bold; text-align: left; margin-left: 50px">企业1</div>
+<div style="width: 600px; font-size: 30px; font-weight: bold; text-align: left; margin-left: 50px; float: left">企业1</div>
+<div style="width: 100px; float: left"><el-button type="danger" @click="back">返回</el-button></div>
+<br/><br/>
 <el-divider></el-divider>
 <div style="width: 800px; margin: auto">
   <div style="width: 800px; text-align: left">
@@ -59,6 +61,9 @@ export default {
     toitem() {
       this.$router.push('/itempage');
     },
+    back() {
+      this.$router.push('/');
+    }
   }
 }
 </script>
