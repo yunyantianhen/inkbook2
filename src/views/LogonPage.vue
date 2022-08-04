@@ -8,6 +8,9 @@
         <el-form-item prop="username">
           <el-input placeholder="用户名" type="username" v-model="form.username" autocomplete="off" clearable></el-input>
         </el-form-item>
+        <el-form-item prop="username">
+          <el-input placeholder="真实姓名" type="username" v-model="form.name" autocomplete="off" clearable></el-input>
+        </el-form-item>
         <el-form-item prop="password_1">
           <el-input placeholder="密码" type="password" v-model="form.password_1" autocomplete="off" clearable show-password></el-input>
         </el-form-item>
@@ -21,6 +24,9 @@
               autocomplete="off"
               @keyup.enter.native="register"
           ></el-input>
+        </el-form-item>
+        <el-form-item prop="username">
+          <el-input placeholder="邮箱" type="username" v-model="form.mail" autocomplete="off" clearable></el-input>
         </el-form-item>
         <el-form-item class="btn_register">
           <el-button type="primary" @click="register">注&nbsp;&nbsp;册</el-button>
@@ -46,8 +52,10 @@ export default {
     return {
       form: {
         username: '',
+        name: '',
         password_1: '',
         password_2: '',
+        mail: '',
       }
     }
   },
@@ -92,7 +100,7 @@ export default {
 
 .wrap{
   width: 300px;
-  height: 350px;
+  height: 450px;
   padding: 0 25px 0 25px;
   line-height: 50px;
   position: relative;
@@ -100,7 +108,7 @@ export default {
   background-color: rgba(255, 255, 255, 0.85);;
   border-radius: 15px;
   color: #303133;
-  top: 160px;
+  top: 100px;
   border: 2px solid #ebeef5;
   box-shadow: 2px 2px 12px 2px rgb(0 0 0 / 10%);
   transition: .3s;
