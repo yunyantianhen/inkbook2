@@ -26,7 +26,7 @@
           ></el-input>
         </el-form-item>
         <el-form-item prop="username">
-          <el-input placeholder="邮箱" type="username" v-model="form.mail" autocomplete="off" clearable></el-input>
+          <el-input placeholder="邮箱" type="username" v-model="form.email" autocomplete="off" clearable></el-input>
         </el-form-item>
         <el-form-item class="btn_register">
           <el-button type="primary" @click="register">注&nbsp;&nbsp;册</el-button>
@@ -45,7 +45,6 @@
 </template>
 
 <script>
-import qs from "qs";
 export default {
   name: "LogonPage",
   data() {
@@ -55,14 +54,20 @@ export default {
         name: '',
         password_1: '',
         password_2: '',
-        mail: '',
+        email: '',
       }
     }
   },
   methods:{
     register: function () {
       // 跳转注册的路由
-      this.$axios.post('/user/register/',qs.stringify(this.form)).then(
+      this.$axios.post('/user/register/',{
+        username:this.form.username,
+        name:this.form.name,
+        password_1:this.form.password_1,
+        password_2:this.form.password_2,
+        email:this.form.email
+      }).then(
           res =>{
             switch (res.data.result) {
               case 1:
@@ -72,7 +77,7 @@ export default {
                 break;
 
               case 0:
-                this.$message.error("注册失败！");
+                this.$message.error(res.data.msg);
                 break;
             }
           }

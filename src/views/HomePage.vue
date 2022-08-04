@@ -53,25 +53,13 @@
                 <div>成员2</div>
               </el-collapse-item>
             </el-collapse>-->
-            <div style="margin: auto; width: 800px">
+            <div style="margin: auto; width: 800px" v-for="(team) in teamList" :key="team.id">
               <br/>
               <div style="width: 800px; text-align: left">
-                企业1
-                <el-button style="position: relative; left: 650px" type="primary" @click="toteam" round plain>企业详情</el-button>
-                <el-divider></el-divider>
-
-              </div>
-              <div style="width: 800px; text-align: left">
-                企业2
-                <el-button style="position: relative; left: 650px" type="primary" @click="toteam" round plain>企业详情</el-button>
+                {{team.name}}
+                <el-button style="position: relative; left: 650px" type="primary" @click="toteam(team.id,team.name)" round plain>企业详情</el-button>
                 <el-divider></el-divider>
               </div>
-              <div style="width: 800px; text-align: left">
-                企业3
-                <el-button style="position: relative; left: 650px" type="primary" @click="toteam" round plain>企业详情</el-button>
-                <el-divider></el-divider>
-              </div>
-
             </div>
           </el-tab-pane>
           <el-tab-pane label="我创建的">
@@ -227,16 +215,7 @@ export default {
           { min :1 ,max:15, message: '项目名的长度在1~15个字符之间', trigger: 'blur'}
         ]
       },
-      teamList:[
-        {
-          name:"asd",
-          id:1
-        },
-        {
-          name:"as22",
-          id:3
-        }
-      ],
+      teamList:[],
       projectList:[]
     };
   },
@@ -254,7 +233,9 @@ export default {
     toitem() {
       this.$router.push('/itempage');
     },
-    toteam() {
+    toteam(team_id,team_name) {
+      this.$store.state.teamid = team_id;
+      this.$store.state.teamname = team_name;
       this.$router.push('/teampage');
     },
     open(){
@@ -311,9 +292,8 @@ export default {
     },
     getTeamlist(){
       var i = 0;
-      this.$axios.post('/team/showTeam/',JSON.stringify({id: this.$store.state.userid})).then(
+      this.$axios.post('/team/showTeam/',{userid: this.$store.state.userid}).then(
           res => {
-            window.alert("团队的个数为"+res.data.result);
             for( i = 0; i < res.data.num ; i++)
             this.teamList.push({
               id: res.data.list[i].id,

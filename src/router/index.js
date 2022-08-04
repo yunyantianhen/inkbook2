@@ -29,6 +29,11 @@ const routes = [
     name: 'ItemPage',
     component: () => import('../views/ItemPage')
   },
+  {
+    path: '/TextEditor',
+    name: 'TextEditor',
+    component: () => import('../views/TextEditor')
+  }
 ]
 
 const router = new VueRouter({
