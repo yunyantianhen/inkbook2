@@ -103,7 +103,19 @@
         </div>
         <div class="team_right">
           <el-row>
-            <el-button type="primary">创建团队</el-button>
+            <el-button type="primary" @click="found_team = true">创建团队</el-button>
+            <el-dialog title="创建团队" :visible.sync="found_team" width="500px" @close="founding">
+              <el-form :model="addForm2" :rules="addFormRules2" ref="addFormRef" label-width="80px">
+                <el-form-item label="团队名" prop="name">
+                  <el-input v-model="addForm2.name"></el-input>
+                </el-form-item>
+              </el-form>
+              <!--底部区域-->
+              <span slot="footer" class="dialog-footer">
+            <el-button @click="found_team = false">取 消</el-button>
+            <el-button type="primary" @click="addTeam">确 定</el-button>
+          </span>
+            </el-dialog>
           </el-row>
         </div>
       </el-tab-pane>
@@ -205,7 +217,17 @@ export default {
       old_name: '未登录',
       old_mail: '未登录',
       old_identity: '未登录',
+      found_team: false,
       addDialogVisible:false,
+      addForm2:{
+        name:''
+      },
+      addFormRules2:{
+        name:[
+          { required : true, message:'请输入用户名' ,trigger:'blur'},
+          { min :1 ,max:15, message: '项目名的长度在1~15个字符之间', trigger: 'blur'}
+        ]
+      },
       addForm:{
         name:''
       },
@@ -310,6 +332,12 @@ export default {
             })
           }
       )
+    },
+    founding() {
+
+    },
+    addTeam() {
+
     },
   },
 }
