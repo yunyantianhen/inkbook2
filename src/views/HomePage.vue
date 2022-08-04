@@ -39,39 +39,61 @@
           <el-button @click="submit_all" type="primary" style="height: 40px; width: 70px; margin-left: 10px">提交</el-button>
         </div>
         <div style="position: absolute; right: 100px; top: 50px">
-          <router-link to="/register"><el-button type="danger" @click="open">登&nbsp;录</el-button></router-link>
+          <router-link to="/register"><el-button type="danger" @click="open">注&nbsp;销</el-button></router-link>
         </div>
       </el-tab-pane>
       <el-tab-pane label="团队管理" >
         <div class="team_left">
         <el-tabs>
           <el-tab-pane label="我参与的">
+            <!--
             <el-collapse v-model="activeNames" @change="handleChange">
               <el-collapse-item :title="team.name" :name="team.id" v-for="(team) in teamList" :key="team.id">
                 <div>成员1</div>
                 <div>成员2</div>
               </el-collapse-item>
-            </el-collapse>
+            </el-collapse>-->
+            <div style="margin: auto; width: 800px">
+              <br/>
+              <div style="width: 800px; text-align: left">
+                企业1
+                <el-button style="position: relative; left: 650px" type="primary" @click="toteam" round plain>企业详情</el-button>
+                <el-divider></el-divider>
+
+              </div>
+              <div style="width: 800px; text-align: left">
+                企业2
+                <el-button style="position: relative; left: 650px" type="primary" @click="toteam" round plain>企业详情</el-button>
+                <el-divider></el-divider>
+              </div>
+              <div style="width: 800px; text-align: left">
+                企业3
+                <el-button style="position: relative; left: 650px" type="primary" @click="toteam" round plain>企业详情</el-button>
+                <el-divider></el-divider>
+              </div>
+
+            </div>
           </el-tab-pane>
           <el-tab-pane label="我创建的">
-            <el-collapse v-model="activeNames" @change="handleChange">
-              <el-collapse-item title="企业1" name="1">
-                <div>成员1</div>
-                <div>成员2</div>
-              </el-collapse-item>
-              <el-collapse-item title="企业2" name="2">
-                <div>成员1</div>
-                <div>成员2</div>
-              </el-collapse-item>
-              <el-collapse-item title="企业3" name="3">
-                <div>成员1</div>
-                <div>成员2</div>
-              </el-collapse-item>
-              <el-collapse-item title="企业4" name="4">
-                <div>成员1</div>
-                <div>成员22345</div>
-              </el-collapse-item>
-            </el-collapse>
+            <div style="margin: auto; width: 800px">
+              <br/>
+              <div style="width: 800px; text-align: left">
+                企业1
+                <el-button style="position: relative; left: 650px" type="primary" @click="toteam" round plain>企业详情</el-button>
+                <el-divider></el-divider>
+
+              </div>
+              <div style="width: 800px; text-align: left">
+                企业2
+                <el-button style="position: relative; left: 650px" type="primary" @click="toteam" round plain>企业详情</el-button>
+                <el-divider></el-divider>
+              </div>
+              <div style="width: 800px; text-align: left">
+                企业3
+                <el-button style="position: relative; left: 650px" type="primary" @click="toteam" round plain>企业详情</el-button>
+                <el-divider></el-divider>
+              </div>
+            </div>
           </el-tab-pane>
           <el-tab-pane label="通讯录">
             <div class="address_list">
@@ -101,30 +123,46 @@
         <div class="item_left">
           <el-tabs>
             <el-tab-pane label="我参与的">
-              <el-collapse v-model="activeNames" @change="handleChange">
-                <el-collapse-item title="项目1" name="1">
-                </el-collapse-item>
-                <el-collapse-item title="项目2" name="2">
-                </el-collapse-item>
-                <el-collapse-item title="项目3" name="3">
-                </el-collapse-item>
-                <el-collapse-item title="项目4" name="4">
-                </el-collapse-item>
-              </el-collapse>
+              <div style="margin: auto; width: 800px">
+                <br/>
+                <div style="width: 800px; text-align: left">
+                  项目1
+                  <el-button style="position: relative; left: 650px" type="primary" @click="toitem" round plain>项目详情</el-button>
+                  <el-divider></el-divider>
+
+                </div>
+                <div style="width: 800px; text-align: left">
+                  项目2
+                  <el-button style="position: relative; left: 650px" type="primary" @click="toitem" round plain>项目详情</el-button>
+                  <el-divider></el-divider>
+                </div>
+                <div style="width: 800px; text-align: left">
+                  项目3
+                  <el-button style="position: relative; left: 650px" type="primary" @click="toitem" round plain>项目详情</el-button>
+                  <el-divider></el-divider>
+                </div>
+              </div>
             </el-tab-pane>
             <el-tab-pane label="回收站">
-              <el-collapse v-model="activeNames" @change="handleChange">
-                <el-collapse-item title="项目1" name="1">
-                </el-collapse-item>
-                <el-collapse-item title="项目2" name="2">
-                </el-collapse-item>
-                <el-collapse-item title="项目3" name="3">
-                </el-collapse-item>
-                <el-collapse-item title="项目4" name="4">
-                </el-collapse-item>
-              </el-collapse>
-            </el-tab-pane>
-            <el-tab-pane label="设计原型" @click="design">
+              <div style="margin: auto; width: 800px">
+                <br/>
+                <div style="width: 800px; text-align: left">
+                  项目1
+                  <el-button style="position: relative; left: 650px" type="primary" @click="toitem" round plain>项目详情</el-button>
+                  <el-divider></el-divider>
+
+                </div>
+                <div style="width: 800px; text-align: left">
+                  项目2
+                  <el-button style="position: relative; left: 650px" type="primary" @click="toitem" round plain>项目详情</el-button>
+                  <el-divider></el-divider>
+                </div>
+                <div style="width: 800px; text-align: left">
+                  项目3
+                  <el-button style="position: relative; left: 650px" type="primary" @click="toitem" round plain>项目详情</el-button>
+                  <el-divider></el-divider>
+                </div>
+              </div>
             </el-tab-pane>
           </el-tabs>
         </div>
@@ -153,18 +191,6 @@
 
 <script>
 import qs from "qs";
-
-/**
- * 设置cookie
- */
-export function setCookie(name, value, hours = 24){
-  let str = name + "=" + value;
-  const time = new Date(new Date().getTime() + hours * 3600 * 1000).toGMTString();  // toGMTstring将时间转换成字符串
-  str += "; expires=" + time;
-  // 写入Cookie
-  document.cookie = str;
-}
-
 export default {
   name: "HomePage",
   data() {
@@ -206,9 +232,8 @@ export default {
     };
   },
   created() {
-    this.$axios.post('/user/show_info/').then(
+    this.$axios.post('/user/show_info/',{id:this.$store.state.userid}).then(
         res =>{
-          window.alert(this.$store.state.userid);
           this.old_nickname = res.data.username;
           this.old_name = res.data.name;
           this.old_mail = res.data.email;
@@ -217,20 +242,29 @@ export default {
     this.getTeamlist();
   },
   methods: {
+    toitem() {
+      this.$router.push('/itempage');
+    },
+    toteam() {
+      this.$router.push('/teampage');
+    },
     open(){
     },
     handleChange(val) {
       console.log(val);
     },
+    handleChange2(val) {
+      console.log(val);
+    },
     submit_all() {
       this.$axios({
         method: 'post',
-        url:'',
+        url:'/user/modify_info/',
         data: qs.stringify({
-          nickname: this.form.nickname,
+          id:this.$store.state.userid,
+          username: this.form.nickname,
           name: this.form.name,
-          mail: this.form.mail,
-          identity: this.form.identity,
+          email: this.form.mail,
         })
       }).then(
           res =>{
@@ -243,7 +277,7 @@ export default {
                 this.old_identity = this.form.identity;
                 break;
               case 0:
-                this.$message.error("修改失败");
+                this.$message.error(res.data.msg);
                 break;
             }
           }
@@ -256,10 +290,10 @@ export default {
       this.$refs.addFormRef.validate(async valid =>{
         if(!valid) return
         //可以发起注册的网络请求
-        const {data:res}= await this.$http.post("project/create/",
+        const {data:res}= await this.$axios.post("/project/create/",
             {"name":this.addForm.name});
         if(res.result === 0) return this.$message.error(res.msg)
-        this.$message.success("注册成功");
+        this.$message.success("创建成功");
         this.addDialogVisible=false;
       })
     },
@@ -280,7 +314,6 @@ export default {
       )
     },
     getProjectlist(team_id){
-      window.alert(222);
       this.$axios.post('/team/show/',team_id).then(
           res => {
             this.projectList.push({
@@ -352,6 +385,7 @@ export default {
 .address_list{
   width: 900px;
   font-size: 16px;
+  text-align: left;
 }
 .item_left{
   height: 500px;

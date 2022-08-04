@@ -54,7 +54,7 @@ export default {
   methods:{
     register: function () {
       // 跳转注册的路由
-      this.$axios.post('/user/login/',qs.stringify(this.form)).then(
+      this.$axios.post('/user/register/',qs.stringify(this.form)).then(
           res =>{
             switch (res.data.result) {
               case 1:
