@@ -243,7 +243,6 @@ export default {
     addDialogClosed(){
       this.$refs.addFormRef.resetFields()
     },
-<<<<<<< HEAD
     addProject(){
       this.$refs.addFormRef.validate(async valid =>{
         if(!valid) return
@@ -258,7 +257,6 @@ export default {
     design(){
 
     },
-=======
     getPersonalInformation(){
     },
     getTeamlist(){
@@ -279,8 +277,6 @@ export default {
           }
       )
     },
-
->>>>>>> c5eeab61fbd0069f571f3410520be2e7de981588
   },
 }
 </script>
