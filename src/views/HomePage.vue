@@ -3,18 +3,25 @@
   <body style="width: 1400px; margin: auto">
     <el-tabs :tab-position="tabPosition" style="height: 1000px;">
       <el-tab-pane label="个人资料">
-        <div class="information">
+        <div class="information" >
+          <br/><br/>
           <div style="height: 100px">
             <img class="head" src="../img/img.png">
           </div>
+          <br>
           <div style="height: 200px">
-            <div class="small">云烟</div>
-            <div class="small">高进</div>
-            <div class="small">809816252@qq.com</div>
-            <div class="small">管理员</div>
+            <div class="small"><span style="font-weight: bold">昵称:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>{{this.old_nickname}}</div>
+            <div class="small"><span style="font-weight: bold">姓名:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>{{this.old_name}}</div>
+            <div class="small"><span style="font-weight: bold">邮箱:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>{{this.old_mail}}</div>
+            <div class="small"><span style="font-weight: bold">身份:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>{{this.old_identity}}</div>
           </div>
         </div>
         <div class="submit_information">
+          <br/><br/><br/>
+          <div style="text-align: left; margin-left: 150px; font-size: 20px; font-weight: bold">
+            请在以下区域修改个人信息：
+            <br/><br/>
+          </div>
           <el-form ref="form" :model="form">
             <el-form-item label="昵称" style="margin-bottom: 20px; display: inline-block">
               <el-input  v-model="form.nickname" style="width: 500px;"></el-input>
@@ -31,8 +38,8 @@
           </el-form>
           <el-button @click="submit_all" type="primary" style="height: 40px; width: 70px; margin-left: 10px">提交</el-button>
         </div>
-        <div>
-          <router-link to="/register"><el-button type="danger" @click="open">登!录!</el-button></router-link>
+        <div style="position: absolute; right: 100px; top: 50px">
+          <router-link to="/register"><el-button type="danger" @click="open">登&nbsp;录</el-button></router-link>
         </div>
       </el-tab-pane>
       <el-tab-pane label="团队管理">
@@ -172,10 +179,10 @@ export default {
         mail: '',
         identity: '',
       },
-      old_nickname: '',
-      old_name: '',
-      old_mail: '',
-      old_identity: '',
+      old_nickname: '未登录',
+      old_name: '未登录',
+      old_mail: '未登录',
+      old_identity: '未登录',
       addDialogVisible:false,
       addForm:{
         name:''
@@ -186,21 +193,22 @@ export default {
           { min :1 ,max:15, message: '项目名的长度在1~15个字符之间', trigger: 'blur'}
         ]
       },
+      teamList:[],
+      projectList:[]
     };
   },
   created() {
     this.$axios.get().then(
         res =>{
-          this.old_nickname=res.data.nickname;
-          this.old_name=res.data.name;
-          this.old_mail=res.data.mail;
-          this.old_identity=res.data.identity;
+          this.old_nickname = res.data.nickname;
+          this.old_name = res.data.name;
+          this.old_mail = res.data.mail;
+          this.old_identity = res.data.identity;
         }
-    );
+    )
   },
   methods: {
     open(){
-
     },
     handleChange(val) {
       console.log(val);
@@ -215,11 +223,27 @@ export default {
           mail: this.form.mail,
           identity: this.form.identity,
         })
-      })
+      }).then(
+          res =>{
+            switch (res.data.result) {
+              case 1:
+                this.$message.success("修改成功");
+                this.old_nickname = this.form.nickname;
+                this.old_name = this.form.name;
+                this.old_mail = this.form.mail;
+                this.old_identity = this.form.identity;
+                break;
+              case 0:
+                this.$message.error("修改失败");
+                break;
+            }
+          }
+      )
     },
     addDialogClosed(){
       this.$refs.addFormRef.resetFields()
     },
+<<<<<<< HEAD
     addProject(){
       this.$refs.addFormRef.validate(async valid =>{
         if(!valid) return
@@ -234,6 +258,29 @@ export default {
     design(){
 
     },
+=======
+    getPersonalInformation(){
+    },
+    getTeamlist(){
+      this.$axios.post('/team/showTeam',[this.$store.state.UserId]).then(
+          res => {
+            this.teamList.push({
+              teamId: res.data.teamId
+            })
+          }
+      )
+    },
+    getProjectlist(team_id){
+      this.$axios.post('/team/showTeam',team_id).then(
+          res => {
+            this.projectList.push({
+              projectId: res.data.projectId
+            })
+          }
+      )
+    },
+
+>>>>>>> c5eeab61fbd0069f571f3410520be2e7de981588
   },
 }
 </script>
@@ -271,10 +318,12 @@ export default {
 .small{
   width: 400px;
   height: 40px;
+  text-align: left;
+  margin-left: 100px;
 }
 .submit_information{
   width: 800px;
-  height: 1000px;
+  height: 1200px;
   font-size: 15px;
   float: left;
 }
