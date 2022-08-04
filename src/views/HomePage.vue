@@ -39,13 +39,14 @@
           <el-button @click="submit_all" type="primary" style="height: 40px; width: 70px; margin-left: 10px">提交</el-button>
         </div>
         <div style="position: absolute; right: 100px; top: 50px">
-          <router-link to="/register"><el-button type="danger" @click="open">登&nbsp;录</el-button></router-link>
+          <router-link to="/register"><el-button type="danger" @click="open">注&nbsp;销</el-button></router-link>
         </div>
       </el-tab-pane>
       <el-tab-pane label="团队管理">
         <div class="team_left">
         <el-tabs>
           <el-tab-pane label="我参与的">
+            <div style="margin: auto; width: 800px">
             <el-collapse v-model="activeNames" @change="handleChange">
               <el-collapse-item title="企业1" name="1">
                 <div>成员1</div>
@@ -64,9 +65,11 @@
                 <div>成员2</div>
               </el-collapse-item>
             </el-collapse>
+            </div>
           </el-tab-pane>
           <el-tab-pane label="我创建的">
-            <el-collapse v-model="activeNames" @change="handleChange">
+            <div style="margin: auto; width: 800px">
+            <el-collapse v-model="activeNames" @change="handleChange2">
               <el-collapse-item title="企业1" name="1">
                 <div>成员1</div>
                 <div>成员2</div>
@@ -84,6 +87,7 @@
                 <div>成员22345</div>
               </el-collapse-item>
             </el-collapse>
+            </div>
           </el-tab-pane>
           <el-tab-pane label="通讯录">
             <div class="address_list">
@@ -190,6 +194,9 @@ export default {
     handleChange(val) {
       console.log(val);
     },
+    handleChange2(val) {
+      console.log(val);
+    },
     submit_all() {
       this.$axios({
         method: 'post',
@@ -268,6 +275,7 @@ export default {
 .address_list{
   width: 900px;
   font-size: 16px;
+  text-align: left;
 }
 .item_left{
   height: 500px;
