@@ -56,8 +56,8 @@
             <div style="margin: auto; width: 800px" v-for="(team) in teamList" :key="team.id">
               <br/>
               <div style="width: 800px; text-align: left">
-                {{team.name}}
-                <el-button style="position: relative; left: 650px" type="primary" @click="toteam(team.id,team.name)" round plain>企业详情</el-button>
+                <div style="width: 300px; float: left">{{team.name}}</div>
+                <div style="width: 500px"><el-button style="position: relative; left: 400px" type="primary" @click="toteam(team.id,team.name)" round plain>企业详情</el-button></div>
                 <el-divider></el-divider>
               </div>
             </div>

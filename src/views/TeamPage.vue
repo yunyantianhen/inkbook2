@@ -21,7 +21,7 @@
             <el-button @click="invite_user = false">取 消</el-button>
             <el-button type="primary" @click="addUser">确 定</el-button>
           </span>
-    </el-dialog>>
+    </el-dialog>
     <br/>
     <br/>
   </div>
@@ -46,11 +46,10 @@
   <div style="margin: auto; width: 800px" v-for="(project) in projectlist" :key="project.id">
     <br/>
     <div style="width: 800px; text-align: left">
-      {{project.name}}
-      <el-button style="position: relative; left: 650px" type="primary" @click="toitem" round plain>项目详情</el-button>
+      <div style="width: 200px; float: left">{{project.name}}</div>
+      <div style="width: 600px"><el-button style="position: relative; left: 500px" type="primary" @click="toitem" round plain>项目详情</el-button></div>
       <el-divider></el-divider>
     </div>
-
   </div>
 </div>
 </body>
