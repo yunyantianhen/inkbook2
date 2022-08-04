@@ -49,8 +49,20 @@
             <div style="margin: auto; width: 800px">
             <el-collapse v-model="activeNames" @change="handleChange">
               <el-collapse-item title="企业1" name="1">
-                <div>成员1</div>
-                <div>成员2</div>
+                <div style="width: 400px; float: left">
+                  <div style="height: 40px">成员1</div>
+                  <div style="height: 40px">成员2</div>
+                  <div style="height: 40px">成员3</div>
+                </div>
+                <div style="width: 400px; float: left; font-weight: bold">
+                  <div style="height: 40px">创建者</div>
+                  <div style="height: 40px">管理员</div>
+                  <div style="height: 40px">成员</div>
+                </div>
+                <div>
+
+
+                </div>
               </el-collapse-item>
               <el-collapse-item title="企业2" name="2">
                 <div>成员1</div>
