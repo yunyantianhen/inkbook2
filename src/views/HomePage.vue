@@ -224,7 +224,7 @@ export default {
       },
       addFormRules2:{
         name:[
-          { required : true, message:'请输入用户名' ,trigger:'blur'},
+          { required : true, message:'请输入团队名' ,trigger:'blur'},
           { min :1 ,max:15, message: '项目名的长度在1~15个字符之间', trigger: 'blur'}
         ]
       },

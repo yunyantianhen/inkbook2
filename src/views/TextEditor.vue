@@ -89,7 +89,7 @@ export default {
   },
   methods:{
     submit_text(){
-      
+
     },
     backitem(){
       this.$router.push('itempage');
