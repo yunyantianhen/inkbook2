@@ -21,7 +21,7 @@
             <el-button @click="invite_user = false">取 消</el-button>
             <el-button type="primary" @click="addUser">确 定</el-button>
           </span>
-    </el-dialog>>
+    </el-dialog>
     <br/>
     <br/>
   </div>
