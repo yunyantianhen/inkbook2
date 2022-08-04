@@ -120,18 +120,24 @@
                 <br/>
                 <div style="width: 800px; text-align: left">
                   项目1
-                  <el-button style="position: relative; left: 650px" type="primary" @click="toitem" round plain>项目详情</el-button>
+                  <el-button style="position: relative; left: 545px" type="primary" icon="el-icon-edit" plain></el-button>
+                  <el-button style="position: relative; left: 535px" type="primary" @click="toitem" plain>项目详情</el-button>
+                  <el-button style="position: relative; left: 525px" type="primary" icon="el-icon-delete" plain></el-button>
                   <el-divider></el-divider>
 
                 </div>
                 <div style="width: 800px; text-align: left">
                   项目2
-                  <el-button style="position: relative; left: 650px" type="primary" @click="toitem" round plain>项目详情</el-button>
+                  <el-button style="position: relative; left: 545px" type="primary" icon="el-icon-edit" plain></el-button>
+                  <el-button style="position: relative; left: 535px" type="primary" @click="toitem" plain>项目详情</el-button>
+                  <el-button style="position: relative; left: 525px" type="primary" icon="el-icon-delete" plain></el-button>
                   <el-divider></el-divider>
                 </div>
                 <div style="width: 800px; text-align: left">
                   项目3
-                  <el-button style="position: relative; left: 650px" type="primary" @click="toitem" round plain>项目详情</el-button>
+                  <el-button style="position: relative; left: 545px" type="primary" icon="el-icon-edit" plain></el-button>
+                  <el-button style="position: relative; left: 535px" type="primary" @click="toitem" plain>项目详情</el-button>
+                  <el-button style="position: relative; left: 525px" type="primary" icon="el-icon-delete" plain></el-button>
                   <el-divider></el-divider>
                 </div>
               </div>
@@ -141,18 +147,21 @@
                 <br/>
                 <div style="width: 800px; text-align: left">
                   项目1
-                  <el-button style="position: relative; left: 650px" type="primary" @click="toitem" round plain>项目详情</el-button>
+                  <el-button style="position: relative; left: 595px" type="primary" @click="toitem" plain>项目详情</el-button>
+                  <el-button style="position: relative; left: 585px" type="primary" plain><i class="el-icon-upload el-icon--right"></i></el-button>
                   <el-divider></el-divider>
 
                 </div>
                 <div style="width: 800px; text-align: left">
                   项目2
-                  <el-button style="position: relative; left: 650px" type="primary" @click="toitem" round plain>项目详情</el-button>
+                  <el-button style="position: relative; left: 595px" type="primary" @click="toitem" plain>项目详情</el-button>
+                  <el-button style="position: relative; left: 585px" type="primary" plain><i class="el-icon-upload el-icon--right"></i></el-button>
                   <el-divider></el-divider>
                 </div>
                 <div style="width: 800px; text-align: left">
                   项目3
-                  <el-button style="position: relative; left: 650px" type="primary" @click="toitem" round plain>项目详情</el-button>
+                  <el-button style="position: relative; left: 595px" type="primary" @click="toitem" plain>项目详情</el-button>
+                  <el-button style="position: relative; left: 585px" type="primary" plain><i class="el-icon-upload el-icon--right"></i></el-button>
                   <el-divider></el-divider>
                 </div>
               </div>
