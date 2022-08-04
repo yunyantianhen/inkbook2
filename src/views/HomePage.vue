@@ -178,7 +178,7 @@
             <el-button @click="addDialogVisible = false">取 消</el-button>
             <el-button type="primary" @click="addProject">确 定</el-button>
           </span>
-          </el-dialog>>
+          </el-dialog>
         </div>
       </el-tab-pane>
     </el-tabs>

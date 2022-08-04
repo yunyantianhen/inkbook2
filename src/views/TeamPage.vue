@@ -13,7 +13,7 @@
     <el-dialog title="邀请成员" :visible.sync="invite_user" width="500px" @close="inviting">
       <el-form :model="addForm" :rules="addFormRules" ref="addFormRef" label-width="110px">
         <el-form-item label="被邀请人邮箱" prop="name">
-          <el-input v-model="addForm.mail"></el-input>
+          <el-input v-model="addForm.email"></el-input>
         </el-form-item>
       </el-form>
       <!--底部区域-->
@@ -32,7 +32,7 @@
     <div style="height: 40px" v-for="(member) in memberlist" :key="member.id">
       <div style="height: 40px; width: 300px; font-weight: bold; float: left">{{member.identity}}</div>
       <div style="width: 100px; float: left">
-        <i class="el-icon-upload2" @click="BecomeAdministrator"></i>
+        <i class="el-icon-upload2" @click="BecomeAdministrator(member.mail)"></i>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <i class="el-icon-delete" @click="leave"></i>
       </div>
@@ -67,7 +67,7 @@ export default {
       invite_user: false,
       addForm:{
         name: '',
-        mail: '',
+        email: '',
       },
       addFormRules:{
       name:[
@@ -86,7 +86,8 @@ export default {
             this.memberlist.push({
               id:res.data.list[i].id,
               name:res.data.list[i].name,
-              identity:res.data.list[i].identity
+              identity:res.data.list[i].identity,
+              mail:res.data.list[i].mail
             })
           }
         }
@@ -115,9 +116,41 @@ export default {
 
     },
     addUser(){
-
+      this.$axios.post('/team/addMember/',{
+        userid1:this.$store.state.userid,
+        email:this.addForm.email,
+        teamid:this.$store.state.teamid,
+        identity:"成员",
+      }).then(
+          res =>{
+            switch (res.data.result){
+              case 1:
+                this.$message.success(res.data.msg);
+                break;
+              case 0:
+                this.$message.error(res.data.msg);
+                break;
+            }
+          }
+      )
     },//邀请成员
-    BecomeAdministrator(){
+    BecomeAdministrator(temail){
+      this.$axios.post('/team/setManager/',{
+        userid1:this.$store.state.userid,
+        email:temail,
+        teamid:this.$store.state.teamid
+      }).then(
+          res =>{
+            switch (res.data.result){
+              case 1:
+                this.$message.success(res.data.msg);
+                break;
+              case 0:
+                this.$message.error(res.data.msg);
+                break;
+            }
+          }
+      )
 
     },//将成员设置为管理员
     leave() {
