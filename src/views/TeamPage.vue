@@ -47,7 +47,7 @@
     <br/>
     <div style="width: 800px; text-align: left">
       <div style="width: 200px; float: left">{{project.name}}</div>
-      <div style="width: 600px"><el-button style="position: relative; left: 500px" type="primary" @click="toitem" round plain>项目详情</el-button></div>
+      <div style="width: 600px"><el-button style="position: relative; left: 500px" type="primary" @click="toitem(project.id,project.name)" round plain>项目详情</el-button></div>
       <el-divider></el-divider>
     </div>
   </div>
@@ -106,7 +106,9 @@ export default {
     )
   },
   methods: {
-    toitem() {
+    toitem(projectid,projectname) {
+      this.$store.state.projectid = projectid;
+      this.$store.state.projectname = projectname;
       this.$router.push('/itempage');
     },
     back() {
