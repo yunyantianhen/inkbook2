@@ -39,6 +39,7 @@
 </template>
 
 <script>
+import qs from "qs";
 export default {
   name: "LogonPage",
   data() {
@@ -51,11 +52,25 @@ export default {
     }
   },
   methods:{
-    toRegister: function () {
+    register: function () {
       // 跳转注册的路由
-      this.$router.push('/register');
+      this.$axios.post('/user/login/',qs.stringify(this.form)).then(
+          res =>{
+            switch (res.data.result) {
+              case 1:
+                this.$message.success("注册成功！");
+                this.$store.state.UserId = res.data.id;
+                this.$router.push('/register');
+                break;
+
+              case 0:
+                this.$message.error("注册失败！");
+                break;
+            }
+          }
+      )
     },
-    register() {
+    toRegister() {
       this.$router.push('/register');
     }
   }

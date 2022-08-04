@@ -117,8 +117,30 @@
         <div class="item_left">
           <el-tabs>
             <el-tab-pane label="我参与的">
+              <el-collapse v-model="activeNames" @change="handleChange">
+                <el-collapse-item title="项目1" name="1">
+                </el-collapse-item>
+                <el-collapse-item title="项目2" name="2">
+                </el-collapse-item>
+                <el-collapse-item title="项目3" name="3">
+                </el-collapse-item>
+                <el-collapse-item title="项目4" name="4">
+                </el-collapse-item>
+              </el-collapse>
             </el-tab-pane>
             <el-tab-pane label="回收站">
+              <el-collapse v-model="activeNames" @change="handleChange">
+                <el-collapse-item title="项目1" name="1">
+                </el-collapse-item>
+                <el-collapse-item title="项目2" name="2">
+                </el-collapse-item>
+                <el-collapse-item title="项目3" name="3">
+                </el-collapse-item>
+                <el-collapse-item title="项目4" name="4">
+                </el-collapse-item>
+              </el-collapse>
+            </el-tab-pane>
+            <el-tab-pane label="设计原型" @click="design">
             </el-tab-pane>
           </el-tabs>
         </div>
@@ -135,7 +157,7 @@
             <!--底部区域-->
             <span slot="footer" class="dialog-footer">
             <el-button @click="addDialogVisible = false">取 消</el-button>
-            <el-button type="primary" @click="addUser">确 定</el-button>
+            <el-button type="primary" @click="addProject">确 定</el-button>
           </span>
           </el-dialog>>
         </div>
@@ -161,10 +183,10 @@ export default {
         mail: '',
         identity: '',
       },
-      old_nickname: '云烟',
-      old_name: '高进',
-      old_mail: '809816252@qq.com',
-      old_identity: '管理员',
+      old_nickname: '未登录',
+      old_name: '未登录',
+      old_mail: '未登录',
+      old_identity: '未登录',
       addDialogVisible:false,
       addForm:{
         name:''
@@ -175,21 +197,22 @@ export default {
           { min :1 ,max:15, message: '项目名的长度在1~15个字符之间', trigger: 'blur'}
         ]
       },
+      teamList:[],
+      projectList:[]
     };
   },
   created() {
     this.$axios.get().then(
         res =>{
-          this.old_nickname=res.data.nickname;
-          this.old_name=res.data.name;
-          this.old_mail=res.data.mail;
-          this.old_identity=res.data.identity;
+          this.old_nickname = res.data.nickname;
+          this.old_name = res.data.name;
+          this.old_mail = res.data.mail;
+          this.old_identity = res.data.identity;
         }
-    );
+    )
   },
   methods: {
     open(){
-
     },
     handleChange(val) {
       console.log(val);
@@ -207,10 +230,59 @@ export default {
           mail: this.form.mail,
           identity: this.form.identity,
         })
-      })
+      }).then(
+          res =>{
+            switch (res.data.result) {
+              case 1:
+                this.$message.success("修改成功");
+                this.old_nickname = this.form.nickname;
+                this.old_name = this.form.name;
+                this.old_mail = this.form.mail;
+                this.old_identity = this.form.identity;
+                break;
+              case 0:
+                this.$message.error("修改失败");
+                break;
+            }
+          }
+      )
     },
     addDialogClosed(){
       this.$refs.addFormRef.resetFields()
+    },
+    addProject(){
+      this.$refs.addFormRef.validate(async valid =>{
+        if(!valid) return
+        //可以发起注册的网络请求
+        const {data:res}= await this.$http.post("project/create/",
+            {"name":this.addForm.name});
+        if(res.result === 0) return this.$message.error(res.msg)
+        this.$message.success("注册成功");
+        this.addDialogVisible=false;
+      })
+    },
+    design(){
+
+    },
+    getPersonalInformation(){
+    },
+    getTeamlist(){
+      this.$axios.post('/team/showTeam',[this.$store.state.UserId]).then(
+          res => {
+            this.teamList.push({
+              teamId: res.data.teamId
+            })
+          }
+      )
+    },
+    getProjectlist(team_id){
+      this.$axios.post('/team/showTeam',team_id).then(
+          res => {
+            this.projectList.push({
+              projectId: res.data.projectId
+            })
+          }
+      )
     },
   },
 }
