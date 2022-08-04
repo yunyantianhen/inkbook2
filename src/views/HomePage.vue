@@ -247,10 +247,10 @@ export default {
       this.$refs.addFormRef.validate(async valid =>{
         if(!valid) return
         //可以发起注册的网络请求
-        const {data:res}= await this.$http.post("project/create/",
+        const {data:res}= await this.$axios.post("/project/create/",
             {"name":this.addForm.name});
         if(res.result === 0) return this.$message.error(res.msg)
-        this.$message.success("注册成功");
+        this.$message.success("创建成功");
         this.addDialogVisible=false;
       })
     },
