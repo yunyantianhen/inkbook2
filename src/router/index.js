@@ -24,6 +24,11 @@ const routes = [
     name: 'TeamPage',
     component: () => import('../views/TeamPage')
   },
+  {
+    path: '/itempage',
+    name: 'ItemPage',
+    component: () => import('../views/ItemPage')
+  },
 ]
 
 const router = new VueRouter({

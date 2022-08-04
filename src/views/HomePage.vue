@@ -56,12 +56,12 @@
               </div>
               <div style="width: 800px; text-align: left">
                 企业2
-                <el-button style="position: relative; left: 650px" type="primary" round plain>企业详情</el-button>
+                <el-button style="position: relative; left: 650px" type="primary" @click="toteam" round plain>企业详情</el-button>
                 <el-divider></el-divider>
               </div>
               <div style="width: 800px; text-align: left">
                 企业3
-                <el-button style="position: relative; left: 650px" type="primary" round plain>企业详情</el-button>
+                <el-button style="position: relative; left: 650px" type="primary" @click="toteam" round plain>企业详情</el-button>
                 <el-divider></el-divider>
               </div>
 
