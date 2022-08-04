@@ -45,38 +45,26 @@
       <el-tab-pane label="团队管理">
         <div class="team_left">
         <el-tabs>
-          <el-tab-pane label="我参与的">
+          <el-tab-pane label="我参与的" style="height: 1200px">
             <div style="margin: auto; width: 800px">
-            <el-collapse v-model="activeNames" @change="handleChange">
-              <el-collapse-item title="企业1" name="1">
-                <div style="width: 400px; float: left">
-                  <div style="height: 40px">成员1</div>
-                  <div style="height: 40px">成员2</div>
-                  <div style="height: 40px">成员3</div>
-                </div>
-                <div style="width: 400px; float: left; font-weight: bold">
-                  <div style="height: 40px">创建者</div>
-                  <div style="height: 40px">管理员</div>
-                  <div style="height: 40px">成员</div>
-                </div>
-                <div>
+              <br/>
+              <div style="width: 800px; text-align: left">
+                企业1
+                <el-button style="position: relative; left: 650px" type="primary" @click="toteam" round plain>企业详情</el-button>
+                <el-divider></el-divider>
 
+              </div>
+              <div style="width: 800px; text-align: left">
+                企业2
+                <el-button style="position: relative; left: 650px" type="primary" round plain>企业详情</el-button>
+                <el-divider></el-divider>
+              </div>
+              <div style="width: 800px; text-align: left">
+                企业3
+                <el-button style="position: relative; left: 650px" type="primary" round plain>企业详情</el-button>
+                <el-divider></el-divider>
+              </div>
 
-                </div>
-              </el-collapse-item>
-              <el-collapse-item title="企业2" name="2">
-                <div>成员1</div>
-                <div>成员2</div>
-              </el-collapse-item>
-              <el-collapse-item title="企业3" name="3">
-                <div>成员1</div>
-                <div>成员2</div>
-              </el-collapse-item>
-              <el-collapse-item title="企业4" name="4">
-                <div>成员1</div>
-                <div>成员2</div>
-              </el-collapse-item>
-            </el-collapse>
             </div>
           </el-tab-pane>
           <el-tab-pane label="我创建的">
@@ -224,6 +212,9 @@ export default {
     )
   },
   methods: {
+    toteam() {
+      this.$router.push('/teampage');
+    },
     open(){
     },
     handleChange(val) {
