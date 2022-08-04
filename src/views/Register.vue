@@ -6,7 +6,7 @@
           <div style="font-size: 25px; position: relative; top: 20px">登&nbsp;&nbsp;录</div>
           <el-form ref="form" :model="form" style="position: relative; top: 30px">
             <el-form-item prop="username">
-              <el-input placeholder="用户名" type="username" v-model="form.username" autocomplete="off" clearable></el-input>
+              <el-input placeholder="用户名" type="username" v-model="form.email" autocomplete="off" clearable></el-input>
             </el-form-item>
             <el-form-item prop="password">
               <el-input v-model="form.password" placeholder="密码" type="password" autocomplete="off" clearable show-password></el-input>
@@ -32,7 +32,7 @@ export default {
   data() {
     return {
       form: {
-        username: '',
+        email: '',
         password: '',
       }
     }
@@ -44,18 +44,19 @@ export default {
             switch (res.data.result) {
               case 1:
                 this.$message.success("登录成功！");
+                this.$store.state.userid = res.data.id;
                 this.$router.push('/');
-                this.$store.state.UserId = res.data.id;
                 break;
 
               case 0:
+                window.alert(res.data.msg);
                 this.$message.error("登录失败！");
                 break;
             }
           }
       )
     },
-  }
+  },
 }
 </script>
 

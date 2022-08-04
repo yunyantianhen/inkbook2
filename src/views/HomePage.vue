@@ -42,24 +42,12 @@
           <router-link to="/register"><el-button type="danger" @click="open">登&nbsp;录</el-button></router-link>
         </div>
       </el-tab-pane>
-      <el-tab-pane label="团队管理">
+      <el-tab-pane label="团队管理" >
         <div class="team_left">
         <el-tabs>
           <el-tab-pane label="我参与的">
             <el-collapse v-model="activeNames" @change="handleChange">
-              <el-collapse-item title="企业1" name="1">
-                <div>成员1</div>
-                <div>成员2</div>
-              </el-collapse-item>
-              <el-collapse-item title="企业2" name="2">
-                <div>成员1</div>
-                <div>成员2</div>
-              </el-collapse-item>
-              <el-collapse-item title="企业3" name="3">
-                <div>成员1</div>
-                <div>成员2</div>
-              </el-collapse-item>
-              <el-collapse-item title="企业4" name="4">
+              <el-collapse-item :title="team.name" :name="team.id" v-for="(team) in teamList" :key="team.id">
                 <div>成员1</div>
                 <div>成员2</div>
               </el-collapse-item>
@@ -177,25 +165,6 @@ export function setCookie(name, value, hours = 24){
   document.cookie = str;
 }
 
-/**
- * 获取cookie
- */
-export function getCookie(name){
-  const reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)"),
-      arr = document.cookie.match(reg);
-  if (arr !== null) {
-    return arr[2];
-  } else {
-    return null;
-  }
-}
-
-/**
- * 清除cookie
- */
-export function clearCookie(name){
-  setCookie(name, '', -1)
-}
 export default {
   name: "HomePage",
   data() {
@@ -223,19 +192,29 @@ export default {
           { min :1 ,max:15, message: '项目名的长度在1~15个字符之间', trigger: 'blur'}
         ]
       },
-      teamList:[],
+      teamList:[
+        {
+          name:"asd",
+          id:1
+        },
+        {
+          name:"as22",
+          id:3
+        }
+      ],
       projectList:[]
     };
   },
   created() {
-    this.$axios.get().then(
+    this.$axios.post('/user/show_info/').then(
         res =>{
-          this.old_nickname = res.data.nickname;
+          window.alert(this.$store.state.userid);
+          this.old_nickname = res.data.username;
           this.old_name = res.data.name;
-          this.old_mail = res.data.mail;
-          this.old_identity = res.data.identity;
+          this.old_mail = res.data.email;
         }
     )
+    this.getTeamlist();
   },
   methods: {
     open(){
@@ -287,19 +266,22 @@ export default {
     design(){
 
     },
-    getPersonalInformation(){
-    },
     getTeamlist(){
-      this.$axios.post('/team/showTeam',[this.$store.state.UserId]).then(
+      var i = 0;
+      this.$axios.post('/team/showTeam/',JSON.stringify({id: this.$store.state.userid})).then(
           res => {
+            window.alert("团队的个数为"+res.data.result);
+            for( i = 0; i < res.data.num ; i++)
             this.teamList.push({
-              teamId: res.data.teamId
+              id: res.data.list[i].id,
+              name: res.data.list[i].name,
             })
           }
       )
     },
     getProjectlist(team_id){
-      this.$axios.post('/team/showTeam',team_id).then(
+      window.alert(222);
+      this.$axios.post('/team/show/',team_id).then(
           res => {
             this.projectList.push({
               projectId: res.data.projectId

@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    UserId: 0
+    userid: 0
   },
   getters: {
   },
