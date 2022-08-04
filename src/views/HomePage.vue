@@ -157,10 +157,10 @@ export default {
         mail: '',
         identity: '',
       },
-      old_nickname: '云烟',
-      old_name: '高进',
-      old_mail: '809816252@qq.com',
-      old_identity: '管理员',
+      old_nickname: '未登录',
+      old_name: '未登录',
+      old_mail: '未登录',
+      old_identity: '未登录',
       addDialogVisible:false,
       addForm:{
         name:''
@@ -176,6 +176,14 @@ export default {
     };
   },
   created() {
+    this.$axios.get().then(
+        res =>{
+          this.old_nickname = res.data.nickname;
+          this.old_name = res.data.name;
+          this.old_mail = res.data.mail;
+          this.old_identity = res.data.identity;
+        }
+    )
   },
   methods: {
     open(){
@@ -193,7 +201,22 @@ export default {
           mail: this.form.mail,
           identity: this.form.identity,
         })
-      })
+      }).then(
+          res =>{
+            switch (res.data.result) {
+              case 1:
+                this.$message.success("修改成功");
+                this.old_nickname = this.form.nickname;
+                this.old_name = this.form.name;
+                this.old_mail = this.form.mail;
+                this.old_identity = this.form.identity;
+                break;
+              case 0:
+                this.$message.error("修改失败");
+                break;
+            }
+          }
+      )
     },
     addDialogClosed(){
       this.$refs.addFormRef.resetFields()

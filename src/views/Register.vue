@@ -24,7 +24,9 @@
   </div>
 </template>
 
+
 <script>
+import qs from "qs";
 export default {
   name: "RegisterPage",
   data() {
@@ -37,8 +39,22 @@ export default {
   },
   methods: {
     login() {
-      this.$router.push('/');
-    }
+      this.$axios.post('/user/login/',qs.stringify(this.form)).then(
+          res =>{
+            switch (res.data.result) {
+              case 1:
+                this.$message.success("登录成功！");
+                this.$router.push('/');
+                this.$store.state.UserId = res.data.id;
+                break;
+
+              case 0:
+                this.$message.error("登录失败！");
+                break;
+            }
+          }
+      )
+    },
   }
 }
 </script>
