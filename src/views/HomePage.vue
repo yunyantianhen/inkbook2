@@ -106,8 +106,30 @@
         <div class="item_left">
           <el-tabs>
             <el-tab-pane label="我参与的">
+              <el-collapse v-model="activeNames" @change="handleChange">
+                <el-collapse-item title="项目1" name="1">
+                </el-collapse-item>
+                <el-collapse-item title="项目2" name="2">
+                </el-collapse-item>
+                <el-collapse-item title="项目3" name="3">
+                </el-collapse-item>
+                <el-collapse-item title="项目4" name="4">
+                </el-collapse-item>
+              </el-collapse>
             </el-tab-pane>
             <el-tab-pane label="回收站">
+              <el-collapse v-model="activeNames" @change="handleChange">
+                <el-collapse-item title="项目1" name="1">
+                </el-collapse-item>
+                <el-collapse-item title="项目2" name="2">
+                </el-collapse-item>
+                <el-collapse-item title="项目3" name="3">
+                </el-collapse-item>
+                <el-collapse-item title="项目4" name="4">
+                </el-collapse-item>
+              </el-collapse>
+            </el-tab-pane>
+            <el-tab-pane label="设计原型" @click="design">
             </el-tab-pane>
           </el-tabs>
         </div>
@@ -124,7 +146,7 @@
             <!--底部区域-->
             <span slot="footer" class="dialog-footer">
             <el-button @click="addDialogVisible = false">取 消</el-button>
-            <el-button type="primary" @click="addUser">确 定</el-button>
+            <el-button type="primary" @click="addProject">确 定</el-button>
           </span>
           </el-dialog>>
         </div>
@@ -197,6 +219,20 @@ export default {
     },
     addDialogClosed(){
       this.$refs.addFormRef.resetFields()
+    },
+    addProject(){
+      this.$refs.addFormRef.validate(async valid =>{
+        if(!valid) return
+        //可以发起注册的网络请求
+        const {data:res}= await this.$http.post("project/create/",
+            {"name":this.addForm.name});
+        if(res.result === 0) return this.$message.error(res.msg)
+        this.$message.success("注册成功");
+        this.addDialogVisible=false;
+      })
+    },
+    design(){
+
     },
   },
 }
