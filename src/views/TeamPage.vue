@@ -159,6 +159,22 @@ export default {
           }
       )
     },//邀请成员
+    shuaxin(){
+      var i = 0;
+      this.$axios.post('/team/showMember/',{teamid:this.$store.state.teamid}).then(
+          res =>{
+            for( i = 0; i < res.data.num; i++ )
+            {
+              this.memberlist.push({
+                id:res.data.list[i].id,
+                name:res.data.list[i].name,
+                identity:res.data.list[i].identity,
+                mail:res.data.list[i].mail
+              })
+            }
+          }
+      )
+    },
     BecomeAdministrator(temail){
       this.$axios.post('/team/setManager/',{
         userid1:this.$store.state.userid,
@@ -176,7 +192,7 @@ export default {
             }
           }
       )
-
+      this.shuaxin();
     },//将成员设置为管理员
     leave() {
 

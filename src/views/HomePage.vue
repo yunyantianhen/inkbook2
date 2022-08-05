@@ -45,7 +45,7 @@
       <el-tab-pane label="团队管理" >
         <div class="team_left">
         <el-tabs>
-          <el-tab-pane label="我参与的">
+          <el-tab-pane label="我参与的" >
             <!--
             <el-collapse v-model="activeNames" @change="handleChange">
               <el-collapse-item :title="team.name" :name="team.id" v-for="(team) in teamList" :key="team.id">
