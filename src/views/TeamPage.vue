@@ -40,6 +40,19 @@
   </div>
   <div style="width: 800px; text-align: left">
     负责项目
+    <el-button style="position: relative; left: 630px" type="primary" @click="addDialogVisible = true" round plain>创建项目</el-button>
+    <el-dialog title="创建项目" :visible.sync="addDialogVisible" width="50%" @close="addDialogClosed">
+      <el-form :model="addForm" :rules="addFormRules" ref="addFormRef" label-width="150px">
+        <el-form-item label="项目名" prop="name">
+          <el-input v-model="addForm.name"></el-input>
+        </el-form-item>
+      </el-form>
+      <!--底部区域-->
+      <span slot="footer" class="dialog-footer">
+            <el-button @click="addDialogVisible = false">取 消</el-button>
+            <el-button type="primary" @click="addProject">确 定</el-button>
+          </span>
+    </el-dialog>
     <br/>
     <br/>
   </div>
@@ -65,6 +78,7 @@ export default {
       memberlist: [],
       projectlist: [],
       invite_user: false,
+      addDialogVisible:false,
       addForm:{
         name: '',
         email: '',
@@ -74,6 +88,15 @@ export default {
       {   required : true, message:'请输入被邀请人的邮箱' ,trigger:'blur'},
       { min :1 ,max:15, message: '项目名的长度在1~15个字符之间', trigger: 'blur'}
       ]
+      },
+      addForm1:{
+        name:''
+      },
+      addFormRules1:{
+        name:[
+          { required : true, message:'请输入用户名' ,trigger:'blur'},
+          { min :1 ,max:15, message: '项目名的长度在1~15个字符之间', trigger: 'blur'}
+        ]
       },
     }
   },
@@ -157,7 +180,22 @@ export default {
     },//将成员设置为管理员
     leave() {
 
+
     },//删除成员
+    addDialogClosed(){
+      this.$refs.addFormRef.resetFields()
+    },
+    addProject(){
+      this.$refs.addFormRef.validate(async valid =>{
+        if(!valid) return
+        //可以发起注册的网络请求
+        const {data:res}= await this.$axios.post("/project/create/",
+            {"name":this.addForm.name});
+        if(res.result === 0) return this.$message.error(res.msg)
+        this.$message.success("创建成功");
+        this.addDialogVisible=false;
+      })
+    },
   }
 }
 </script>
