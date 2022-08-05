@@ -51,7 +51,7 @@
     <br/>
     <div style="margin: auto; margin-bottom: 100px;text-align: left; width: 1200px">
       <div style="width: 1000px; font-weight: bold; font-size: 30px; margin: auto">
-        文档名
+        {{this.$store.state.documentname}}
         <div style="width: 100px; float: right; margin-left: 500px"><el-button type="danger" @click="backitem">返回</el-button></div>
         <el-divider></el-divider>
       </div>
@@ -70,8 +70,17 @@ export default {
   data(){
     return{
       contentEditor:"",
-      textCon:""
+      textCon:"",
+      text:""
     }
+  },
+  created() {
+    this.$axios.post('/document/find/',{id:this.$store.state.documentid}).then(
+        res =>{
+          this.text = res.data.text;
+          this.contentEditor.setValue(this.text);
+        }
+    )
   },
   mounted(){
     this.contentEditor = new Vditor('vditor', {
@@ -83,13 +92,24 @@ export default {
         enable: false,
       },
       after: () => {
-        this.contentEditor.setValue('## hello, Vditor + Vue!')
+        this.contentEditor.setValue(this.text);
       },
     })
   },
   methods:{
     submit_text(){
-      
+      this.$axios.post('/document/update/',{id:this.$store.state.documentid,text:this.contentEditor.getValue()}).then(
+          res =>{
+            switch (res.data.result){
+              case 1:
+                this.$message.success(res.data.msg);
+                break;
+              case 0:
+                this.$message.error(res.data.msg);
+                break;
+            }
+          }
+      )
     },
     backitem(){
       this.$router.push('itempage');
