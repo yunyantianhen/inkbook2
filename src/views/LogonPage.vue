@@ -73,7 +73,7 @@ export default {
               case 1:
                 this.$message.success("注册成功！");
                 this.$store.state.UserId = res.data.id;
-                this.$router.push('/register');
+                this.$router.push('/');
                 break;
 
               case 0:
