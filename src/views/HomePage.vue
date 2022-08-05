@@ -57,7 +57,9 @@
               <br/>
               <div style="width: 800px; text-align: left">
                 <div style="width: 300px; float: left">{{team.name}}</div>
-                <div style="width: 500px"><el-button style="position: relative; left: 400px" type="primary" @click="toteam(team.id,team.name)" round plain>企业详情</el-button></div>
+                <div style="width: 500px">
+                  <el-button style="position: relative; left: 400px" type="primary" @click="toteam(team.id,team.name)" round plain>企业详情</el-button>
+                </div>
                 <el-divider></el-divider>
               </div>
             </div>
@@ -66,8 +68,10 @@
             <div style="margin: auto; width: 800px">
               <br/>
               <div style="width: 800px; text-align: left" v-for="(team) in myteamlist" :key="team.id">
-                {{team.name}}
-                <el-button style="position: relative; left: 650px" type="primary" @click="toteam(team.id,team.name)" round plain>企业详情</el-button>
+                <div style="width: 300px; float: left">{{team.name}}</div>
+                <div style="width: 500px">
+                  <el-button style="position: relative; left: 400px" type="primary" @click="toteam(team.id,team.name)" round plain>企业详情</el-button>
+                </div>
                 <el-divider></el-divider>
               </div>
             </div>
@@ -115,26 +119,31 @@
               <div style="margin: auto; width: 800px">
                 <br/>
                 <div style="width: 800px; text-align: left" v-for="(project) in projectList" :key="project.id">
-                  {{project.name}}
-                  <el-button style="position: relative; left: 545px" type="primary" icon="el-icon-edit" plain></el-button>
-                  <!--<el-button style="position: relative; left: 535px" type="primary" @click="toitem2" plain>项目详情</el-button>
-                  <el-button style="position: relative; left: 525px" type="primary" icon="el-icon-delete" plain></el-button>
+                  <div style="width: 200px; float: left">{{project.name}}</div>
+                  <div style="width: 500px">
+                  <!--<el-button style="position: relative; left: 345px" type="primary" icon="el-icon-edit" plain></el-button>
+                  <el-button style="position: relative; left: 335px" type="primary" @click="toitem2" plain>项目详情</el-button>
+                  <el-button style="position: relative; left: 325px" type="primary" icon="el-icon-delete" plain></el-button>
+                  </div>
                   <el-divider></el-divider>
                 </div>
                 <div style="width: 800px; text-align: left">
-                  项目2
-                  <el-button style="position: relative; left: 545px" type="primary" icon="el-icon-edit" plain></el-button>
-                  <el-button style="position: relative; left: 535px" type="primary" @click="toitem2" plain>项目详情</el-button>
-                  <el-button style="position: relative; left: 525px" type="primary" icon="el-icon-delete" plain></el-button>
+                  <div style="width: 200px; float: left">项目9</div>
+                  <div style="width: 500px">
+                  <el-button style="position: relative; left: 345px" type="primary" icon="el-icon-edit" plain></el-button>
+                  <el-button style="position: relative; left: 335px" type="primary" @click="toitem2" plain>项目详情</el-button>
+                  <el-button style="position: relative; left: 325px" type="primary" icon="el-icon-delete" plain></el-button>
+                  </div>
                   <el-divider></el-divider>
                 </div>
                 <div style="width: 800px; text-align: left">
                   项目3
                   <el-button style="position: relative; left: 545px" type="primary" icon="el-icon-edit" plain></el-button>
-                  <el-button style="position: relative; left: 535px" type="primary" @click="toitem2" plain>项目详情</el-button>
-                  <el-button style="position: relative; left: 525px" type="primary" icon="el-icon-delete" plain></el-button>-->
-                  <el-button style="position: relative; left: 535px" type="primary" @click="toitem(project.id,project.name)" plain>项目详情</el-button>
-                  <el-button style="position: relative; left: 525px" type="primary" icon="el-icon-delete" plain @click="deleteitem(project.id)"></el-button>
+                  <el-button style="position: relative; left: 535px" type="primary" @click="toitem2" plain>项目详情</el-button>-->
+                  <el-button style="position: relative; left: 325px" type="primary" icon="el-icon-delete" plain></el-button>
+                  <el-button style="position: relative; left: 335px" type="primary" @click="toitem(project.id,project.name)" plain>项目详情</el-button>
+                  <el-button style="position: relative; left: 325px" type="primary" icon="el-icon-delete" plain @click="deleteitem(project.id)"></el-button>
+                </div>
                   <el-divider></el-divider>
                 </div>
               </div>
