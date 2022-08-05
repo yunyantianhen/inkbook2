@@ -192,7 +192,6 @@ export default {
             }
           }
       )
-      this.shuaxin();
     },//将成员设置为管理员
     leave() {
 
