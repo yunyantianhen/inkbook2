@@ -92,7 +92,7 @@ export default {
           }
         }
     )
-    this.$axios.post('/project/list_project/',{team_id:this.$store.state.teamid}).then(
+    this.$axios.post('/project/list_project/',{team_id:this.$store.state.teamid,user_id:this.$store.state.userid}).then(
         res =>{
           for( i = 0 ; i < res.data.data.number ; i++)
           {

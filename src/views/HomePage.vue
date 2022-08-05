@@ -65,20 +65,9 @@
           <el-tab-pane label="我创建的">
             <div style="margin: auto; width: 800px">
               <br/>
-              <div style="width: 800px; text-align: left">
-                企业1
-                <el-button style="position: relative; left: 650px" type="primary" @click="toteam" round plain>企业详情</el-button>
-                <el-divider></el-divider>
-
-              </div>
-              <div style="width: 800px; text-align: left">
-                企业2
-                <el-button style="position: relative; left: 650px" type="primary" @click="toteam" round plain>企业详情</el-button>
-                <el-divider></el-divider>
-              </div>
-              <div style="width: 800px; text-align: left">
-                企业3
-                <el-button style="position: relative; left: 650px" type="primary" @click="toteam" round plain>企业详情</el-button>
+              <div style="width: 800px; text-align: left" v-for="(team) in myteamlist" :key="team.id">
+                {{team.name}}
+                <el-button style="position: relative; left: 650px" type="primary" @click="toteam(team.id,team.name)" round plain>企业详情</el-button>
                 <el-divider></el-divider>
               </div>
             </div>
@@ -125,26 +114,11 @@
             <el-tab-pane label="我参与的">
               <div style="margin: auto; width: 800px">
                 <br/>
-                <div style="width: 800px; text-align: left">
-                  项目1
+                <div style="width: 800px; text-align: left" v-for="(project) in projectList" :key="project.id">
+                  {{project.name}}
                   <el-button style="position: relative; left: 545px" type="primary" icon="el-icon-edit" plain></el-button>
-                  <el-button style="position: relative; left: 535px" type="primary" @click="toitem" plain>项目详情</el-button>
-                  <el-button style="position: relative; left: 525px" type="primary" icon="el-icon-delete" plain></el-button>
-                  <el-divider></el-divider>
-
-                </div>
-                <div style="width: 800px; text-align: left">
-                  项目2
-                  <el-button style="position: relative; left: 545px" type="primary" icon="el-icon-edit" plain></el-button>
-                  <el-button style="position: relative; left: 535px" type="primary" @click="toitem" plain>项目详情</el-button>
-                  <el-button style="position: relative; left: 525px" type="primary" icon="el-icon-delete" plain></el-button>
-                  <el-divider></el-divider>
-                </div>
-                <div style="width: 800px; text-align: left">
-                  项目3
-                  <el-button style="position: relative; left: 545px" type="primary" icon="el-icon-edit" plain></el-button>
-                  <el-button style="position: relative; left: 535px" type="primary" @click="toitem" plain>项目详情</el-button>
-                  <el-button style="position: relative; left: 525px" type="primary" icon="el-icon-delete" plain></el-button>
+                  <el-button style="position: relative; left: 535px" type="primary" @click="toitem(project.id,project.name)" plain>项目详情</el-button>
+                  <el-button style="position: relative; left: 525px" type="primary" icon="el-icon-delete" plain @click="deleteitem(project.id)"></el-button>
                   <el-divider></el-divider>
                 </div>
               </div>
@@ -238,7 +212,8 @@ export default {
         ]
       },
       teamList:[],
-      projectList:[]
+      myteamlist:[],
+      projectList:[],
     };
   },
   created() {
@@ -249,10 +224,27 @@ export default {
           this.old_mail = res.data.email;
         }
     )
+    var i = 0;
+    this.$axios.post('/team/showMyCreate/',{userid:this.$store.state.userid}).then(
+        res =>{
+          for( i = 0; i < res.data.num ; i++)
+          {
+            this.myteamlist.push({
+              id: res.data.list[i].id,
+              name: res.data.list[i].name,
+            })
+          }
+        }
+    )
     this.getTeamlist();
+    this.getProjectlist();
   },
   methods: {
-    toitem() {
+
+    toitem(projectid,projectname) {
+      this.$store.state.projectid = projectid;
+      this.$store.state.projectname = projectname;
+      this.$router.push('/itempage');
       this.$router.push('/itempage');
     },
     toteam(team_id,team_name) {
@@ -324,12 +316,17 @@ export default {
           }
       )
     },
-    getProjectlist(team_id){
-      this.$axios.post('/team/show/',team_id).then(
+    getProjectlist(){
+      var i = 0;
+      this.$axios.post('/project/list_project/',{team_id:-1,user_id:this.$store.state.userid}).then(
           res => {
-            this.projectList.push({
-              projectId: res.data.projectId
-            })
+            for(i = 0 ; i < res.data.data.number ; i++)
+            {
+              this.projectList.push({
+                id: res.data.data.project[i].id,
+                name:res.data.data.project[i].name
+              })
+            }
           }
       )
     },
@@ -337,8 +334,34 @@ export default {
 
     },
     addTeam() {
-
+      this.$axios.post('/team/createTeam/',{userid:this.$store.state.userid,teamname:this.addForm2.name}).then(
+          res =>{
+            switch (res.data.result)
+            {
+              case 1:
+                this.$message.success(res.data.msg);
+                break;
+              case 2:
+                this.$message.error(res.data.msg);
+                break;
+            }
+          }
+      )
     },
+    deleteitem(itemid){
+      this.$axios.post('/project/delete/',{id:itemid}).then(
+          res =>{
+            switch (res.data.result){
+              case 1:
+                this.$message.success(res.data.msg);
+                break;
+              case 0:
+                this.$message.error(res.data.msg);
+                break;
+            }
+          }
+      )
+    }
   },
 }
 </script>
