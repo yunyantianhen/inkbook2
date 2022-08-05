@@ -84,7 +84,7 @@ export default {
       )
     },
     toRegister() {
-      this.$router.push('/register');
+      this.$router.push('/');
     }
   }
 }

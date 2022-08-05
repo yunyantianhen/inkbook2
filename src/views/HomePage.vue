@@ -128,7 +128,7 @@
                 <div style="width: 800px; text-align: left">
                   项目1
                   <el-button style="position: relative; left: 545px" type="primary" icon="el-icon-edit" plain></el-button>
-                  <el-button style="position: relative; left: 535px" type="primary" @click="toitem" plain>项目详情</el-button>
+                  <el-button style="position: relative; left: 535px" type="primary" @click="toitem2" plain>项目详情</el-button>
                   <el-button style="position: relative; left: 525px" type="primary" icon="el-icon-delete" plain></el-button>
                   <el-divider></el-divider>
 
@@ -136,14 +136,14 @@
                 <div style="width: 800px; text-align: left">
                   项目2
                   <el-button style="position: relative; left: 545px" type="primary" icon="el-icon-edit" plain></el-button>
-                  <el-button style="position: relative; left: 535px" type="primary" @click="toitem" plain>项目详情</el-button>
+                  <el-button style="position: relative; left: 535px" type="primary" @click="toitem2" plain>项目详情</el-button>
                   <el-button style="position: relative; left: 525px" type="primary" icon="el-icon-delete" plain></el-button>
                   <el-divider></el-divider>
                 </div>
                 <div style="width: 800px; text-align: left">
                   项目3
                   <el-button style="position: relative; left: 545px" type="primary" icon="el-icon-edit" plain></el-button>
-                  <el-button style="position: relative; left: 535px" type="primary" @click="toitem" plain>项目详情</el-button>
+                  <el-button style="position: relative; left: 535px" type="primary" @click="toitem2" plain>项目详情</el-button>
                   <el-button style="position: relative; left: 525px" type="primary" icon="el-icon-delete" plain></el-button>
                   <el-divider></el-divider>
                 </div>
@@ -213,10 +213,10 @@ export default {
         mail: '',
         identity: '',
       },
-      old_nickname: '未登录',
-      old_name: '未登录',
-      old_mail: '未登录',
-      old_identity: '未登录',
+      old_nickname: '*****',
+      old_name: '*****',
+      old_mail: '*****',
+      old_identity: '*****',
       found_team: false,
       addDialogVisible:false,
       addForm2:{
@@ -254,6 +254,9 @@ export default {
   methods: {
     toitem() {
       this.$router.push('/itempage');
+    },
+    toitem2() {
+      this.$router.push('/itempage2');
     },
     toteam(team_id,team_name) {
       this.$store.state.teamid = team_id;

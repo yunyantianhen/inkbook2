@@ -112,7 +112,7 @@ export default {
       )
     },
     backitem(){
-      this.$router.push('itempage');
+      this.$router.push('/itempage');
     },
     goBack() {
       window.alert(this.contentEditor.getValue());

@@ -112,7 +112,7 @@ export default {
       this.$router.push('/itempage');
     },
     back() {
-      this.$router.push('/');
+      this.$router.push('/homepage');
     },
     inviting() {
 

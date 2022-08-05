@@ -5,12 +5,12 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
+    path: '/homepage',
     name: 'HomePage',
     component: () => import('../views/HomePage')
   },
   {
-    path: '/register',
+    path: '/',
     name: 'RegisterPage',
     component: () => import('../views/Register')
   },
@@ -28,6 +28,11 @@ const routes = [
     path: '/itempage',
     name: 'ItemPage',
     component: () => import('../views/ItemPage')
+  },
+  {
+    path: '/itempage2',
+    name: 'ItemPage2',
+    component: () => import('../views/ItemPage2')
   },
   {
     path: '/TextEditor',
