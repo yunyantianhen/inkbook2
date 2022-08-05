@@ -140,7 +140,7 @@
                   项目3
                   <el-button style="position: relative; left: 545px" type="primary" icon="el-icon-edit" plain></el-button>
                   <el-button style="position: relative; left: 535px" type="primary" @click="toitem2" plain>项目详情</el-button>-->
-                  <el-button style="position: relative; left: 325px" type="primary" icon="el-icon-delete" plain></el-button>
+                  <el-button style="position: relative; left: 345px" type="primary" icon="el-icon-edit" plain></el-button>
                   <el-button style="position: relative; left: 335px" type="primary" @click="toitem(project.id,project.name)" plain>项目详情</el-button>
                   <el-button style="position: relative; left: 325px" type="primary" icon="el-icon-delete" plain @click="deleteitem(project.id)"></el-button>
                 </div>
