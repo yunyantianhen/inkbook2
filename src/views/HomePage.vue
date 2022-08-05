@@ -166,9 +166,11 @@
           </el-tabs>
         </div>
         <div class="item_right">
+          <!--
           <el-row>
             <el-button type="primary" @click="addDialogVisible = true">创建项目</el-button>
           </el-row>
+          -->
           <el-dialog title="创建项目" :visible.sync="addDialogVisible" width="50%" @close="addDialogClosed">
             <el-form :model="addForm" :rules="addFormRules" ref="addFormRef" label-width="150px">
               <el-form-item label="项目名" prop="name">
