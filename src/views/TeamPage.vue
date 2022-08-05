@@ -190,7 +190,7 @@ export default {
         if(!valid) return
         //可以发起注册的网络请求
         const {data:res}= await this.$axios.post("/project/create/",
-            {"name":this.addForm.name});
+            {"name":this.addForm.name,"team_id":this.$store.state.teamid});
         if(res.result === 0) return this.$message.error(res.msg)
         this.$message.success("创建成功");
         this.addDialogVisible=false;
