@@ -40,10 +40,52 @@ const routes = [
     component: () => import('../views/TextEditor')
   },
   {
+<<<<<<< HEAD
     path: '/design',
     name: 'design',
     component: () => import('../examples/vseditor/index')
   }
+=======
+    path: '/newpage',
+    name: 'NewPage',
+    component: () => import('../views/NewPage')
+  },
+  {
+    path: '/personpage',
+    name: 'PersonPage',
+    component: () => import('../views/PersonPage')
+  },
+  {
+    path: '/homepage2',
+    name: 'HomePage2',
+    component: () => import('../views/HomePage2')
+  },
+  {
+    path: '/teamwork',
+    name: 'TeamWork',
+    component: () => import('../views/TeamWork')
+  },
+  {
+    path: '/itemwork',
+    name: 'ItemWork',
+    component: () => import('../views/ItemWork')
+  },
+  {
+    path: '/created',
+    name: 'Created',
+    component: () => import('../views/Created')
+  },
+  {
+    path: '/participated',
+    name: 'Participated',
+    component: () => import('../views/Participated')
+  },
+  {
+    path: '/recycle',
+    name: 'Recycle',
+    component: () => import('../views/Recycle')
+  },
+>>>>>>> 80ad8d9828b74257c718ccc7d0a1a20d8408bbaf
 ]
 
 const router = new VueRouter({
