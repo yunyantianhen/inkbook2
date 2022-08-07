@@ -40,6 +40,7 @@
         </div>
         <div style="position: absolute; right: 100px; top: 50px">
           <router-link to="/"><el-button type="danger" @click="open">注&nbsp;销</el-button></router-link>
+          <router-link to="/newpage"><el-button type="danger" @click="open">实&nbsp;验</el-button></router-link>
         </div>
       </el-tab-pane>
       <el-tab-pane label="团队管理" >

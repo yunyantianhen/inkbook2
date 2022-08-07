@@ -38,7 +38,32 @@ const routes = [
     path: '/TextEditor',
     name: 'TextEditor',
     component: () => import('../views/TextEditor')
-  }
+  },
+  {
+    path: '/newpage',
+    name: 'NewPage',
+    component: () => import('../views/NewPage')
+  },
+  {
+    path: '/personpage',
+    name: 'PersonPage',
+    component: () => import('../views/PersonPage')
+  },
+  {
+    path: '/homepage2',
+    name: 'HomePage2',
+    component: () => import('../views/HomePage2')
+  },
+  {
+    path: '/teamwork',
+    name: 'TeamWork',
+    component: () => import('../views/TeamWork')
+  },
+  {
+    path: '/itemwork',
+    name: 'ItemWork',
+    component: () => import('../views/ItemWork')
+  },
 ]
 
 const router = new VueRouter({
