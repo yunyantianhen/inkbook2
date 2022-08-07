@@ -40,12 +40,12 @@ const routes = [
     component: () => import('../views/TextEditor')
   },
   {
-<<<<<<< HEAD
+
     path: '/design',
     name: 'design',
     component: () => import('../examples/vseditor/index')
-  }
-=======
+  },
+      {
     path: '/newpage',
     name: 'NewPage',
     component: () => import('../views/NewPage')
@@ -84,10 +84,8 @@ const routes = [
     path: '/recycle',
     name: 'Recycle',
     component: () => import('../views/Recycle')
-  },
->>>>>>> 80ad8d9828b74257c718ccc7d0a1a20d8408bbaf
+  }
 ]
-
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
