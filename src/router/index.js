@@ -64,6 +64,21 @@ const routes = [
     name: 'ItemWork',
     component: () => import('../views/ItemWork')
   },
+  {
+    path: '/created',
+    name: 'Created',
+    component: () => import('../views/Created')
+  },
+  {
+    path: '/participated',
+    name: 'Participated',
+    component: () => import('../views/Participated')
+  },
+  {
+    path: '/recycle',
+    name: 'Recycle',
+    component: () => import('../views/Recycle')
+  },
 ]
 
 const router = new VueRouter({

@@ -135,7 +135,7 @@
         </el-table-column>
         <el-table-column
             width="250">
-            <a href="TeamPage" style="color: #409EFF; text-decoration-line: none">团队详情</a>
+          <a href="TeamPage" style="color: #409EFF; text-decoration-line: none">团队详情</a>
         </el-table-column>
       </el-table>
     </div>
@@ -151,21 +151,20 @@ export default {
     return {
       tableData: [{
         date: '2016-05-02',
-        name: '创建者1的团队',
-        creator: '创建者1',
-        detail: '团队详情'
+        name: '团队1',
+        creator: '创建者竟是我自己',
       }, {
         date: '2016-05-04',
-        name: '创建者2号的团队',
-        creator: '创建者2号'
+        name: '团队2',
+        creator: '创建者竟是我自己'
       }, {
         date: '2016-05-01',
-        name: '3号的团队',
-        creator: '3号'
+        name: '团队3',
+        creator: '创建者竟是我自己'
       }, {
         date: '2016-05-03',
-        name: '4号神秘人的团队',
-        creator: '4号神秘人'
+        name: '团队4',
+        creator: '创建者竟是我自己'
       }],
       found_team: false,
       addDialogVisible:false,

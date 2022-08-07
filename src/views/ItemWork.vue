@@ -68,7 +68,58 @@
     </el-col>
   </el-row>
   <div>
-    itemwork
+    <el-row class="tac" style="float: left">
+      <el-col :span="12">
+        <el-menu
+            default-active="5"
+            class="el-menu-vertical-demo"
+            @open="handleOpen"
+            @close="handleClose"
+            background-color="#545c64"
+            text-color="#fff"
+            active-text-color="#ffd04b"
+            style="height: 703px; width: 155px">
+          <el-menu-item index="5">
+            <router-link to="/teamwork" style="text-decoration-line: none;">
+              <i class="el-icon-menu"></i>
+              <span style="color: white;">我参与的</span>
+            </router-link>
+          </el-menu-item>
+          <el-menu-item index="6">
+            <router-link to="/created" style="text-decoration-line: none">
+              <i class="el-icon-menu"></i>
+              <span style="color: white;">回收站</span>
+            </router-link>
+          </el-menu-item>
+        </el-menu>
+      </el-col>
+    </el-row>
+  <div style="width: 1100px; float: left">
+    <el-table
+        :data="tableData"
+        stripe
+        style="width: 1000px; margin: auto">
+      <el-table-column
+          prop="date"
+          label="创建日期"
+          width="250">
+      </el-table-column>
+      <el-table-column
+          prop="name"
+          label="项目名称"
+          width="250">
+      </el-table-column>
+      <el-table-column
+          prop="creator"
+          label="所属团队"
+          width="250">
+      </el-table-column>
+      <el-table-column
+          width="250">
+        <a href="ItemPage" style="color: #409EFF; text-decoration-line: none">项目详情</a>
+      </el-table-column>
+    </el-table>
+  </div>
   </div>
   </body>
   </html>
@@ -79,6 +130,24 @@ export default {
   name: "NewPage",
   data() {
     return {
+      tableData: [{
+        date: '2016-05-02',
+        name: '项目1',
+        creator: '创建者1',
+        detail: '团队详情'
+      }, {
+        date: '2016-05-04',
+        name: '项目2',
+        creator: '创建者2号'
+      }, {
+        date: '2016-05-01',
+        name: '项目3',
+        creator: '3号'
+      }, {
+        date: '2016-05-03',
+        name: '项目4',
+        creator: '4号神秘人'
+      }],
     };
   },
   methods: {
