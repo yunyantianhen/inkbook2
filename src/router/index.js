@@ -38,6 +38,11 @@ const routes = [
     path: '/TextEditor',
     name: 'TextEditor',
     component: () => import('../views/TextEditor')
+  },
+  {
+    path: '/design',
+    name: 'design',
+    component: () => import('../examples/vseditor/index')
   }
 ]
 
