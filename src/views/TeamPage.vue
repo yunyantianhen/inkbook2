@@ -1,6 +1,96 @@
 <template>
 <html>
-<body style="width: 800px; margin: auto">
+<body>
+<el-row class="tac" style="float: left">
+  <el-col :span="12">
+    <el-menu
+        default-active="3"
+        class="el-menu-vertical-demo"
+        @open="handleOpen"
+        @close="handleClose"
+        background-color="#545c64"
+        text-color="#fff"
+        active-text-color="#ffd04b"
+        style="height: 703px; width: 155px">
+      <!--<el-submenu index="1">
+       <div style="color: deepskyblue"></div>
+      background-color="#545c64"
+
+      active-text-color="#ffd04b"
+        <template slot="title">
+          <i class="el-icon-location"></i>
+          <span>导航一</span>
+        </template>
+        <el-menu-item-group>
+          <template slot="title">分组一</template>
+          <el-menu-item index="1-1">选项1</el-menu-item>
+          <el-menu-item index="1-2">选项2</el-menu-item>
+        </el-menu-item-group>
+        <el-menu-item-group title="分组2">
+          <el-menu-item index="1-3">选项3</el-menu-item>
+        </el-menu-item-group>
+        <el-submenu index="1-4">
+          <template slot="title">选项4</template>
+          <el-menu-item index="1-4-1">选项1</el-menu-item>
+        </el-submenu>
+      </el-submenu>-->
+      <el-menu-item index="1">
+        <router-link to="/homepage2" style="text-decoration-line: none;">
+          <i class="el-icon-menu"></i>
+          <span style="color: white;">主页</span>
+        </router-link>
+      </el-menu-item>
+      <el-menu-item index="2">
+        <router-link to="/personpage" style="text-decoration-line: none">
+          <i class="el-icon-menu"></i>
+          <span style="color: white;">个人资料</span>
+        </router-link>
+      </el-menu-item>
+      <el-menu-item index="3">
+        <router-link to="/teamwork" style="text-decoration-line: none">
+          <i class="el-icon-menu"></i>
+          <span style="color: white;">团队管理</span>
+        </router-link>
+      </el-menu-item>
+      <el-menu-item index="4">
+        <router-link to="/itemwork" style="text-decoration-line: none">
+          <i class="el-icon-menu"></i>
+          <span style="color: white;">项目管理</span>
+        </router-link>
+      </el-menu-item>
+      <!--<el-menu-item index="3">
+        <i class="el-icon-document"></i>
+        <span slot="title">导航三</span>
+      </el-menu-item>
+      <el-menu-item index="4">
+        <i class="el-icon-setting"></i>
+        <span slot="title">导航四</span>
+      </el-menu-item>-->
+    </el-menu>
+  </el-col>
+</el-row>
+<div>
+  <el-row class="tac" style="float: left">
+    <el-col :span="12">
+      <el-menu
+          default-active="5"
+          class="el-menu-vertical-demo"
+          @open="handleOpen"
+          @close="handleClose"
+          background-color="#545c64"
+          text-color="#fff"
+          active-text-color="#ffd04b"
+          style="height: 703px; width: 155px">
+        <el-menu-item index="5">
+          <router-link to="/teamwork" style="text-decoration-line: none;">
+            <i class="el-icon-menu"></i>
+            <span style="color: white;">团队详情</span>
+          </router-link>
+        </el-menu-item>
+      </el-menu>
+    </el-col>
+  </el-row>
+  <div style="width: 900px; float: left">
 <br/>
 <div style="width: 600px; font-size: 30px; font-weight: bold; text-align: left; margin-left: 50px; float: left">{{this.$store.state.teamname}}</div>
 <div style="width: 100px; float: left"><el-button type="danger" @click="back">返回</el-button></div>
@@ -64,6 +154,8 @@
       <el-divider></el-divider>
     </div>
   </div>
+</div>
+</div>
 </div>
 </body>
 </html>

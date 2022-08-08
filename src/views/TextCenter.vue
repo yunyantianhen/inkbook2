@@ -1,31 +1,31 @@
 <template>
   <body style="width: 1500px;margin: auto;">
-    <div style="width: 300px;position: fixed;">
+    <div style="width: 300px;position: fixed;margin-top: 60px">
       <el-card class="box-card">
+        <div style="margin-bottom: 10px;text-align: left">
+          <el-button type="text" @click="open"><i class="el-icon-plus" @click="addText"></i></el-button>
+        </div>
         <el-tree :data="data" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
       </el-card>
     </div>
     <div>
-    <div style="margin-left: 450px;margin-bottom: 100px;text-align: left">
-      <div>
-        <el-page-header @back="goBack" content="项目管理">
+      <div style="margin-top: 20px;margin-left:40px;text-align: left">
+        <div>
+        <el-page-header @back="goBack" content="文档中心">
         </el-page-header>
       </div>
-      <div>
-        <h1>
-          标题
-        </h1>
-        <h5>
-          文档简介
-        </h5>
       </div>
     </div>
-    <div style="margin-left: 400px">
-      <div style="text-align: left" id="vditor" name="description" ></div>
+    <div style="margin-left: 350px;">
+      <div class="texte" style="text-align: left;" id="vditor" name="description" ></div>
     </div>
-  </div>
   </body>
 </template>
+<style scoped>
+  .texte{
+    height: 640px!important;
+  }
+</style>
 <script>
 import Vditor from "vditor"
 import "vditor/dist/index.css"
@@ -131,6 +131,25 @@ export default {
       window.alert(data.id);
       this.contentEditor.setValue(data.id);
       console.log(data);
+    },
+    addText(){
+
+    },
+    open() {
+      this.$prompt('请输入新建文档标题', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+      }).then(() => {
+        this.$message({
+          type: 'success',
+          message: "新建文档成功"
+        });
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '取消输入'
+        });
+      });
     }
   }
 }

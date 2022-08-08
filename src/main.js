@@ -21,7 +21,7 @@ axios.defaults.baseURL = 'http://81.70.132.82:16384'
 Vue.prototype.$http = axios
 Vue.config.productionTip = false
 axios.defaults.withCredentials = true;// 允许跨域携带cookie
-
+Vue.prototype.eventbus = new Vue()
 new Vue({
   router,
   store,
