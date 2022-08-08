@@ -38,7 +38,12 @@ const routes = [
     path: '/TextEditor',
     name: 'TextEditor',
     component: () => import('../views/TextEditor')
-  }
+  },
+  {
+    path: '/TextCenter',
+    name: 'TextCenter',
+    component: () => import('../views/TextCenter')
+  },
 ]
 
 const router = new VueRouter({
