@@ -34,30 +34,30 @@
             <el-menu-item index="1-4-1">选项1</el-menu-item>
           </el-submenu>
         </el-submenu>-->
-        <el-menu-item index="1">
-          <router-link to="/homepage2" style="text-decoration-line: none;">
+        <router-link to="/homepage2" style="text-decoration-line: none">
+          <el-menu-item index="1">
             <i class="el-icon-menu"></i>
             <span style="color: white;">主页</span>
-          </router-link>
-        </el-menu-item>
-        <el-menu-item index="2">
-          <router-link to="/personpage" style="text-decoration-line: none">
+          </el-menu-item>
+        </router-link>
+        <router-link to="/personpage" style="text-decoration-line: none">
+          <el-menu-item index="2">
             <i class="el-icon-menu"></i>
             <span style="color: white;">个人资料</span>
-          </router-link>
-        </el-menu-item>
-        <el-menu-item index="3">
-          <router-link to="/teamwork" style="text-decoration-line: none">
+          </el-menu-item>
+        </router-link>
+        <router-link to="/teamwork" style="text-decoration-line: none">
+          <el-menu-item index="3">
             <i class="el-icon-menu"></i>
             <span style="color: white;">团队管理</span>
-          </router-link>
-        </el-menu-item>
-        <el-menu-item index="4">
-          <router-link to="/itemwork" style="text-decoration-line: none">
+          </el-menu-item>
+        </router-link>
+        <router-link to="/itemwork" style="text-decoration-line: none">
+          <el-menu-item index="4">
             <i class="el-icon-menu"></i>
             <span style="color: white;">项目管理</span>
-          </router-link>
-        </el-menu-item>
+          </el-menu-item>
+        </router-link>
         <!--<el-menu-item index="3">
           <i class="el-icon-document"></i>
           <span slot="title">导航三</span>
@@ -81,7 +81,7 @@
             text-color="#fff"
             active-text-color="#ffd04b"
             style="height: 703px; width: 155px">
-          <el-menu-item index="5">
+          <!--<el-menu-item index="5">
             <router-link to="/teamwork" style="text-decoration-line: none;">
               <i class="el-icon-menu"></i>
               <span style="color: white;">我参与的</span>
@@ -92,7 +92,19 @@
               <i class="el-icon-menu"></i>
               <span style="color: white;">我创建的</span>
             </router-link>
-          </el-menu-item>
+          </el-menu-item>-->
+          <router-link to="/teamwork" style="text-decoration-line: none;">
+            <el-menu-item index="5">
+              <i class="el-icon-menu"></i>
+              <span style="color: white;">我参与的</span>
+            </el-menu-item>
+          </router-link>
+          <router-link to="/created" style="text-decoration-line: none">
+            <el-menu-item index="6">
+              <i class="el-icon-menu"></i>
+              <span style="color: white;">我创建的</span>
+            </el-menu-item>
+          </router-link>
         </el-menu>
       </el-col>
     </el-row>
