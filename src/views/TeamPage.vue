@@ -96,7 +96,7 @@
       <div style="width: 600px; font-size: 30px; font-weight: bold; text-align: left; margin-left: 50px; float: left">
         {{this.$store.state.teamname}}
       </div>
-      <div style="width: 100px; float: left"><el-button type="danger" @click="back">返回</el-button></div>
+      <div style="width: 100px; float: left; position: relative; left: 300px"><el-button type="danger" @click="back">返回</el-button></div>
       <br/><br/>
       <el-divider></el-divider>
       <div style="width: 1035px; margin: auto">
@@ -149,7 +149,14 @@
             </el-table>
           </el-tab-pane>
           <el-tab-pane label="负责项目">
-            <el-button style="position: relative; left: 400px" type="info" @click="addDialogVisible = true" plain>创建项目</el-button>
+            <el-input
+                placeholder="请输入搜索信息"
+                v-model="input_search"
+                clearable
+            style="width: 400px; position: relative; right: 200px">
+            </el-input>
+            <el-button style="position: relative; right: 200px" type="primary" @click="search" plain>搜索</el-button>
+            <el-button style="position: relative; left: 100px" type="info" @click="addDialogVisible = true" plain>创建项目</el-button>
             <el-dialog title="创建项目" :visible.sync="addDialogVisible" width="50%" @close="addDialogClosed">
               <el-form :model="addForm" :rules="addFormRules" ref="addFormRef" label-width="150px">
                 <el-form-item label="项目名" prop="name">
@@ -162,6 +169,25 @@
             <el-button type="primary" @click="addProject">确 定</el-button>
           </span>
             </el-dialog>
+            <div style="width: 600px; float: left; height: 50px; text-align: left">
+              <br/>
+              <template>
+                <el-radio-group v-model="sorting_factor">
+                  <el-radio :label="1">按创建时间排序</el-radio>
+                  <el-radio :label="2">按最近修改时间排序</el-radio>
+                  <el-radio :label="3">按项目名称排序</el-radio>
+                </el-radio-group>
+              </template>
+            </div>
+            <div style="width: 300px; float: left; height: 50px; text-align: right">
+              <br/>
+              <template>
+                <el-radio-group v-model="sorting_order">
+                  <el-radio :label="4">正序</el-radio>
+                  <el-radio :label="5">倒序</el-radio>
+                </el-radio-group>
+              </template>
+            </div>
             <el-table
                 :data="ItemList"
                 stripe
@@ -194,7 +220,7 @@
           </el-tab-pane>
           <el-tab-pane label="回收站">
             <el-table
-                :data="ItemList"
+                :data="RecycleList"
                 stripe
                 style="width: 1000px;">
               <el-table-column
@@ -290,6 +316,9 @@ export default {
   name: "TeamPage",
   data() {
     return{
+      input_search: '',//搜索团队输入框中的内容
+      sorting_factor: '',//排序的因素
+      sorting_order: '',//是正序还是倒序
       teamname: "",
       memberlist: [],
       projectlist: [],
@@ -335,6 +364,8 @@ export default {
         mail: '1234@qq.com',
         identity: '神秘人',
       }],
+      //团队成员列表
+
       ItemList: [{
         name: '某不科学的项目1',
         Creation_time: '2022-05-05',
@@ -352,6 +383,27 @@ export default {
         Creation_time: '2022-05-05',
         Time_last_modified: '2022-08-08',
       }],
+      //团队项目列表
+
+      RecycleList: [{
+        name: '某不科学的项目1',
+        Creation_time: '2022-05-05',
+        Time_last_modified: '2022-08-08',
+      }, {
+        name: '某不科学的项目2',
+        Creation_time: '2022-05-05',
+        Time_last_modified: '2022-08-08',
+      }, {
+        name: '某不科学的项目3',
+        Creation_time: '2022-05-05',
+        Time_last_modified: '2022-08-08',
+      }, {
+        name: '某不科学的项目4',
+        Creation_time: '2022-05-05',
+        Time_last_modified: '2022-08-08',
+      }],
+      //回收站中项目列表
+
     }
   },
   created() {
