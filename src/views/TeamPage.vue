@@ -34,30 +34,30 @@
           <el-menu-item index="1-4-1">选项1</el-menu-item>
         </el-submenu>
       </el-submenu>-->
-      <el-menu-item index="1">
-        <router-link to="/homepage2" style="text-decoration-line: none;">
+      <router-link to="/homepage2" style="text-decoration-line: none">
+        <el-menu-item index="1">
           <i class="el-icon-menu"></i>
           <span style="color: white;">主页</span>
-        </router-link>
-      </el-menu-item>
-      <el-menu-item index="2">
-        <router-link to="/personpage" style="text-decoration-line: none">
+        </el-menu-item>
+      </router-link>
+      <router-link to="/personpage" style="text-decoration-line: none">
+        <el-menu-item index="2">
           <i class="el-icon-menu"></i>
           <span style="color: white;">个人资料</span>
-        </router-link>
-      </el-menu-item>
-      <el-menu-item index="3">
-        <router-link to="/teamwork" style="text-decoration-line: none">
+        </el-menu-item>
+      </router-link>
+      <router-link to="/teamwork" style="text-decoration-line: none">
+        <el-menu-item index="3">
           <i class="el-icon-menu"></i>
           <span style="color: white;">团队管理</span>
-        </router-link>
-      </el-menu-item>
-      <el-menu-item index="4">
-        <router-link to="/itemwork" style="text-decoration-line: none">
+        </el-menu-item>
+      </router-link>
+      <router-link to="/itemwork" style="text-decoration-line: none">
+        <el-menu-item index="4">
           <i class="el-icon-menu"></i>
           <span style="color: white;">项目管理</span>
-        </router-link>
-      </el-menu-item>
+        </el-menu-item>
+      </router-link>
       <!--<el-menu-item index="3">
         <i class="el-icon-document"></i>
         <span slot="title">导航三</span>
@@ -81,54 +81,177 @@
           text-color="#fff"
           active-text-color="#ffd04b"
           style="height: 703px; width: 155px">
-        <el-menu-item index="5">
-          <router-link to="/teamwork" style="text-decoration-line: none;">
+        <router-link to="/teamwork" style="text-decoration-line: none;">
+          <el-menu-item index="5">
             <i class="el-icon-menu"></i>
             <span style="color: white;">团队详情</span>
-          </router-link>
-        </el-menu-item>
+          </el-menu-item>
+        </router-link>
       </el-menu>
     </el-col>
   </el-row>
-  <div style="width: 900px; float: left">
-<br/>
-<div style="width: 600px; font-size: 30px; font-weight: bold; text-align: left; margin-left: 50px; float: left">{{this.$store.state.teamname}}</div>
-<div style="width: 100px; float: left"><el-button type="danger" @click="back">返回</el-button></div>
-<br/><br/>
-<el-divider></el-divider>
-<div style="width: 800px; margin: auto">
-  <div style="width: 800px; text-align: left">
-    人员组成
-    <el-button style="position: relative; left: 630px" type="primary" @click="invite_user = true" round plain>邀请</el-button>
-    <el-dialog title="邀请成员" :visible.sync="invite_user" width="500px" @close="inviting">
-      <el-form :model="addForm" :rules="addFormRules" ref="addFormRef" label-width="110px">
-        <el-form-item label="被邀请人邮箱" prop="name">
-          <el-input v-model="addForm.email"></el-input>
-        </el-form-item>
-      </el-form>
-      <!--底部区域-->
-      <span slot="footer" class="dialog-footer">
-            <el-button @click="invite_user = false">取 消</el-button>
-            <el-button type="primary" @click="addUser">确 定</el-button>
-          </span>
-    </el-dialog>
-    <br/>
-    <br/>
-  </div>
-  <div style="width: 400px; float: left">
-    <div style="height: 40px" v-for="(member) in memberlist" :key="member.id">{{member.name}}</div>
-  </div>
-  <div style="width: 400px; float: left">
-    <div style="height: 40px" v-for="(member) in memberlist" :key="member.id">
-      <div style="height: 40px; width: 300px; font-weight: bold; float: left">{{member.identity}}</div>
-      <div style="width: 100px; float: left">
-        <i class="el-icon-upload2" @click="BecomeAdministrator(member.mail)"></i>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <i class="el-icon-delete" @click="leave"></i>
+  <div style="width: 1100px; float: left">
+    <div style="width: 1100px; float: left; margin: auto">
+      <br/>
+      <div style="width: 600px; font-size: 30px; font-weight: bold; text-align: left; margin-left: 50px; float: left">
+        {{this.$store.state.teamname}}
       </div>
-    </div>
-  </div>
-  <div style="width: 800px; text-align: left">
+      <div style="width: 100px; float: left"><el-button type="danger" @click="back">返回</el-button></div>
+      <br/><br/>
+      <el-divider></el-divider>
+      <div style="width: 1035px; margin: auto">
+        <el-tabs type="border-card">
+          <el-tab-pane label="人员组成">
+            <el-button style="position: relative; left: 400px" type="info" @click="invite_user = true" plain>邀请</el-button>
+            <el-dialog title="邀请成员" :visible.sync="invite_user" width="500px" @close="inviting">
+              <el-form :model="addForm" :rules="addFormRules" ref="addFormRef" label-width="110px">
+                <el-form-item label="被邀请人邮箱" prop="name">
+                  <el-input v-model="addForm.email"></el-input>
+                </el-form-item>
+              </el-form>
+              <!--底部区域-->
+              <span slot="footer" class="dialog-footer">
+              <el-button @click="invite_user = false">取 消</el-button>
+              <el-button type="primary" @click="addUser">确 定</el-button>
+            </span>
+            </el-dialog>
+            <el-table
+                :data="GroupList"
+                stripe
+                style="width: 1000px;">
+              <el-table-column
+                  prop="nickname"
+                  label="昵称"
+                  width="200">
+              </el-table-column>
+              <el-table-column
+                  prop="name"
+                  label="真实姓名"
+                  width="200">
+              </el-table-column>
+              <el-table-column
+                  prop="mail"
+                  label="邮箱"
+                  width="200">
+              </el-table-column>
+              <el-table-column
+                  prop="identity"
+                  label="身份"
+                  width="200">
+              </el-table-column>
+              <el-table-column
+                  width="200">
+                <!--<el-button type="text" style="color: #409EFF; text-decoration-line: none" @click="123">设置为管理员</el-button>-->
+                <el-button type="text" icon="el-icon-user" @click="123">设置管理员</el-button>
+                <el-button type="text" icon="el-icon-delete" @click="1234">移出</el-button>
+                <!--<el-button type="text" style="color: #409EFF; text-decoration-line: none" @click="123">移出队伍</el-button>-->
+              </el-table-column>
+            </el-table>
+          </el-tab-pane>
+          <el-tab-pane label="负责项目">
+            <el-button style="position: relative; left: 400px" type="info" @click="addDialogVisible = true" plain>创建项目</el-button>
+            <el-dialog title="创建项目" :visible.sync="addDialogVisible" width="50%" @close="addDialogClosed">
+              <el-form :model="addForm" :rules="addFormRules" ref="addFormRef" label-width="150px">
+                <el-form-item label="项目名" prop="name">
+                  <el-input v-model="addForm.name"></el-input>
+                </el-form-item>
+              </el-form>
+              <!--底部区域-->
+              <span slot="footer" class="dialog-footer">
+            <el-button @click="addDialogVisible = false">取 消</el-button>
+            <el-button type="primary" @click="addProject">确 定</el-button>
+          </span>
+            </el-dialog>
+            <el-table
+                :data="ItemList"
+                stripe
+                style="width: 1000px;">
+              <el-table-column
+                  prop="name"
+                  label="项目名称"
+                  width="220">
+              </el-table-column>
+              <el-table-column
+                  prop="Creation_time"
+                  label="创建时间"
+                  width="220">
+              </el-table-column>
+              <el-table-column
+                  prop="Time_last_modified"
+                  label="最近一次修改"
+                  width="220">
+              </el-table-column>
+              <el-table-column
+                  width="">
+                <!--<el-button type="text" style="color: #409EFF; text-decoration-line: none" @click="123">设置为管理员</el-button>-->
+                <el-button type="text" icon="el-icon-more-outline" @click="12345">项目详情</el-button>
+                <el-button type="text" icon="el-icon-edit" @click="12345">重命名</el-button>
+                <el-button type="text" icon="el-icon-delete" @click="1234">删除</el-button>
+                <el-button type="text" icon="el-icon-copy-document" @click="1234">复制</el-button>
+                <!--<el-button type="text" style="color: #409EFF; text-decoration-line: none" @click="123">移出队伍</el-button>-->
+              </el-table-column>
+            </el-table>
+          </el-tab-pane>
+          <el-tab-pane label="回收站">
+            <el-table
+                :data="ItemList"
+                stripe
+                style="width: 1000px;">
+              <el-table-column
+                  prop="name"
+                  label="项目名称"
+                  width="250">
+              </el-table-column>
+              <el-table-column
+                  prop="Creation_time"
+                  label="创建时间"
+                  width="250">
+              </el-table-column>
+              <el-table-column
+                  prop="Time_last_modified"
+                  label="删除时间"
+                  width="250">
+              </el-table-column>
+              <el-table-column
+                  width="">
+                <!--<el-button type="text" style="color: #409EFF; text-decoration-line: none" @click="123">设置为管理员</el-button>-->
+                <el-button type="text" icon="el-icon-more-outline" @click="12345">项目详情</el-button>
+                <el-button type="text" icon="el-icon-upload2" @click="1234">恢复</el-button>
+                <!--<el-button type="text" style="color: #409EFF; text-decoration-line: none" @click="123">移出队伍</el-button>-->
+              </el-table-column>
+            </el-table>
+          </el-tab-pane>
+        </el-tabs>
+        <!--<div style="width: 800px; text-align: left">人员组成
+          <el-button style="position: relative; left: 630px" type="primary" @click="invite_user = true" round plain>邀请</el-button>
+          <el-dialog title="邀请成员" :visible.sync="invite_user" width="500px" @close="inviting">
+            <el-form :model="addForm" :rules="addFormRules" ref="addFormRef" label-width="110px">
+              <el-form-item label="被邀请人邮箱" prop="name">
+                <el-input v-model="addForm.email"></el-input>
+              </el-form-item>
+            </el-form>-->
+            <!--底部区域-->
+            <!--<span slot="footer" class="dialog-footer">
+              <el-button @click="invite_user = false">取 消</el-button>
+              <el-button type="primary" @click="addUser">确 定</el-button>
+            </span>
+          </el-dialog>
+          <br/><br/>
+        </div>-->
+        <div style="width: 400px; float: left">
+          <div style="height: 40px" v-for="(member) in memberlist" :key="member.id">{{member.name}}</div>
+        </div>
+        <div style="width: 400px; float: left">
+          <div style="height: 40px" v-for="(member) in memberlist" :key="member.id">
+            <div style="height: 40px; width: 300px; font-weight: bold; float: left">{{member.identity}}</div>
+            <div style="width: 100px; float: left">
+              <i class="el-icon-upload2" @click="BecomeAdministrator(member.mail)"></i>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <i class="el-icon-delete" @click="leave"></i>
+            </div>
+          </div>
+        </div>
+  <!--<div style="width: 800px; text-align: left">
     负责项目
     <el-button style="position: relative; left: 630px" type="primary" @click="addDialogVisible = true" round plain>创建项目</el-button>
     <el-dialog title="创建项目" :visible.sync="addDialogVisible" width="50%" @close="addDialogClosed">
@@ -137,7 +260,7 @@
           <el-input v-model="addForm.name"></el-input>
         </el-form-item>
       </el-form>
-      <!--底部区域-->
+
       <span slot="footer" class="dialog-footer">
             <el-button @click="addDialogVisible = false">取 消</el-button>
             <el-button type="primary" @click="addProject">确 定</el-button>
@@ -145,7 +268,7 @@
     </el-dialog>
     <br/>
     <br/>
-  </div>
+  </div>-->
   <div style="margin: auto; width: 800px" v-for="(project) in projectlist" :key="project.id">
     <br/>
     <div style="width: 800px; text-align: left">
@@ -155,6 +278,7 @@
     </div>
   </div>
 </div>
+  </div>
 </div>
 </div>
 </body>
@@ -190,6 +314,44 @@ export default {
           { min :1 ,max:15, message: '项目名的长度在1~15个字符之间', trigger: 'blur'}
         ]
       },
+      GroupList: [{
+        nickname: '某科学的昵称1',
+        name: 'JGG',
+        mail: '1234@qq.com',
+        identity: '神秘人',
+      }, {
+        nickname: '某科学的昵称2',
+        name: 'JGG',
+        mail: '1234@qq.com',
+        identity: '神秘人',
+      }, {
+        nickname: '某科学的昵称3',
+        name: 'JGG',
+        mail: '1234@qq.com',
+        identity: '神秘人',
+      }, {
+        nickname: '某科学的昵称4',
+        name: 'JGG',
+        mail: '1234@qq.com',
+        identity: '神秘人',
+      }],
+      ItemList: [{
+        name: '某不科学的项目1',
+        Creation_time: '2022-05-05',
+        Time_last_modified: '2022-08-08',
+      }, {
+        name: '某不科学的项目2',
+        Creation_time: '2022-05-05',
+        Time_last_modified: '2022-08-08',
+      }, {
+        name: '某不科学的项目3',
+        Creation_time: '2022-05-05',
+        Time_last_modified: '2022-08-08',
+      }, {
+        name: '某不科学的项目4',
+        Creation_time: '2022-05-05',
+        Time_last_modified: '2022-08-08',
+      }],
     }
   },
   created() {
