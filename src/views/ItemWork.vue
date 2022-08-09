@@ -85,18 +85,18 @@
               <span style="color: white;">我参与的</span>
             </el-menu-item>
           </router-link>
-          <router-link to="/recycle" style="text-decoration-line: none">
+          <!--<router-link to="/recycle" style="text-decoration-line: none">
             <el-menu-item index="6">
               <i class="el-icon-menu"></i>
               <span style="color: white;">回收站</span>
             </el-menu-item>
-          </router-link>
+          </router-link>-->
         </el-menu>
       </el-col>
     </el-row>
   <div style="width: 1100px; float: left">
     <el-table
-        :data="tableData"
+        :data="projectList"
         stripe
         style="width: 1000px; margin: auto">
       <el-table-column
@@ -130,11 +130,11 @@ export default {
   name: "NewPage",
   data() {
     return {
-      tableData: [{
+      projectList: [
+          /*{
         date: '2016-05-02',
         name: '项目1',
         creator: '创建者1',
-        detail: '团队详情'
       }, {
         date: '2016-05-04',
         name: '项目2',
@@ -147,7 +147,8 @@ export default {
         date: '2016-05-03',
         name: '项目4',
         creator: '4号神秘人'
-      }],
+      }*/
+      ],
     };
   },
   methods: {

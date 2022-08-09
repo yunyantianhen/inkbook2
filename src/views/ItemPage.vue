@@ -1,15 +1,103 @@
 <template>
 <html>
-<body style="width: 1000px; margin: auto">
-<div style="margin-bottom: 100px;text-align: left; width: 1000px">
-  <br/>
+<body>
+<el-row class="tac" style="float: left">
+  <el-col :span="12">
+    <el-menu
+        default-active="3"
+        class="el-menu-vertical-demo"
+        @open="handleOpen"
+        @close="handleClose"
+        background-color="#545c64"
+        text-color="#fff"
+        active-text-color="#ffd04b"
+        style="height: 703px; width: 155px">
+      <!--<el-submenu index="1">
+       <div style="color: deepskyblue"></div>
+      background-color="#545c64"
+
+      active-text-color="#ffd04b"
+        <template slot="title">
+          <i class="el-icon-location"></i>
+          <span>导航一</span>
+        </template>
+        <el-menu-item-group>
+          <template slot="title">分组一</template>
+          <el-menu-item index="1-1">选项1</el-menu-item>
+          <el-menu-item index="1-2">选项2</el-menu-item>
+        </el-menu-item-group>
+        <el-menu-item-group title="分组2">
+          <el-menu-item index="1-3">选项3</el-menu-item>
+        </el-menu-item-group>
+        <el-submenu index="1-4">
+          <template slot="title">选项4</template>
+          <el-menu-item index="1-4-1">选项1</el-menu-item>
+        </el-submenu>
+      </el-submenu>-->
+      <router-link to="/homepage2" style="text-decoration-line: none">
+        <el-menu-item index="1">
+          <i class="el-icon-menu"></i>
+          <span style="color: white;">主页</span>
+        </el-menu-item>
+      </router-link>
+      <router-link to="/personpage" style="text-decoration-line: none">
+        <el-menu-item index="2">
+          <i class="el-icon-menu"></i>
+          <span style="color: white;">个人资料</span>
+        </el-menu-item>
+      </router-link>
+      <router-link to="/teamwork" style="text-decoration-line: none">
+        <el-menu-item index="3">
+          <i class="el-icon-menu"></i>
+          <span style="color: white;">团队管理</span>
+        </el-menu-item>
+      </router-link>
+      <router-link to="/itemwork" style="text-decoration-line: none">
+        <el-menu-item index="4">
+          <i class="el-icon-menu"></i>
+          <span style="color: white;">项目管理</span>
+        </el-menu-item>
+      </router-link>
+      <!--<el-menu-item index="3">
+        <i class="el-icon-document"></i>
+        <span slot="title">导航三</span>
+      </el-menu-item>
+      <el-menu-item index="4">
+        <i class="el-icon-setting"></i>
+        <span slot="title">导航四</span>
+      </el-menu-item>-->
+    </el-menu>
+  </el-col>
+</el-row>
+<div>
+  <el-row class="tac" style="float: left">
+    <el-col :span="12">
+      <el-menu
+          default-active="6"
+          class="el-menu-vertical-demo"
+          @open="handleOpen"
+          @close="handleClose"
+          background-color="#545c64"
+          text-color="#fff"
+          active-text-color="#ffd04b"
+          style="height: 703px; width: 155px">
+        <router-link to="/itempage" style="text-decoration-line: none;">
+          <el-menu-item index="6">
+            <i class="el-icon-menu"></i>
+            <span style="color: white;">项目详情</span>
+          </el-menu-item>
+        </router-link>
+      </el-menu>
+    </el-col>
+  </el-row>
+  <div style="width: 1100px; float: left">
   <div style="width: 715px; font-weight: bold; font-size: 30px; margin: auto; float: left; margin-left: 100px">
     {{this.$store.state.projectname}}
   </div>
   <div style="width: 100px; float: left"><el-button type="danger" @click="backteam">返回</el-button></div>
   <br/><br/>
   <el-divider></el-divider>
-  <div style="margin-left: 100px">
+  <div style="margin-right: 700px; height: 50px">
     <el-button type="info" plain @click="todesign()">设计原型</el-button>&nbsp;&nbsp;
   <a href="https://app.diagrams.net/"><el-button type="info" plain>绘制图</el-button></a>&nbsp;&nbsp;
   <el-button type="info" @click="found_text=true" plain>创建文档</el-button>
@@ -25,7 +113,36 @@
           </span>
     </el-dialog>
   </div>
-  <br/>
+    <div style="width: 1000px; margin: auto">
+    <el-table
+        :data="documentlist"
+        stripe
+        style="width: 1000px;">
+      <el-table-column
+          prop="name"
+          label="文档名"
+          width="240">
+      </el-table-column>
+      <el-table-column
+          prop="Creation_time"
+          label="创建时间"
+          width="240">
+      </el-table-column>
+      <el-table-column
+          prop="Time_last_modified"
+          label="最近一次修改时间"
+          width="240">
+      </el-table-column>
+      <el-table-column
+          width="">
+        <!--<el-button type="text" style="color: #409EFF; text-decoration-line: none" @click="123">设置为管理员</el-button>-->
+        <el-button type="text" icon="el-icon-more-outline" @click="totext">文档详情</el-button>
+        <el-button type="text" icon="el-icon-edit" @click="12345">重命名</el-button>
+        <el-button type="text" icon="el-icon-delete" @click="1234">删除</el-button>
+        <!--<el-button type="text" style="color: #409EFF; text-decoration-line: none" @click="123">移出队伍</el-button>-->
+      </el-table-column>
+    </el-table>
+  <!--<br/>
   <br/>
   <div style="margin: auto; width: 800px">
     <br/>
@@ -37,7 +154,9 @@
       </div>
       <el-divider></el-divider>
     </div>
-  </div>
+  </div>-->
+    </div>
+</div>
 </div>
 </body>
 </html>
@@ -48,7 +167,25 @@ export default {
   name: "ItemPage",
   data(){
     return{
-      documentlist:[],
+      documentlist:[
+        /*{
+          name: '某不科学的文档1',
+          Creation_time: '2022-05-05',
+          Time_last_modified: '2022-08-08',
+        }, {
+          name: '某不科学的文档2',
+          Creation_time: '2022-05-05',
+          Time_last_modified: '2022-08-08',
+        }, {
+          name: '某不科学的文档3',
+          Creation_time: '2022-05-05',
+          Time_last_modified: '2022-08-08',
+        }, {
+          name: '某不科学的文档4',
+          Creation_time: '2022-05-05',
+          Time_last_modified: '2022-08-08',
+        }*/
+      ],
       found_text: false,
       addForm:{
         name: '',
@@ -59,6 +196,23 @@ export default {
           { min :1 ,max:15, message: '项目名的长度在1~15个字符之间', trigger: 'blur'}
           ]
         },
+      /*FileList: [{
+        name: '某不科学的文档1',
+        Creation_time: '2022-05-05',
+        Time_last_modified: '2022-08-08',
+      }, {
+        name: '某不科学的文档2',
+        Creation_time: '2022-05-05',
+        Time_last_modified: '2022-08-08',
+      }, {
+        name: '某不科学的文档3',
+        Creation_time: '2022-05-05',
+        Time_last_modified: '2022-08-08',
+      }, {
+        name: '某不科学的文档4',
+        Creation_time: '2022-05-05',
+        Time_last_modified: '2022-08-08',
+      }],*///文档列表
     }
   },
   created() {
