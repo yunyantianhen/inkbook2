@@ -34,74 +34,57 @@ export default {
     return{
       contentEditor:"",
       textCon:"",
-      data: [{
-        label: '团队1',
-        id:1,
-        children: [{
-          label: '项目1',
-          children: [{
-            label: '文档1',
+      data: [
+      {
+        name: '项目文档区',
+        document: [
+        {
+          name: '项目1',
+          document: [
+          {
+            name: '文档1',
             id:2
           }]
         }]
-      }, {
-        label: '团队2',
-        children: [{
-          label: '项目2',
-          children: [{
-            label: '文档2'
-          }]
-        }, {
-          label: '项目3',
-          children: [{
-            label: '文档3'
-          }]
-        }]
-      }, {
-        label: '团队3',
-        children: [{
-          label: '项目4',
-          children: [{
-            label: '文档4'
-          }]
-        }, {
-          label: '项目5',
-          children: [{
-            label: '文档5'
-          }]
-        }]
-      },{
-        label: '团队3',
-        children: [{
-          label: '项目4',
-          children: [{
-            label: '文档4'
-          }]
-        }, {
-          label: '项目5',
-          children: [{
-            label: '文档5'
-          }]
-        }]
-      },{
-        label: '团队3',
-        children: [{
-          label: '项目4',
-          children: [{
-            label: '文档4'
-          }]
-        }, {
-          label: '项目5',
-          children: [{
-            label: '文档5'
-          }]
-        }]
-      }],
+      },
+        {
+          name: '项目文档区',
+          document: [
+            {
+              name: '项目1',
+              document: [
+                {
+                  name: '文档1',
+                  id:2
+                }]
+            }]
+        },
+        {
+          name: '项目文档区',
+          document: [
+            {
+              name: '项目1',
+              document: [
+                {
+                  name: '文档1',
+                  id:2
+                }]
+            }]
+        },
+      ],
       defaultProps: {
-        children: 'children',
-        label: 'label'
+        children: 'document',
+        label: 'name'
       }
     }
+  },
+  created() {
+    this.$axios.post('/document/centre/',{team_id:1}).then(
+        res =>{
+          window.alert(res.data.msg);
+          this.data = res.data.data;
+        }
+    )
   },
   mounted(){
     this.contentEditor = new Vditor('vditor', {
@@ -119,7 +102,7 @@ export default {
   },
   methods:{
     goBack() {
-      window.alert(this.contentEditor.getValue());
+      window.alert(this.$store.state.userid);
     },
     handleOpen(key, keyPath) {
       console.log(key, keyPath);
@@ -128,8 +111,11 @@ export default {
       console.log(key, keyPath);
     },
     handleNodeClick(data) {
-      window.alert(data.id);
-      this.contentEditor.setValue(data.id);
+      this.$axios.post('/document/find/',{id:data.id}).then(
+          res =>{
+            this.contentEditor.setValue(res.data.text);
+          }
+      )
       console.log(data);
     },
     addText(){
