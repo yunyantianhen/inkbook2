@@ -82,14 +82,73 @@
           <router-link to="/teampage" style="text-decoration-line: none;">
             <el-menu-item index="5">
               <i class="el-icon-menu"></i>
-              <span style="color: white;">信息修改</span>
+              <span style="color: white;">个人信息</span>
             </el-menu-item>
           </router-link>
         </el-menu>
       </el-col>
     </el-row>
-    <div>
-      123
+    <div style="width: 1150px; float: left">
+      <div style="height: 100px"></div>
+    <div style="width: 800px; margin: auto">
+      <el-tabs type="border-card">
+        <el-tab-pane label="信息展示">
+          <div style="height: 400px; width: 350px; float: left">
+            <div style="height: 50px"></div>
+            <div style="height: 200px">
+              <img class="head" src="../img/3.png">
+            </div>
+          </div>
+          <div style="height: 400px; width: 400px; float: left">
+            <div style="height: 70px"></div>
+              <div style="height: 200px; text-align: left">
+                <div class="small"><span style="font-weight: bold">昵称:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>{{this.old_nickname}}</div>
+                <div class="small"><span style="font-weight: bold">姓名:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>{{this.old_name}}</div>
+                <div class="small"><span style="font-weight: bold">邮箱:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>{{this.old_mail}}</div>
+                <div class="small"><span style="font-weight: bold">签名:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>{{this.old_identity}}</div>
+              </div>
+          </div>
+        </el-tab-pane>
+        <el-tab-pane label="信息修改">
+          <div style="height: 400px; width: 350px; float: left">
+            <div style="height: 50px"></div>
+            <div style="height: 200px">
+              <img class="head" src="../img/3.png">
+            </div>
+          </div>
+          <div style="width: 400px; float: left">
+            <div style="height: 20px"></div>
+          <div style="text-align: left; margin-left: 50px; font-size: 18px; font-weight: bold">
+            请在以下区域修改个人信息：
+            <br/><br/>
+          </div>
+          <el-form ref="form" :model="form" style="text-align: left; margin-left: 50px">
+            <el-form-item label="" style="margin-bottom: 20px; display: inline-block">
+              昵称&nbsp;&nbsp;
+              <el-input  v-model="form.nickname" style="width: 250px;" size="small" :placeholder="this.old_nickname" :value="this.old_nickname" clearable>
+              </el-input>
+            </el-form-item>
+            <el-form-item label="" style="margin-bottom: 20px; display: inline-block">
+              姓名&nbsp;&nbsp;
+              <el-input  v-model="form.name" style="width: 250px;" size="small" :placeholder="this.old_name" :value="this.old_name" clearable>
+              </el-input>
+            </el-form-item>
+            <el-form-item label="" style="margin-bottom: 20px; display: inline-block">
+              邮箱&nbsp;&nbsp;
+              <el-input  v-model="form.mail" style="width: 250px;" size="small" :placeholder="this.old_mail" :value="this.old_mail" clearable>
+              </el-input>
+            </el-form-item>
+            <el-form-item label="" style="margin-bottom: 20px; display: inline-block">
+              身份&nbsp;&nbsp;
+              <el-input  v-model="form.identity" style="width: 250px;" size="small" :placeholder="this.old_identity" :value="this.old_identity" clearable>
+              </el-input>
+            </el-form-item>
+          </el-form>
+          <el-button @click="submit_all" type="primary" style="height: 40px; width: 70px; margin-left: 10px">提交</el-button>
+          </div>
+        </el-tab-pane>
+      </el-tabs>
+    </div>
     </div>
   </div>
   </body>
@@ -97,11 +156,32 @@
 </template>
 
 <script>
+import qs from "qs";
+
 export default {
   name: "NewPage",
   data() {
     return {
+      form: {
+        nickname: '',
+        name: '',
+        mail: '',
+        identity: '',
+      },
+      old_nickname: '*****',
+      old_name: '*****',
+      old_mail: '*****',
+      old_identity: '*****',
     };
+  },
+  created() {
+    this.$axios.post('/user/show_info/',{id:this.$store.state.userid}).then(
+        res =>{
+          this.old_nickname = res.data.username;
+          this.old_name = res.data.name;
+          this.old_mail = res.data.email;
+        }
+    )
   },
   methods: {
     handleOpen(key, keyPath) {
@@ -109,11 +189,48 @@ export default {
     },
     handleClose(key, keyPath) {
       console.log(key, keyPath);
-    }
+    },
+    submit_all() {
+      this.$axios({
+        method: 'post',
+        url:'/user/modify_info/',
+        data: qs.stringify({
+          id:this.$store.state.userid,
+          username: this.form.nickname,
+          name: this.form.name,
+          email: this.form.mail,
+        })
+      }).then(
+          res =>{
+            switch (res.data.result) {
+              case 1:
+                this.$message.success("修改成功");
+                this.old_nickname = this.form.nickname;
+                this.old_name = this.form.name;
+                this.old_mail = this.form.mail;
+                this.old_identity = this.form.identity;
+                break;
+              case 0:
+                this.$message.error(res.data.msg);
+                break;
+            }
+          }
+      )
+    },
   }
 }
 </script>
 
 <style scoped>
-
+.head{
+  height: 180px;
+  width: 180px;
+  border-radius: 50%;
+}
+.small{
+  width: 400px;
+  height: 40px;
+  text-align: left;
+  margin-left: 50px;
+}
 </style>
