@@ -190,6 +190,22 @@ export default {
       },
     };
   },
+  created() {
+    var i = 0;
+    this.$axios.post('/team/showMyCreate/',{userid:sessionStorage.getItem('userid')}).then(
+        res =>{
+          for( i = 0; i < res.data.num ; i++)
+          {
+            this.myteamlist.push({
+              id: res.data.list[i].id,
+              name: res.data.list[i].name,
+              date:res.data.list[i].createTime,
+              creator:res.data.list[i].creator
+            })
+          }
+        }
+    )
+  },
   methods: {
     handleOpen(key, keyPath) {
       console.log(key, keyPath);

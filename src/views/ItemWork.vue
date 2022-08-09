@@ -130,7 +130,7 @@ export default {
   name: "NewPage",
   data() {
     return {
-      projectList: [
+      projectlist: [
           /*{
         date: '2016-05-02',
         name: '项目1',
@@ -150,6 +150,21 @@ export default {
       }*/
       ],
     };
+  },
+  created() {
+    var i = 0;
+    this.$axios.post('/project/list_project/',{team_id:-1,user_id:sessionStorage.getItem('userid')}).then(
+        res =>{
+          for( i = 0 ; i < res.data.data.number ; i++)
+          {
+            this.projectlist.push({
+              id:res.data.data.project[i].id,
+              name:res.data.data.project[i].name,
+              team:res.data.data.project[i].team
+            })
+          }
+        }
+    )
   },
   methods: {
     handleOpen(key, keyPath) {

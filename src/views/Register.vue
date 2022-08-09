@@ -44,7 +44,7 @@ export default {
             switch (res.data.result) {
               case 1:
                 this.$message.success("登录成功！");
-                this.$store.state.userid = res.data.id;
+                sessionStorage.setItem('userid',res.data.id);
                 this.$router.push('/homepage');
                 break;
 

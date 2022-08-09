@@ -100,7 +100,7 @@
     <div style="width: 1100px; float: left; margin: auto">
       <br/>
       <div style="width: 600px; font-size: 30px; font-weight: bold; text-align: left; margin-left: 50px; float: left">
-        {{this.$store.state.teamname}}
+        {{this.teamname}}
       </div>
       <div style="width: 100px; float: left; position: relative; left: 300px"><el-button type="danger" @click="back">返回</el-button></div>
       <br/><br/>
@@ -147,10 +147,12 @@
               </el-table-column>
               <el-table-column
                   width="200">
-                <!--<el-button type="text" style="color: #409EFF; text-decoration-line: none" @click="123">设置为管理员</el-button>-->
-                <el-button type="text" icon="el-icon-user" @click="BecomeAdministrator">设置管理员</el-button>
-                <el-button type="text" icon="el-icon-delete" @click="leave">移出</el-button>
-                <!--<el-button type="text" style="color: #409EFF; text-decoration-line: none" @click="123">移出队伍</el-button>-->
+                <template slot-scope="scope">
+                  <!--<el-button type="text" style="color: #409EFF; text-decoration-line: none" @click="123">设置为管理员</el-button>-->
+                  <el-button type="text" icon="el-icon-user" @click="BecomeAdministrator(scope.row.mail)">设置管理员</el-button>
+                  <el-button type="text" icon="el-icon-delete" @click="leave(scope.$index)">移出</el-button>
+                  <!--<el-button type="text" style="color: #409EFF; text-decoration-line: none" @click="123">移出队伍</el-button>-->
+                </template>
               </el-table-column>
             </el-table>
           </el-tab-pane>
@@ -189,8 +191,8 @@
               <br/>
               <template>
                 <el-radio-group v-model="sorting_order">
-                  <el-radio :label="4">正序</el-radio>
-                  <el-radio :label="5">倒序</el-radio>
+                  <el-radio :label="0">正序</el-radio>
+                  <el-radio :label="1">倒序</el-radio>
                 </el-radio-group>
               </template>
             </div>
@@ -215,12 +217,14 @@
               </el-table-column>
               <el-table-column
                   width="">
-                <!--<el-button type="text" style="color: #409EFF; text-decoration-line: none" @click="123">设置为管理员</el-button>-->
-                <el-button type="text" icon="el-icon-more-outline" @click="toitem">项目详情</el-button>
-                <el-button type="text" icon="el-icon-edit" @click="12345">重命名</el-button>
-                <el-button type="text" icon="el-icon-delete" @click="1234">删除</el-button>
-                <el-button type="text" icon="el-icon-copy-document" @click="1234">复制</el-button>
-                <!--<el-button type="text" style="color: #409EFF; text-decoration-line: none" @click="123">移出队伍</el-button>-->
+                <template slot-scope="scope">
+                  <!--<el-button type="text" style="color: #409EFF; text-decoration-line: none" @click="123">设置为管理员</el-button>-->
+                  <el-button type="text" icon="el-icon-more-outline" @click="toitem">项目详情</el-button>
+                  <el-button type="text" icon="el-icon-edit" @click="12345">重命名</el-button>
+                  <el-button type="text" icon="el-icon-delete" @click="deleteitem(scope.$index)">删除</el-button>
+                  <el-button type="text" icon="el-icon-copy-document" @click="copy(scope.$index)">复制</el-button>
+                  <!--<el-button type="text" style="color: #409EFF; text-decoration-line: none" @click="123">移出队伍</el-button>-->
+                </template>
               </el-table-column>
             </el-table>
           </el-tab-pane>
@@ -246,11 +250,13 @@
               </el-table-column>
               <el-table-column
                   width="">
-                <!--<el-button type="text" style="color: #409EFF; text-decoration-line: none" @click="123">设置为管理员</el-button>-->
-                <el-button type="text" icon="el-icon-more-outline" @click="toitem">项目详情</el-button>
-                <el-button type="text" icon="el-icon-upload2" @click="1234">恢复</el-button>
-                <el-button type="text" icon="el-icon-delete" @click="1234">删除</el-button>
-                <!--<el-button type="text" style="color: #409EFF; text-decoration-line: none" @click="123">移出队伍</el-button>-->
+                <template slot-scope="scope">
+                  <!--<el-button type="text" style="color: #409EFF; text-decoration-line: none" @click="123">设置为管理员</el-button>-->
+                  <el-button type="text" icon="el-icon-more-outline" @click="toitem">项目详情</el-button>
+                  <el-button type="text" icon="el-icon-upload2" @click="recover(scope.$index)">恢复</el-button>
+                  <el-button type="text" icon="el-icon-delete" @click="1234">删除</el-button>
+                  <!--<el-button type="text" style="color: #409EFF; text-decoration-line: none" @click="123">移出队伍</el-button>-->
+                </template>
               </el-table-column>
             </el-table>
           </el-tab-pane>
@@ -458,12 +464,14 @@ export default {
     }
   },
   created() {
+    this.teamname = sessionStorage.getItem('teamname');
     var i = 0;
-    this.$axios.post('/team/showMember/',{teamid:this.$store.state.teamid}).then(
+    this.$axios.post('/team/showMember/',{teamid:sessionStorage.getItem('teamid')}).then(
         res =>{
           for( i = 0; i < res.data.num; i++ )
           {
             this.memberlist.push({
+              username:res.data.list[i].username,
               id:res.data.list[i].id,
               name:res.data.list[i].name,
               identity:res.data.list[i].identity,
@@ -472,11 +480,24 @@ export default {
           }
         }
     )
-    this.$axios.post('/project/list_project/',{team_id:this.$store.state.teamid,user_id:this.$store.state.userid}).then(
+    this.$axios.post('/project/list_project/',{team_id:-1,user_id:sessionStorage.getItem('userid')}).then(
         res =>{
           for( i = 0 ; i < res.data.data.number ; i++)
           {
             this.projectlist.push({
+              id:res.data.data.project[i].id,
+              name:res.data.data.project[i].name,
+              team:res.data.data.project[i].team,
+
+            })
+          }
+        }
+    )
+    this.$axios.post('/project/recycle_bin/',{'team_id':sessionStorage.getItem('teamid')}).then(
+        res =>{
+          for( i = 0 ; i < res.data.data.number ; i++)
+          {
+            this.RecycleList.push({
               id:res.data.data.project[i].id,
               name:res.data.data.project[i].name,
               team:res.data.data.project[i].team
@@ -487,8 +508,8 @@ export default {
   },
   methods: {
     toitem(projectid,projectname) {
-      this.$store.state.projectid = projectid;
-      this.$store.state.projectname = projectname;
+      sessionStorage.setItem('projectid',projectid);
+      sessionStorage.setItem('projectname',projectname);
       this.$router.push('/itempage');
     },
     back() {
@@ -499,9 +520,9 @@ export default {
     },
     addUser(){
       this.$axios.post('/team/addMember/',{
-        userid1:this.$store.state.userid,
+        userid1:sessionStorage.getItem('userid'),
         email:this.addForm.email,
-        teamid:this.$store.state.teamid,
+        teamid:sessionStorage.getItem('teamid'),
         identity:"成员",
       }).then(
           res =>{
@@ -516,6 +537,43 @@ export default {
           }
       )
     },//邀请成员
+    order(){
+      var m = "name";
+      var i = 0;
+      if(this.sorting_factor === 1)
+          m = "create_time";
+      else if(this.sorting_factor === 2)
+          m = "update_time";
+      this.projectlist.length = 0;
+      this.$axios.post('/project/sort/',{'team_id':sessionStorage.getItem('teamid'),'order_by':m,'reverse':this.sorting_order}).then(
+          res =>{
+            for( i = 0 ; i < res.data.data.number ; i++)
+            {
+              this.projectlist.push({
+                id:res.data.data.project[i].id,
+                name:res.data.data.project[i].name,
+                team:res.data.data.project[i].team,
+              })
+            }
+          }
+      )
+    },
+    search(){
+      var i = 0;
+      this.projectlist.length = 0;
+      this.$axios.post('/project/search/',{'team_id':sessionStorage.getItem('teamid'),'keyword':this.input_search}).then(
+          res =>{
+            for( i = 0 ; i < res.data.data.number ; i++)
+            {
+              this.projectlist.push({
+                id:res.data.data.project[i].id,
+                name:res.data.data.project[i].name,
+                team:res.data.data.project[i].team,
+              })
+            }
+          }
+      )
+    },
     shuaxin(){
       var i = 0;
       this.$axios.post('/team/showMember/',{teamid:this.$store.state.teamid}).then(
@@ -534,9 +592,9 @@ export default {
     },
     BecomeAdministrator(temail){
       this.$axios.post('/team/setManager/',{
-        userid1:this.$store.state.userid,
+        userid1:sessionStorage.getItem('userid'),
         email:temail,
-        teamid:this.$store.state.teamid
+        teamid:sessionStorage.getItem('teamid')
       }).then(
           res =>{
             switch (res.data.result){
@@ -550,19 +608,75 @@ export default {
           }
       )
     },//将成员设置为管理员
-    leave() {
-
-
+    leave(id) {
+      this.$axios.post('/team/deleteMember/',{
+        userid1:sessionStorage.getItem('userid'),
+        userid2:this.memberlist[id].id,
+        teamid:sessionStorage.getItem('teamid')
+      }).then(
+          res =>{
+            switch (res.data.result){
+              case 1:
+                this.$message.success(res.data.msg);
+                break;
+              case 0:
+                this.$message.error(res.data.msg);
+                break;
+            }
+          }
+      )
     },//删除成员
     addDialogClosed(){
       this.$refs.addFormRef.resetFields()
+    },
+    deleteitem(id){
+      this.$axios.post('/project/delete/',{'id':this.projectlist[id].id}).then(
+          res =>{
+            switch (res.data.result){
+              case 1:
+                this.$message.success(res.data.msg);
+                break;
+              case 0:
+                this.$message.error(res.data.msg);
+                break;
+            }
+          }
+      )
+    },
+    copy(id){
+      this.$axios.post('/project/copy/',{'id':this.projectlist[id].id,'user_id':sessionStorage.getItem('userid')}).then(
+          res =>{
+            switch (res.data.result){
+              case 1:
+                this.$message.success(res.data.msg);
+                break;
+              case 0:
+                this.$message.error(res.data.msg);
+                break;
+            }
+          }
+      )
+    },
+    recover(id){
+      this.$axios.post('/project/recover/',{'id':this.RecycleList[id].id}).then(
+          res =>{
+            switch (res.data.result){
+              case 1:
+                this.$message.success(res.data.msg);
+                break;
+              case 0:
+                this.$message.error(res.data.msg);
+                break;
+            }
+          }
+      )
     },
     addProject(){
       this.$refs.addFormRef.validate(async valid =>{
         if(!valid) return
         //可以发起注册的网络请求
         const {data:res}= await this.$axios.post("/project/create/",
-            {"name":this.addForm.name,"team_id":this.$store.state.teamid});
+            {"name":this.addForm.name,"team_id":sessionStorage.getItem('teamid'),"user_id":sessionStorage.getItem('userid')});
         if(res.result === 0) return this.$message.error(res.msg)
         this.$message.success("创建成功");
         this.addDialogVisible=false;
