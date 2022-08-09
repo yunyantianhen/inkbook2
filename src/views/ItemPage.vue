@@ -245,7 +245,7 @@ export default {
     },
     addText(){
       this.$axios.post('/document/create/',{
-      user_id:this.$store.state.userid,
+      user_id:window.sessionStorage.getItem('id'),
       project_id:this.$store.state.projectid,
       name:this.addForm.mail,
       text:""
