@@ -245,7 +245,7 @@ export default {
     };
   },
   created() {
-    this.$axios.post('/user/show_info/',{id:this.$store.state.userid}).then(
+    this.$axios.post('/user/show_info/',{id:window.sessionStorage.getItem('id')}).then(
         res =>{
           this.old_nickname = res.data.username;
           this.old_name = res.data.name;
@@ -253,7 +253,7 @@ export default {
         }
     )
     var i = 0;
-    this.$axios.post('/team/showMyCreate/',{userid:this.$store.state.userid}).then(
+    this.$axios.post('/team/showMyCreate/',{userid:window.sessionStorage.getItem('id')}).then(
         res =>{
           for( i = 0; i < res.data.num ; i++)
           {
@@ -278,6 +278,7 @@ export default {
       this.$router.push('/itempage2');
     },
     toteam(team_id,team_name) {
+      window.sessionStorage.setItem('teamid',team_id)
       this.$store.state.teamid = team_id;
       this.$store.state.teamname = team_name;
       this.$router.push('/teampage');
@@ -296,7 +297,7 @@ export default {
         method: 'post',
         url:'/user/modify_info/',
         data: qs.stringify({
-          id:this.$store.state.userid,
+          id:window.sessionStorage.getItem('id'),
           username: this.form.nickname,
           name: this.form.name,
           email: this.form.mail,
@@ -337,7 +338,7 @@ export default {
     },
     getTeamlist(){
       var i = 0;
-      this.$axios.post('/team/showTeam/',{userid: this.$store.state.userid}).then(
+      this.$axios.post('/team/showTeam/',{userid: window.sessionStorage.getItem('id')}).then(
           res => {
             for( i = 0; i < res.data.num ; i++)
             this.teamList.push({
@@ -349,7 +350,7 @@ export default {
     },
     getProjectlist(){
       var i = 0;
-      this.$axios.post('/project/list_project/',{team_id:-1,user_id:this.$store.state.userid}).then(
+      this.$axios.post('/project/list_project/',{team_id:-1,user_id:window.sessionStorage.getItem('id')}).then(
           res => {
             for(i = 0 ; i < res.data.data.number ; i++)
             {

@@ -79,9 +79,8 @@ export default {
     }
   },
   created() {
-    this.$axios.post('/document/centre/',{team_id:1}).then(
+    this.$axios.post('/document/centre/',{team_id:sessionStorage.getItem('teamid')}).then(
         res =>{
-          window.alert(res.data.msg);
           this.data = res.data.data;
         }
     )
@@ -102,7 +101,6 @@ export default {
   },
   methods:{
     goBack() {
-      window.alert(this.$store.state.userid);
     },
     handleOpen(key, keyPath) {
       console.log(key, keyPath);

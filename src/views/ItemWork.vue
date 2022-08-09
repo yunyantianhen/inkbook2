@@ -96,7 +96,7 @@
     </el-row>
   <div style="width: 1100px; float: left">
     <el-table
-        :data="projectList"
+        :data="projectlist"
         stripe
         style="width: 1000px; margin: auto">
       <el-table-column
@@ -116,7 +116,9 @@
       </el-table-column>
       <el-table-column
           width="250">
-        <a href="ItemPage" style="color: #409EFF; text-decoration-line: none">项目详情</a>
+        <template slot-scope="scope">
+          <a href="ItemPage" style="color: #409EFF; text-decoration-line: none" @click="toitem(scope.$index,scope.row.name)">项目详情</a>
+        </template>
       </el-table-column>
     </el-table>
   </div>
@@ -160,7 +162,7 @@ export default {
             this.projectlist.push({
               id:res.data.data.project[i].id,
               name:res.data.data.project[i].name,
-              team:res.data.data.project[i].team
+              team:res.data.data.project[i].team,
             })
           }
         }
@@ -172,7 +174,12 @@ export default {
     },
     handleClose(key, keyPath) {
       console.log(key, keyPath);
-    }
+    },
+    toitem(projectid,projectname) {
+      sessionStorage.setItem('projectid',this.projectlist[projectid].id);
+      sessionStorage.setItem('projectname',projectname);
+      this.$router.push('/itempage');
+    },
   }
 }
 </script>

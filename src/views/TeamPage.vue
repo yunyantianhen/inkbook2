@@ -219,7 +219,7 @@
                   width="">
                 <template slot-scope="scope">
                   <!--<el-button type="text" style="color: #409EFF; text-decoration-line: none" @click="123">设置为管理员</el-button>-->
-                  <el-button type="text" icon="el-icon-more-outline" @click="toitem">项目详情</el-button>
+                  <el-button type="text" icon="el-icon-more-outline" @click="toitem(scope.$index,scope.row.name)">项目详情</el-button>
                   <el-button type="text" icon="el-icon-edit" @click="12345">重命名</el-button>
                   <el-button type="text" icon="el-icon-delete" @click="deleteitem(scope.$index)">删除</el-button>
                   <el-button type="text" icon="el-icon-copy-document" @click="copy(scope.$index)">复制</el-button>
@@ -252,7 +252,7 @@
                   width="">
                 <template slot-scope="scope">
                   <!--<el-button type="text" style="color: #409EFF; text-decoration-line: none" @click="123">设置为管理员</el-button>-->
-                  <el-button type="text" icon="el-icon-more-outline" @click="toitem">项目详情</el-button>
+                  <el-button type="text" icon="el-icon-more-outline" @click="toitem(scope.$index,scope.row.name)">项目详情</el-button>
                   <el-button type="text" icon="el-icon-upload2" @click="recover(scope.$index)">恢复</el-button>
                   <el-button type="text" icon="el-icon-delete" @click="1234">删除</el-button>
                   <!--<el-button type="text" style="color: #409EFF; text-decoration-line: none" @click="123">移出队伍</el-button>-->
@@ -508,7 +508,7 @@ export default {
   },
   methods: {
     toitem(projectid,projectname) {
-      sessionStorage.setItem('projectid',projectid);
+      sessionStorage.setItem('projectid',this.projectlist[projectid].id);
       sessionStorage.setItem('projectname',projectname);
       this.$router.push('/itempage');
     },
@@ -576,7 +576,7 @@ export default {
     },
     shuaxin(){
       var i = 0;
-      this.$axios.post('/team/showMember/',{teamid:this.$store.state.teamid}).then(
+      this.$axios.post('/team/showMember/',{teamid:window.sessionStorage.getItem('teamid')}).then(
           res =>{
             for( i = 0; i < res.data.num; i++ )
             {
