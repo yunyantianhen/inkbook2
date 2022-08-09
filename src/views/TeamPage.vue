@@ -122,11 +122,11 @@
             </span>
             </el-dialog>
             <el-table
-                :data="GroupList"
+                :data="memberlist"
                 stripe
                 style="width: 1000px;">
               <el-table-column
-                  prop="nickname"
+                  prop="username"
                   label="昵称"
                   width="200">
               </el-table-column>
@@ -148,8 +148,8 @@
               <el-table-column
                   width="200">
                 <!--<el-button type="text" style="color: #409EFF; text-decoration-line: none" @click="123">设置为管理员</el-button>-->
-                <el-button type="text" icon="el-icon-user" @click="123">设置管理员</el-button>
-                <el-button type="text" icon="el-icon-delete" @click="1234">移出</el-button>
+                <el-button type="text" icon="el-icon-user" @click="BecomeAdministrator">设置管理员</el-button>
+                <el-button type="text" icon="el-icon-delete" @click="leave">移出</el-button>
                 <!--<el-button type="text" style="color: #409EFF; text-decoration-line: none" @click="123">移出队伍</el-button>-->
               </el-table-column>
             </el-table>
@@ -195,7 +195,7 @@
               </template>
             </div>
             <el-table
-                :data="ItemList"
+                :data="projectlist"
                 stripe
                 style="width: 1000px;">
               <el-table-column
@@ -302,14 +302,16 @@
     <br/>
     <br/>
   </div>-->
-  <div style="margin: auto; width: 800px" v-for="(project) in projectlist" :key="project.id">
+
+
+  <!--<div style="margin: auto; width: 800px" v-for="(project) in projectlist" :key="project.id">
     <br/>
     <div style="width: 800px; text-align: left">
       <div style="width: 200px; float: left">{{project.name}}</div>
       <div style="width: 600px"><el-button style="position: relative; left: 500px" type="primary" @click="toitem(project.id,project.name)" round plain>项目详情</el-button></div>
       <el-divider></el-divider>
     </div>
-  </div>
+  </div>-->
 </div>
   </div>
 </div>
@@ -327,8 +329,48 @@ export default {
       sorting_factor: '',//排序的因素
       sorting_order: '',//是正序还是倒序
       teamname: "",
-      memberlist: [],
-      projectlist: [],
+      memberlist: [
+        /*{
+          username: '某科学的昵称1',
+          name: 'JGG',
+          mail: '1234@qq.com',
+          identity: '神秘人',
+        }, {
+          username: '某科学的昵称2',
+          name: 'JGG',
+          mail: '1234@qq.com',
+          identity: '神秘人',
+        }, {
+          username: '某科学的昵称3',
+          name: 'JGG',
+          mail: '1234@qq.com',
+          identity: '神秘人',
+        }, {
+          username: '某科学的昵称4',
+          name: 'JGG',
+          mail: '1234@qq.com',
+          identity: '神秘人',
+        }*/
+      ],
+      projectlist: [
+        /*{
+          name: '某不科学的项目1',
+          Creation_time: '2022-05-05',
+          Time_last_modified: '2022-08-08',
+        }, {
+          name: '某不科学的项目2',
+          Creation_time: '2022-05-05',
+          Time_last_modified: '2022-08-08',
+        }, {
+          name: '某不科学的项目3',
+          Creation_time: '2022-05-05',
+          Time_last_modified: '2022-08-08',
+        }, {
+          name: '某不科学的项目4',
+          Creation_time: '2022-05-05',
+          Time_last_modified: '2022-08-08',
+        }*/
+      ],
       invite_user: false,
       addDialogVisible:false,
       addForm:{
@@ -350,7 +392,7 @@ export default {
           { min :1 ,max:15, message: '项目名的长度在1~15个字符之间', trigger: 'blur'}
         ]
       },
-      GroupList: [{
+      /*GroupList: [{
         nickname: '某科学的昵称1',
         name: 'JGG',
         mail: '1234@qq.com',
@@ -370,10 +412,10 @@ export default {
         name: 'JGG',
         mail: '1234@qq.com',
         identity: '神秘人',
-      }],
+      }],*/
       //团队成员列表
 
-      ItemList: [{
+      /*ItemList: [{
         name: '某不科学的项目1',
         Creation_time: '2022-05-05',
         Time_last_modified: '2022-08-08',
@@ -389,10 +431,11 @@ export default {
         name: '某不科学的项目4',
         Creation_time: '2022-05-05',
         Time_last_modified: '2022-08-08',
-      }],
+      }],*/
       //团队项目列表
 
-      RecycleList: [{
+      RecycleList: [
+          /*{
         name: '某不科学的项目1',
         Creation_time: '2022-05-05',
         Time_last_modified: '2022-08-08',
@@ -408,7 +451,8 @@ export default {
         name: '某不科学的项目4',
         Creation_time: '2022-05-05',
         Time_last_modified: '2022-08-08',
-      }],
+      }*/
+      ],
       //回收站中项目列表
 
     }

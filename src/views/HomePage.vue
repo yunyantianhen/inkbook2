@@ -268,7 +268,6 @@ export default {
     this.getProjectlist();
   },
   methods: {
-
     toitem(projectid,projectname) {
       this.$store.state.projectid = projectid;
       this.$store.state.projectname = projectname;

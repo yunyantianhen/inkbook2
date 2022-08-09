@@ -115,7 +115,7 @@
     </div>
     <div style="width: 1100px; float: left">
       <el-table
-          :data="tableData"
+          :data="myteamlist"
           stripe
           style="width: 1000px; margin: auto">
         <el-table-column
@@ -149,7 +149,8 @@ export default {
   name: "NewPage",
   data() {
     return {
-      tableData: [{
+      myteamlist: [
+          /*{
         date: '2016-05-02',
         name: '团队1',
         creator: '创建者竟是我自己',
@@ -165,7 +166,8 @@ export default {
         date: '2016-05-03',
         name: '团队4',
         creator: '创建者竟是我自己'
-      }],
+      }*/
+      ],
       found_team: false,
       addDialogVisible:false,
       addForm2:{

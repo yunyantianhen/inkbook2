@@ -115,7 +115,7 @@
   </div>
     <div style="width: 1000px; margin: auto">
     <el-table
-        :data="FileList"
+        :data="documentlist"
         stripe
         style="width: 1000px;">
       <el-table-column
@@ -167,7 +167,25 @@ export default {
   name: "ItemPage",
   data(){
     return{
-      documentlist:[],
+      documentlist:[
+        /*{
+          name: '某不科学的文档1',
+          Creation_time: '2022-05-05',
+          Time_last_modified: '2022-08-08',
+        }, {
+          name: '某不科学的文档2',
+          Creation_time: '2022-05-05',
+          Time_last_modified: '2022-08-08',
+        }, {
+          name: '某不科学的文档3',
+          Creation_time: '2022-05-05',
+          Time_last_modified: '2022-08-08',
+        }, {
+          name: '某不科学的文档4',
+          Creation_time: '2022-05-05',
+          Time_last_modified: '2022-08-08',
+        }*/
+      ],
       found_text: false,
       addForm:{
         name: '',
@@ -178,7 +196,7 @@ export default {
           { min :1 ,max:15, message: '项目名的长度在1~15个字符之间', trigger: 'blur'}
           ]
         },
-      FileList: [{
+      /*FileList: [{
         name: '某不科学的文档1',
         Creation_time: '2022-05-05',
         Time_last_modified: '2022-08-08',
@@ -194,7 +212,7 @@ export default {
         name: '某不科学的文档4',
         Creation_time: '2022-05-05',
         Time_last_modified: '2022-08-08',
-      }],//文档列表
+      }],*///文档列表
     }
   },
   created() {
