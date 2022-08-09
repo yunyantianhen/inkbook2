@@ -214,7 +214,7 @@ export default {
 
     },
     addTeam() {
-      this.$axios.post('/team/createTeam/',{userid:this.$store.state.userid,teamname:this.addForm2.name}).then(
+      this.$axios.post('/team/createTeam/',{userid:window.sessionStorage.getItem('id'),teamname:this.addForm2.name}).then(
           res =>{
             switch (res.data.result)
             {

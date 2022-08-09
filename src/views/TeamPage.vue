@@ -459,7 +459,7 @@ export default {
   },
   created() {
     var i = 0;
-    this.$axios.post('/team/showMember/',{teamid:this.$store.state.teamid}).then(
+    this.$axios.post('/team/showMember/',{teamid:window.sessionStorage.getItem('teamid')}).then(
         res =>{
           for( i = 0; i < res.data.num; i++ )
           {
@@ -472,7 +472,7 @@ export default {
           }
         }
     )
-    this.$axios.post('/project/list_project/',{team_id:this.$store.state.teamid,user_id:this.$store.state.userid}).then(
+    this.$axios.post('/project/list_project/',{team_id:window.sessionStorage.getItem('teamid'),user_id:window.sessionStorage.getItem('id')}).then(
         res =>{
           for( i = 0 ; i < res.data.data.number ; i++)
           {
@@ -499,9 +499,9 @@ export default {
     },
     addUser(){
       this.$axios.post('/team/addMember/',{
-        userid1:this.$store.state.userid,
+        userid1:window.sessionStorage.getItem('id'),
         email:this.addForm.email,
-        teamid:this.$store.state.teamid,
+        teamid:window.sessionStorage.getItem('teamid'),
         identity:"成员",
       }).then(
           res =>{
@@ -518,7 +518,7 @@ export default {
     },//邀请成员
     shuaxin(){
       var i = 0;
-      this.$axios.post('/team/showMember/',{teamid:this.$store.state.teamid}).then(
+      this.$axios.post('/team/showMember/',{teamid:window.sessionStorage.getItem('teamid')}).then(
           res =>{
             for( i = 0; i < res.data.num; i++ )
             {
@@ -534,9 +534,9 @@ export default {
     },
     BecomeAdministrator(temail){
       this.$axios.post('/team/setManager/',{
-        userid1:this.$store.state.userid,
+        userid1:window.sessionStorage.getItem('id'),
         email:temail,
-        teamid:this.$store.state.teamid
+        teamid:window.sessionStorage.getItem('teamid')
       }).then(
           res =>{
             switch (res.data.result){
@@ -562,7 +562,7 @@ export default {
         if(!valid) return
         //可以发起注册的网络请求
         const {data:res}= await this.$axios.post("/project/create/",
-            {"name":this.addForm.name,"team_id":this.$store.state.teamid});
+            {"name":this.addForm.name,"team_id":window.sessionStorage.getItem('teamid')});
         if(res.result === 0) return this.$message.error(res.msg)
         this.$message.success("创建成功");
         this.addDialogVisible=false;
