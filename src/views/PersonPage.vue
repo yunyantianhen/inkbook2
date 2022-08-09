@@ -68,7 +68,29 @@
     </el-col>
   </el-row>
   <div>
-    personpage
+    <el-row class="tac" style="float: left">
+      <el-col :span="12">
+        <el-menu
+            default-active="5"
+            class="el-menu-vertical-demo"
+            @open="handleOpen"
+            @close="handleClose"
+            background-color="#545c64"
+            text-color="#fff"
+            active-text-color="#ffd04b"
+            style="height: 703px; width: 155px">
+          <router-link to="/teampage" style="text-decoration-line: none;">
+            <el-menu-item index="5">
+              <i class="el-icon-menu"></i>
+              <span style="color: white;">信息修改</span>
+            </el-menu-item>
+          </router-link>
+        </el-menu>
+      </el-col>
+    </el-row>
+    <div>
+      123
+    </div>
   </div>
   </body>
   </html>

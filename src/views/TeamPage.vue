@@ -81,10 +81,16 @@
           text-color="#fff"
           active-text-color="#ffd04b"
           style="height: 703px; width: 155px">
-        <router-link to="/teamwork" style="text-decoration-line: none;">
+        <router-link to="/teampage" style="text-decoration-line: none;">
           <el-menu-item index="5">
             <i class="el-icon-menu"></i>
             <span style="color: white;">团队详情</span>
+          </el-menu-item>
+        </router-link>
+        <router-link to="/teampage" style="text-decoration-line: none;">
+          <el-menu-item index="6">
+            <i class="el-icon-menu"></i>
+            <span style="color: white;">文档中心</span>
           </el-menu-item>
         </router-link>
       </el-menu>
@@ -210,7 +216,7 @@
               <el-table-column
                   width="">
                 <!--<el-button type="text" style="color: #409EFF; text-decoration-line: none" @click="123">设置为管理员</el-button>-->
-                <el-button type="text" icon="el-icon-more-outline" @click="12345">项目详情</el-button>
+                <el-button type="text" icon="el-icon-more-outline" @click="toitem">项目详情</el-button>
                 <el-button type="text" icon="el-icon-edit" @click="12345">重命名</el-button>
                 <el-button type="text" icon="el-icon-delete" @click="1234">删除</el-button>
                 <el-button type="text" icon="el-icon-copy-document" @click="1234">复制</el-button>
@@ -241,8 +247,9 @@
               <el-table-column
                   width="">
                 <!--<el-button type="text" style="color: #409EFF; text-decoration-line: none" @click="123">设置为管理员</el-button>-->
-                <el-button type="text" icon="el-icon-more-outline" @click="12345">项目详情</el-button>
+                <el-button type="text" icon="el-icon-more-outline" @click="toitem">项目详情</el-button>
                 <el-button type="text" icon="el-icon-upload2" @click="1234">恢复</el-button>
+                <el-button type="text" icon="el-icon-delete" @click="1234">删除</el-button>
                 <!--<el-button type="text" style="color: #409EFF; text-decoration-line: none" @click="123">移出队伍</el-button>-->
               </el-table-column>
             </el-table>
