@@ -68,7 +68,10 @@
     </el-col>
   </el-row>
   <div>
-    homepage2
+    <img style="height: 100px" src="../img/tubiao2.png">
+    <div style="width: 800px; height: 600px; background-color: #409EFF">
+      1234
+    </div>
   </div>
   </body>
   </html>

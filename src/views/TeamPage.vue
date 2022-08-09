@@ -271,7 +271,7 @@
           </el-dialog>
           <br/><br/>
         </div>-->
-        <div style="width: 400px; float: left">
+        <!--<div style="width: 400px; float: left">
           <div style="height: 40px" v-for="(member) in memberlist" :key="member.id">{{member.name}}</div>
         </div>
         <div style="width: 400px; float: left">
@@ -283,7 +283,7 @@
               <i class="el-icon-delete" @click="leave"></i>
             </div>
           </div>
-        </div>
+        </div>-->
   <!--<div style="width: 800px; text-align: left">
     负责项目
     <el-button style="position: relative; left: 630px" type="primary" @click="addDialogVisible = true" round plain>创建项目</el-button>

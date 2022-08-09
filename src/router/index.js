@@ -84,7 +84,12 @@ const routes = [
     path: '/recycle',
     name: 'Recycle',
     component: () => import('../views/Recycle')
-  }
+  },
+  {
+    path: '/guidepage',
+    name: 'GuidePage',
+    component: () => import('../views/GuidePage')
+  },
 ]
 const router = new VueRouter({
   mode: 'history',

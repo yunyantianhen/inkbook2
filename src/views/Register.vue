@@ -12,11 +12,12 @@
               <el-input v-model="form.password" placeholder="密码" type="password" autocomplete="off" clearable show-password></el-input>
             </el-form-item>
             <el-form-item class="btn_login">
-              <el-button type="primary" @click="login">登&nbsp;&nbsp;录</el-button>
+              <el-button type="primary" @click="login" style="box-shadow: #42b983">登&nbsp;&nbsp;录</el-button>
             </el-form-item>
           </el-form>
-          <div class="suffix">
-            <router-link to="/logonpage"><p style="color: gray">注册帐号</p></router-link>
+          <div class="suffix" style="">
+            <router-link to="/logonpage"><p style="color: gray;">注册帐号</p></router-link>
+            <router-link to="/guidepage"><p style="color: gray;">回到首页</p></router-link>
           </div>
         </div>
       </div>
