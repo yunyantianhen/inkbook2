@@ -291,22 +291,27 @@ export default {
   },
   created() {
     this.projectname = sessionStorage.getItem('projectname');
-    var i = 0;
-    this.$axios.post('/document/list_document/',{project_id:sessionStorage.getItem('projectid')}).then(
-        res => {
-          for( i = 0 ; i < res.data.data.number; i++)
-          {
-            this.documentlist.push({
-              id:res.data.data.document[i].id,
-              name:res.data.data.document[i].name,
-              Creation_time:res.data.data.document[i].create_time,
-              Time_last_modified:res.data.data.document[i].update_time,
-            })
-          }
-        }
-    )
+    this.showdocument();
+
   },
   methods: {
+    showdocument(){
+      var i=0;
+      this.documentlist.length=0;
+      this.$axios.post('/document/list_document/',{project_id:sessionStorage.getItem('projectid')}).then(
+          res => {
+            for( i = 0 ; i < res.data.data.number; i++)
+            {
+              this.documentlist.push({
+                id:res.data.data.document[i].id,
+                name:res.data.data.document[i].name,
+                Creation_time:res.data.data.document[i].create_time,
+                Time_last_modified:res.data.data.document[i].update_time,
+              })
+            }
+          }
+      )
+    },
     reName(id) {
       this.rename_item = true;
       this.itemid = id;
@@ -377,6 +382,7 @@ export default {
             switch (res.data.result){
               case 1:
                 this.$message.success(res.data.msg);
+                this.showdocument();
                 break;
               case 0:
                 this.$message.error(res.data.msg);
