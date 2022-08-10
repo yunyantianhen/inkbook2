@@ -163,6 +163,8 @@ export default {
               id:res.data.data.project[i].id,
               name:res.data.data.project[i].name,
               team:res.data.data.project[i].team,
+              creator:res.data.data.project[i].team,
+              date:res.data.data.project[i].create_time,
             })
           }
         }

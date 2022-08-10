@@ -220,7 +220,7 @@
                 <template slot-scope="scope">
                   <!--<el-button type="text" style="color: #409EFF; text-decoration-line: none" @click="123">设置为管理员</el-button>-->
                   <el-button type="text" icon="el-icon-more-outline" @click="toitem(scope.$index,scope.row.name)">项目详情</el-button>
-                  <el-button type="text" icon="el-icon-edit" @click="rename">重命名</el-button>
+                  <el-button type="text" icon="el-icon-edit" @click="rename(scope.$index)">重命名</el-button>
                   <el-button type="text" icon="el-icon-delete" @click="deleteitem(scope.$index)">删除</el-button>
                   <el-button type="text" icon="el-icon-copy-document" @click="copy(scope.$index)">复制</el-button>
                   <!--<el-button type="text" style="color: #409EFF; text-decoration-line: none" @click="123">移出队伍</el-button>-->
@@ -510,15 +510,17 @@ export default {
     )
   },
   methods: {
-    rename() {
+    rename(itemid) {
       this.$prompt('请输入改动后的项目名', '重命名', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
+        inputPlaceholder: '',
       }).then(({ value }) => {
         this.$message({
           type: 'success',
           message: '修改成功' + value
         });
+        this.renameitem(itemid);
       }).catch(() => {
         this.$message({
           type: 'info',
@@ -556,6 +558,21 @@ export default {
           }
       )
     },//邀请成员
+    renameitem(id){
+      window.alert();
+      this.$axios.post('/project/rename/',{'id':this.projectlist[id].id,'name':this.value}).then(
+          res =>{
+            switch(res.data.result){
+              case 1:
+                this.$message.success(res.data.msg);
+                break;
+              case 0:
+                this.$message.error(res.data.msg);
+                break;
+            }
+          }
+      )
+    },
     order(){
       var m = "name";
       var i = 0;

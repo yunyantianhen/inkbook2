@@ -260,6 +260,8 @@ export default {
             this.documentlist.push({
               id:res.data.data.document[i].id,
               name:res.data.data.document[i].name,
+              Creation_time:res.data.data.document[i].create_time,
+              Time_last_modified:res.data.data.document[i].update_time,
             })
           }
         }
@@ -280,11 +282,24 @@ export default {
     founding_text(){
     },
     addText(){
+      var m = "空白文档";
+      if(this.value == 2)
+        m = "会议政要";
+      else if(this.value == 3)
+        m = "架构设计说明书";
+      else if(this.value == 4)
+        m = "项目管理书";
+      else if(this.value == 5)
+        m = "项目计划书";
+      else if(this.value == 6)
+        m = "需求调研报告书";
+      else if(this.value == 7)
+        m = "需求说明书";
       this.$axios.post('/document/create/',{
-      user_id:window.sessionStorage.getItem('userid'),
-      project_id:sessionStorage.getItem('projectid'),
-      name:this.addForm.mail,
-      text:""
+        user_id:sessionStorage.getItem('userid'),
+        project_id:sessionStorage.getItem('projectid'),
+        name:this.addForm.mail,
+        type:m,
     }).then(
         res =>{
           switch (res.data.result){
@@ -299,7 +314,7 @@ export default {
     )
     },
     deletedocument(documentid){
-      this.$axios.post('/document/delete/',{id:documentid}).then(
+      this.$axios.post('/document/delete/',{id:this.documentlist[documentid].id}).then(
           res =>{
             switch (res.data.result){
               case 1:
