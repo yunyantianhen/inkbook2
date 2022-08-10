@@ -328,7 +328,7 @@ export default {
     founding_text(){
     },
     renamedocument(){
-      this.$axios.post('/project/rename/',{'id':this.projectlist[this.itemid].id,'name':this.addForm2.name}).then(
+      this.$axios.post('/document/update/',{'id':this.documentlist[this.itemid].id,'name':this.addForm3.name,'text':""}).then(
           res =>{
             switch(res.data.result){
               case 1:
