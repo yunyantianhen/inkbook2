@@ -1,6 +1,22 @@
 <template>
   <html>
   <body>
+  <div id="background" style="height: 120px; "></div>
+  <div style="height: 40px; box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)">
+    <div style="position: relative; bottom: 40px; left: 50px; width: 300px;">
+      <img class="head" src="../img/3.png">
+    </div>
+    <div style="position: relative; bottom: 97px; left: 250px; font-size: 20px; font-weight: bold; width: 100px">
+      云烟
+    </div>
+    <div style="position: relative; bottom: 122px; left: 1280px;width: 100px">
+      <el-link type="info" @click="toregister" style="font-size: 18px">注销</el-link>
+    </div>
+    <div style="position: relative; bottom: 265px; left: 1180px;width: 100px">
+      <img style="height: 100px" src="../img/baimoshu.png">
+    </div>
+  </div>
+  <div style="height: 30px"></div>
   <el-row class="tac" style="float: left">
     <el-col :span="12">
       <el-menu
@@ -89,7 +105,7 @@
       </el-col>
     </el-row>
     <div style="width: 1150px; float: left">
-      <div style="height: 100px"></div>
+      <div style="height: 10px"></div>
     <div style="width: 800px; margin: auto">
       <el-tabs type="border-card">
         <el-tab-pane label="信息展示">
@@ -184,6 +200,9 @@ export default {
     )
   },
   methods: {
+    toregister() {
+      this.$router.push('/register');
+    },
     handleOpen(key, keyPath) {
       console.log(key, keyPath);
     },
@@ -222,7 +241,7 @@ export default {
 </script>
 
 <style scoped>
-.head{
+.head2{
   height: 180px;
   width: 180px;
   border-radius: 50%;
@@ -232,5 +251,19 @@ export default {
   height: 40px;
   text-align: left;
   margin-left: 50px;
+}
+
+#background{
+  width: 100%;
+  height: 100%;
+  border: 1px #1A4BAF;
+  background-image: url("../img/xingkong3.jpg");
+  background-size: 750px;
+  background-attachment: fixed;
+}
+.head{
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
 }
 </style>
