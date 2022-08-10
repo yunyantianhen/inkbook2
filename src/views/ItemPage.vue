@@ -102,10 +102,19 @@
   <a href="https://app.diagrams.net/"><el-button type="info" plain>绘制图</el-button></a>&nbsp;&nbsp;
   <el-button type="info" @click="found_text=true" plain>创建文档</el-button>
     <el-dialog title="创建文档" :visible.sync="found_text" width="500px" @close="founding_text">
-      <el-form :model="addForm" :rules="addFormRules" ref="addFormRef" label-width="110px">
+      <el-form :model="addForm" :rules="addFormRules" ref="addFormRef" label-width="70px">
         <el-form-item label="文档名" prop="name">
           <el-input v-model="addForm.mail"></el-input>
         </el-form-item>
+        <el-select v-model="value" placeholder="请选择你需要的模板" style="width: 400px; margin-left: 60px">
+          <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+              >
+          </el-option>
+        </el-select>
       </el-form>
       <span slot="footer" class="dialog-footer">
             <el-button @click="found_text = false">取 消</el-button>
@@ -169,6 +178,29 @@ export default {
   name: "ItemPage",
   data(){
     return{
+      options: [{
+        value: '1',
+        label: '无需模板'
+      }, {
+        value: '2',
+        label: '会议纪要'
+      }, {
+        value: '3',
+        label: '架构设计说明书'
+      }, {
+        value: '4',
+        label: '项目管理书'
+      }, {
+        value: '5',
+        label: '项目计划书'
+      }, {
+        value: '6',
+        label: '需求调研报告书'
+      }, {
+        value: '7',
+        label: '需求说明书'
+      }],
+      value: '',
       projectname:"",
       documentlist:[
         /*{
