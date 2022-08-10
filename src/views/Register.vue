@@ -13,9 +13,6 @@
     <div style="width: 1500px;">
       <div style="height: 700px">
         <div class="warp" style="width: 400px; height: 280px; margin: auto;">
-          <div class="suffix2" style="">
-            <router-link to="/"><p style="color: gray;">返回首页</p></router-link>
-          </div>
           <div style="font-size: 25px; position: relative; top: 20px">登&nbsp;&nbsp;录</div>
           <el-form ref="form" :model="form" style="position: relative; top: 30px">
             <el-form-item prop="username">
@@ -30,7 +27,10 @@
           </el-form>
           <div class="suffix" style="">
             <router-link to="/logonpage"><p style="color: gray;">注册帐号</p></router-link>
-            <router-link to="/"><p style="color: gray;">注册帐号2</p></router-link>
+            <!--<router-link to="/"><p style="color: gray;">注册帐号2</p></router-link>-->
+          </div>
+          <div style="position: relative; bottom: 220px; left: 165px">
+            <el-button type="text" icon="el-icon-s-home" style="font-size: 25px" @click="toguidepage"></el-button>
           </div>
         </div>
       </div>
