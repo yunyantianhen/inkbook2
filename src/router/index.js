@@ -40,7 +40,11 @@ const routes = [
     component: () => import('../views/TextEditor')
   },
   {
-
+    path: '/TextCenter',
+    name: 'TextCenter',
+    component: () => import('../views/TextCenter')
+  },
+  {
     path: '/design',
     name: 'design',
     component: () => import('../examples/vseditor/index')

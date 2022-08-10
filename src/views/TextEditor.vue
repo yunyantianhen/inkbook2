@@ -51,7 +51,7 @@
     <br/>
     <div style="margin: auto; margin-bottom: 100px;text-align: left; width: 1200px">
       <div style="width: 1000px; font-weight: bold; font-size: 30px; margin: auto">
-        {{this.$store.state.documentname}}
+        {{this.documentname}}
         <div style="width: 100px; float: right; margin-left: 500px"><el-button type="danger" @click="backitem">返回</el-button></div>
         <el-divider></el-divider>
       </div>
@@ -71,11 +71,13 @@ export default {
     return{
       contentEditor:"",
       textCon:"",
-      text:""
+      text:"",
+      documentname:"",
     }
   },
   created() {
-    this.$axios.post('/document/find/',{id:this.$store.state.documentid}).then(
+    this.documentname = sessionStorage.getItem('documentname');
+    this.$axios.post('/document/find/',{id:sessionStorage.getItem('documentid')}).then(
         res =>{
           this.text = res.data.text;
           this.contentEditor.setValue(this.text);
@@ -98,7 +100,7 @@ export default {
   },
   methods:{
     submit_text(){
-      this.$axios.post('/document/update/',{id:this.$store.state.documentid,text:this.contentEditor.getValue()}).then(
+      this.$axios.post('/document/update/',{id:sessionStorage.getItem('documentid'),text:this.contentEditor.getValue()}).then(
           res =>{
             switch (res.data.result){
               case 1:

@@ -175,7 +175,7 @@ export default {
     };
   },
   created() {
-    this.$axios.post('/user/show_info/',{id:window.sessionStorage.getItem('id')}).then(
+    this.$axios.post('/user/show_info/',{id:sessionStorage.getItem('userid')}).then(
         res =>{
           this.old_nickname = res.data.username;
           this.old_name = res.data.name;
@@ -195,7 +195,7 @@ export default {
         method: 'post',
         url:'/user/modify_info/',
         data: qs.stringify({
-          id:window.sessionStorage.getItem('id'),
+          id:sessionStorage.getItem('userid'),
           username: this.form.nickname,
           name: this.form.name,
           email: this.form.mail,

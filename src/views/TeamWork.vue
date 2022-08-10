@@ -127,7 +127,7 @@
     </div>
     <div style="width: 1100px; float: left">
       <el-table
-          :data="teamList"
+          :data="teamlist"
           stripe
           style="width: 1000px; margin: auto">
         <el-table-column
@@ -146,8 +146,11 @@
             width="250">
         </el-table-column>
         <el-table-column
+            label="详情"
             width="250">
-            <a href="TeamPage" style="color: #409EFF; text-decoration-line: none">团队详情</a>
+          <template slot-scope="scope">
+            <a href="TeamPage" style="color: #409EFF; text-decoration-line: none" @click="toteam(scope.$index,scope.row.name)">团队详情</a>
+          </template>
         </el-table-column>
       </el-table>
     </div>
@@ -161,7 +164,7 @@ export default {
   name: "NewPage",
   data() {
     return {
-      teamList: [
+      teamlist: [
           /*{
         date: '2016-05-02',
         name: '创建者1的团队',
@@ -203,6 +206,20 @@ export default {
       },
     };
   },
+  created() {
+    var i = 0;
+    this.$axios.post('/team/showTeam/',{userid: sessionStorage.getItem('userid')}).then(
+        res => {
+          for( i = 0; i < res.data.num ; i++)
+            this.teamlist.push({
+              id: res.data.list[i].id,
+              name: res.data.list[i].name,
+              date:res.data.list[i].createTime,
+              creator:res.data.list[i].creator
+            })
+        }
+    )
+  },
   methods: {
     handleOpen(key, keyPath) {
       console.log(key, keyPath);
@@ -214,7 +231,7 @@ export default {
 
     },
     addTeam() {
-      this.$axios.post('/team/createTeam/',{userid:window.sessionStorage.getItem('id'),teamname:this.addForm2.name}).then(
+      this.$axios.post('/team/createTeam/',{userid:sessionStorage.getItem('userid'),teamname:this.addForm2.name}).then(
           res =>{
             switch (res.data.result)
             {
@@ -228,6 +245,10 @@ export default {
           }
       )
     },
+    toteam(teamid,teamname){
+      sessionStorage.setItem('teamid',this.teamlist[teamid].id);
+      sessionStorage.setItem('teamname',teamname);
+    }
     /*handleOpen2(key, keyPath) {
       console.log(key, keyPath);
     },

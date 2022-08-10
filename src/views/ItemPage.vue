@@ -92,7 +92,7 @@
   </el-row>
   <div style="width: 1100px; float: left">
   <div style="width: 715px; font-weight: bold; font-size: 30px; margin: auto; float: left; margin-left: 100px">
-    {{this.$store.state.projectname}}
+    {{this.projectname}}
   </div>
   <div style="width: 100px; float: left"><el-button type="danger" @click="backteam">返回</el-button></div>
   <br/><br/>
@@ -135,11 +135,13 @@
       </el-table-column>
       <el-table-column
           width="">
-        <!--<el-button type="text" style="color: #409EFF; text-decoration-line: none" @click="123">设置为管理员</el-button>-->
-        <el-button type="text" icon="el-icon-more-outline" @click="totext">文档详情</el-button>
-        <el-button type="text" icon="el-icon-edit" @click="12345">重命名</el-button>
-        <el-button type="text" icon="el-icon-delete" @click="1234">删除</el-button>
-        <!--<el-button type="text" style="color: #409EFF; text-decoration-line: none" @click="123">移出队伍</el-button>-->
+        <template slot-scope="scope">
+          <!--<el-button type="text" style="color: #409EFF; text-decoration-line: none" @click="123">设置为管理员</el-button>-->
+          <el-button type="text" icon="el-icon-more-outline" @click="totext(scope.$index,scope.row.name)">文档详情</el-button>
+          <el-button type="text" icon="el-icon-edit" @click="12345">重命名</el-button>
+          <el-button type="text" icon="el-icon-delete" @click="deletedocument(scope.$index)">删除</el-button>
+          <!--<el-button type="text" style="color: #409EFF; text-decoration-line: none" @click="123">移出队伍</el-button>-->
+        </template>
       </el-table-column>
     </el-table>
   <!--<br/>
@@ -167,6 +169,7 @@ export default {
   name: "ItemPage",
   data(){
     return{
+      projectname:"",
       documentlist:[
         /*{
           name: '某不科学的文档1',
@@ -216,8 +219,9 @@ export default {
     }
   },
   created() {
+    this.projectname = sessionStorage.getItem('projectname');
     var i = 0;
-    this.$axios.post('/document/list_document/',{project_id:this.$store.state.projectid}).then(
+    this.$axios.post('/document/list_document/',{project_id:sessionStorage.getItem('projectid')}).then(
         res => {
           for( i = 0 ; i < res.data.data.number; i++)
           {
@@ -234,8 +238,8 @@ export default {
       this.$router.push('/teampage');
     },
     totext(documentid,documentname) {
-      this.$store.state.documentid = documentid;
-      this.$store.state.documentname = documentname;
+      sessionStorage.setItem('documentid',this.documentlist[documentid].id);
+      sessionStorage.setItem('documentname',documentname);
       this.$router.push('/TextEditor');
     },
     todesign(){
@@ -245,8 +249,8 @@ export default {
     },
     addText(){
       this.$axios.post('/document/create/',{
-      user_id:window.sessionStorage.getItem('id'),
-      project_id:this.$store.state.projectid,
+      user_id:window.sessionStorage.getItem('userid'),
+      project_id:sessionStorage.getItem('projectid'),
       name:this.addForm.mail,
       text:""
     }).then(
