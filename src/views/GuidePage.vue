@@ -42,7 +42,7 @@ export default {
   name: "GuidePage",
   methods: {
     toregister() {
-      this.$router.push('/');
+      this.$router.push('/register');
     },
     tologon() {
       this.$router.push('/logonpage');

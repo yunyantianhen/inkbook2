@@ -10,7 +10,7 @@ const routes = [
     component: () => import('../views/HomePage')
   },
   {
-    path: '/',
+    path: '/register',
     name: 'RegisterPage',
     component: () => import('../views/Register')
   },
@@ -90,7 +90,7 @@ const routes = [
     component: () => import('../views/Recycle')
   },
   {
-    path: '/guidepage',
+    path: '/',
     name: 'GuidePage',
     component: () => import('../views/GuidePage')
   },

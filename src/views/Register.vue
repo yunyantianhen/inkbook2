@@ -14,7 +14,7 @@
       <div style="height: 700px">
         <div class="warp" style="width: 400px; height: 280px; margin: auto;">
           <div class="suffix2" style="">
-            <router-link to="/guidepage"><p style="color: gray;">返回首页</p></router-link>
+            <router-link to="/"><p style="color: gray;">返回首页</p></router-link>
           </div>
           <div style="font-size: 25px; position: relative; top: 20px">登&nbsp;&nbsp;录</div>
           <el-form ref="form" :model="form" style="position: relative; top: 30px">
@@ -30,7 +30,7 @@
           </el-form>
           <div class="suffix" style="">
             <router-link to="/logonpage"><p style="color: gray;">注册帐号</p></router-link>
-            <router-link to="/guidepage"><p style="color: gray;">注册帐号2</p></router-link>
+            <router-link to="/"><p style="color: gray;">注册帐号2</p></router-link>
           </div>
         </div>
       </div>
@@ -54,7 +54,7 @@ export default {
   },
   methods: {
     toguidepage() {
-      this.$router.push('/guidepage');
+      this.$router.push('/');
     },
     login() {
       this.$axios.post('/user/login/',qs.stringify(this.form)).then(
@@ -63,7 +63,7 @@ export default {
               case 1:
                 this.$message.success("登录成功！");
                 sessionStorage.setItem('userid',res.data.id);
-                this.$router.push('/homepage');
+                this.$router.push('/homepage2');
                 break;
 
               case 0:
