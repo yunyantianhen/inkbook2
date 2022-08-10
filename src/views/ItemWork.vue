@@ -7,7 +7,7 @@
       <img class="head" src="../img/3.png">
     </div>
     <div style="position: relative; bottom: 97px; left: 250px; font-size: 20px; font-weight: bold; width: 100px">
-      云烟
+      {{this.username}}
     </div>
     <div style="position: relative; bottom: 122px; left: 1280px;width: 100px">
       <el-link type="info" @click="toregister" style="font-size: 18px">注销</el-link>
@@ -148,6 +148,7 @@ export default {
   name: "NewPage",
   data() {
     return {
+      username:"",
       projectlist: [
           /*{
         date: '2016-05-02',
@@ -170,6 +171,7 @@ export default {
     };
   },
   created() {
+    this.username = sessionStorage.getItem('username');
     var i = 0;
     this.$axios.post('/project/list_project/',{team_id:-1,user_id:sessionStorage.getItem('userid')}).then(
         res =>{
