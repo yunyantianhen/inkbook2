@@ -63,6 +63,7 @@ export default {
               case 1:
                 this.$message.success("登录成功！");
                 sessionStorage.setItem('userid',res.data.id);
+                sessionStorage.setItem('username',res.data.username);
                 this.$router.push('/homepage2');
                 break;
 

@@ -237,7 +237,6 @@ export default {
                 date:res.data.list[i].createTime,
                 creator:res.data.list[i].creator
               })
-
           }
       )
     },

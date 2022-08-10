@@ -7,7 +7,7 @@
       <img class="head" src="../img/3.png">
     </div>
     <div style="position: relative; bottom: 97px; left: 250px; font-size: 20px; font-weight: bold; width: 100px">
-      云烟
+      {{this.username}}
     </div>
     <div style="position: relative; bottom: 122px; left: 1280px;width: 100px">
       <el-link type="info" @click="toregister" style="font-size: 18px">注销</el-link>
@@ -148,47 +148,40 @@ export default {
   name: "NewPage",
   data() {
     return {
+      username: "",
       date: new Date(),
-      teamlist: [
-        {
-      date: '2016-05-02',
-      name: '创建者1的团队',
-      creator: '创建者1',
-      detail: '团队详情'
-    }, {
-      date: '2016-05-04',
-      name: '创建者2号的团队',
-      creator: '创建者2号'
-    }, {
-      date: '2016-05-01',
-      name: '3号的团队',
-      creator: '3号'
-    }, {
-      date: '2016-05-03',
-      name: '4号神秘人的团队',
-      creator: '4号神秘人'
-    }
-      ],
-      projectlist: [
-        {
-      date: '2016-05-02',
-      name: '项目1',
-      creator: '创建者1',
-    }, {
-      date: '2016-05-04',
-      name: '项目2',
-      creator: '创建者2号'
-    }, {
-      date: '2016-05-01',
-      name: '项目3',
-      creator: '3号'
-    }, {
-      date: '2016-05-03',
-      name: '项目4',
-      creator: '4号神秘人'
-    }
-      ],
+      teamlist: [],
+      projectlist: [],
     };
+  },
+  created() {
+    var i = 0;
+    this.username = sessionStorage.getItem('username');
+    this.$axios.post('/team/showTeam/',{userid: sessionStorage.getItem('userid')}).then(
+        res => {
+          for( i = 0; i < res.data.num ; i++)
+            this.teamlist.push({
+              id: res.data.list[i].id,
+              name: res.data.list[i].name,
+              date:res.data.list[i].createTime,
+              creator:res.data.list[i].creator
+            })
+        }
+    )
+    this.$axios.post('/project/list_project/',{team_id:-1,user_id:sessionStorage.getItem('userid')}).then(
+        res =>{
+          for( i = 0 ; i < res.data.data.number ; i++)
+          {
+            this.projectlist.push({
+              id:res.data.data.project[i].id,
+              name:res.data.data.project[i].name,
+              team:res.data.data.project[i].team,
+              creator:res.data.data.project[i].team,
+              date:res.data.data.project[i].create_time,
+            })
+          }
+        }
+    )
   },
   methods: {
     handleOpen(key, keyPath) {
@@ -199,7 +192,12 @@ export default {
     },
     toregister() {
       this.$router.push('/register');
-    }
+    },
+    toitem(projectid,projectname) {
+      sessionStorage.setItem('projectid',this.projectlist[projectid].id);
+      sessionStorage.setItem('projectname',projectname);
+      this.$router.push('/itempage');
+    },
   }
 }
 </script>
