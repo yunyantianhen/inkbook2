@@ -88,6 +88,7 @@
     <div style="width: 1500px; height: 200px;">
       <div style="width: 50px; float: left">&nbsp;</div>
       <div style="width: 400px; float: left; box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)">
+        <br/>
         我的团队
         <el-table
             :data="teamlist"
@@ -114,6 +115,7 @@
       </div>
       <div style="width: 50px; float: left">&nbsp;</div>
       <div style="width: 400px; float: left; box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)">
+        <br/>
         我的项目
         <el-table
             :data="projectlist"
@@ -136,6 +138,9 @@
             </template>
           </el-table-column>
         </el-table>
+      </div>
+      <div>
+        <img style="height: 600px" src="../img/erciyuan.jpg">
       </div>
     </div>
   </div>

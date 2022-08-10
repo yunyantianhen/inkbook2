@@ -493,27 +493,32 @@ export default {
 
     this.showmember();
     this.showproject();
+    this.showbin();
     this.username = sessionStorage.getItem('username');
     this.teamname = sessionStorage.getItem('teamname');
-    var i = 0;
 
 
-    this.$axios.post('/project/recycle_bin/',{'team_id':sessionStorage.getItem('teamid')}).then(
-        res =>{
-          for( i = 0 ; i < res.data.data.number ; i++)
-          {
-            this.RecycleList.push({
-              id:res.data.data.project[i].id,
-              name:res.data.data.project[i].name,
-              team:res.data.data.project[i].team,
-              Creation_time:res.data.data.project[i].create_time,
-              Time_last_modified:res.data.data.project[i].update_time,
-            })
-          }
-        }
-    )
+
   },
   methods: {
+    showbin(){
+      var i=0;
+      this.RecycleList.length=0;
+      this.$axios.post('/project/recycle_bin/',{'team_id':sessionStorage.getItem('teamid')}).then(
+          res =>{
+            for( i = 0 ; i < res.data.data.number ; i++)
+            {
+              this.RecycleList.push({
+                id:res.data.data.project[i].id,
+                name:res.data.data.project[i].name,
+                team:res.data.data.project[i].team,
+                Creation_time:res.data.data.project[i].create_time,
+                Time_last_modified:res.data.data.project[i].update_time,
+              })
+            }
+          }
+      )
+    },
     showmember(){
       var i=0;
       this.memberlist.length=0;
@@ -669,6 +674,7 @@ export default {
             switch (res.data.result){
               case 1:
                 this.$message.success(res.data.msg);
+                this.showmember();
                 break;
               case 0:
                 this.$message.error(res.data.msg);
@@ -706,6 +712,7 @@ export default {
             switch (res.data.result){
               case 1:
                 this.$message.success(res.data.msg);
+                this.showproject();
                 break;
               case 0:
                 this.$message.error(res.data.msg);
@@ -720,6 +727,7 @@ export default {
             switch (res.data.result){
               case 1:
                 this.$message.success(res.data.msg);
+                this.showproject();
                 break;
               case 0:
                 this.$message.error(res.data.msg);
@@ -734,6 +742,8 @@ export default {
             switch (res.data.result){
               case 1:
                 this.$message.success(res.data.msg);
+                this.showproject();
+                this.showbin();
                 break;
               case 0:
                 this.$message.error(res.data.msg);

@@ -214,9 +214,7 @@ export default {
         mail: '',
       },
       addFormRules3:{
-        name:[{   required : true, message:'请输入修改后的文档名' ,trigger:'blur'},
-          { min :1 ,max:15, message: '项目名的长度在1~15个字符之间', trigger: 'blur'}
-        ]
+
       },
       options: [{
         value: '1',
@@ -338,6 +336,8 @@ export default {
             switch(res.data.result){
               case 1:
                 this.$message.success(res.data.msg);
+                this.showdocument();
+                this.rename_item=false;
                 break;
               case 0:
                 this.$message.error(res.data.msg);
@@ -370,6 +370,8 @@ export default {
           switch (res.data.result){
             case 1:
               this.$message.success(res.data.msg);
+              this.found_text=false;
+              this.showdocument();
               break;
             case 0:
               this.$message.error(res.data.msg);
