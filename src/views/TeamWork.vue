@@ -223,20 +223,24 @@ export default {
     };
   },
   created() {
-    var i = 0;
-    this.$axios.post('/team/showTeam/',{userid: sessionStorage.getItem('userid')}).then(
-        res => {
-          for( i = 0; i < res.data.num ; i++)
-            this.teamlist.push({
-              id: res.data.list[i].id,
-              name: res.data.list[i].name,
-              date:res.data.list[i].createTime,
-              creator:res.data.list[i].creator
-            })
-        }
-    )
+    this.getTeamlist();
   },
   methods: {
+    getTeamlist() {
+      let i = 0;
+      this.$axios.post('/team/showTeam/',{userid: sessionStorage.getItem('userid')}).then(
+          res => {
+            for( i = 0; i < res.data.num ; i++)
+              this.teamlist.push({
+                id: res.data.list[i].id,
+                name: res.data.list[i].name,
+                date:res.data.list[i].createTime,
+                creator:res.data.list[i].creator
+              })
+
+          }
+      )
+    },
     toregister() {
       this.$router.push('/register');
     },
@@ -256,6 +260,7 @@ export default {
             {
               case 1:
                 this.$message.success(res.data.msg);
+                this.found_team =false;
                 break;
               case 2:
                 this.$message.error(res.data.msg);
