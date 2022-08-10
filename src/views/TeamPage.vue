@@ -220,7 +220,7 @@
                 <template slot-scope="scope">
                   <!--<el-button type="text" style="color: #409EFF; text-decoration-line: none" @click="123">设置为管理员</el-button>-->
                   <el-button type="text" icon="el-icon-more-outline" @click="toitem(scope.$index,scope.row.name)">项目详情</el-button>
-                  <el-button type="text" icon="el-icon-edit" @click="12345">重命名</el-button>
+                  <el-button type="text" icon="el-icon-edit" @click="rename">重命名</el-button>
                   <el-button type="text" icon="el-icon-delete" @click="deleteitem(scope.$index)">删除</el-button>
                   <el-button type="text" icon="el-icon-copy-document" @click="copy(scope.$index)">复制</el-button>
                   <!--<el-button type="text" style="color: #409EFF; text-decoration-line: none" @click="123">移出队伍</el-button>-->
@@ -277,7 +277,7 @@
           </el-dialog>
           <br/><br/>
         </div>-->
-        <div style="width: 400px; float: left">
+        <!--<div style="width: 400px; float: left">
           <div style="height: 40px" v-for="(member) in memberlist" :key="member.id">{{member.name}}</div>
         </div>
         <div style="width: 400px; float: left">
@@ -289,7 +289,7 @@
               <i class="el-icon-delete" @click="leave"></i>
             </div>
           </div>
-        </div>
+        </div>-->
   <!--<div style="width: 800px; text-align: left">
     负责项目
     <el-button style="position: relative; left: 630px" type="primary" @click="addDialogVisible = true" round plain>创建项目</el-button>
@@ -510,6 +510,22 @@ export default {
     )
   },
   methods: {
+    rename() {
+      this.$prompt('请输入改动后的项目名', '重命名', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+      }).then(({ value }) => {
+        this.$message({
+          type: 'success',
+          message: '修改成功' + value
+        });
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '取消修改'
+        });
+      });
+    },
     toitem(projectid,projectname) {
       sessionStorage.setItem('projectid',this.projectlist[projectid].id);
       sessionStorage.setItem('projectname',projectname);

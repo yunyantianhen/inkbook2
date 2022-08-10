@@ -1,6 +1,19 @@
 <template>
   <html>
   <body>
+  <div id="background" style="height: 120px; "></div>
+  <div style="height: 40px; box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)">
+    <div style="position: relative; bottom: 40px; left: 50px; width: 300px">
+      <img class="head" src="../img/3.png">
+    </div>
+    <div style="position: relative; bottom: 97px; right: 450px; font-size: 20px; font-weight: bold">
+      云烟
+    </div>
+    <div style="position: relative; bottom: 122px; left: 580px;">
+      <el-link type="info" @click="toregister" style="font-size: 18px">注销</el-link>
+    </div>
+  </div>
+  <div style="height: 30px"></div>
   <el-row class="tac" style="float: left">
     <el-col :span="12">
       <el-menu
@@ -68,7 +81,70 @@
     </el-col>
   </el-row>
   <div>
-    homepage2
+    <img style="height: 200px" src="../img/tubiao2.png">
+    <div style="width: 1500px; height: 200px;">
+      <div style="width: 50px; float: left">&nbsp;</div>
+      <div style="width: 600px; float: left; box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)">
+        我的团队
+        <el-table
+            :data="teamlist"
+            stripe
+            style="width: 1000px; margin: auto">
+          <el-table-column
+              prop="date"
+              label="创建日期"
+              width="150">
+          </el-table-column>
+          <el-table-column
+              prop="name"
+              label="团队名称"
+              width="150">
+          </el-table-column>
+          <el-table-column
+              prop="creator"
+              label="创建者"
+              width="150">
+          </el-table-column>
+          <el-table-column
+              label="详情"
+              width="150">
+            <template slot-scope="scope">
+              <a href="TeamPage" style="color: #409EFF; text-decoration-line: none" @click="toteam(scope.$index,scope.row.name)">团队详情</a>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
+      <div style="width: 50px; float: left">&nbsp;</div>
+      <div style="width: 600px; float: left; box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)">
+        我的项目
+        <el-table
+            :data="projectlist"
+            stripe
+            style="width: 1000px; margin: auto">
+          <el-table-column
+              prop="date"
+              label="创建日期"
+              width="150">
+          </el-table-column>
+          <el-table-column
+              prop="name"
+              label="项目名称"
+              width="150">
+          </el-table-column>
+          <el-table-column
+              prop="creator"
+              label="所属团队"
+              width="150">
+          </el-table-column>
+          <el-table-column
+              width="150">
+            <template slot-scope="scope">
+              <a href="ItemPage" style="color: #409EFF; text-decoration-line: none" @click="toitem(scope.$index,scope.row.name)">项目详情</a>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
+    </div>
   </div>
   </body>
   </html>
@@ -87,11 +163,26 @@ export default {
     },
     handleClose(key, keyPath) {
       console.log(key, keyPath);
+    },
+    toregister() {
+      this.$router.push('/register');
     }
   }
 }
 </script>
 
 <style scoped>
-
+#background{
+  width: 100%;
+  height: 100%;
+  border: 1px #1A4BAF;
+  background-image: url("../img/星空4.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+}
+.head{
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+}
 </style>

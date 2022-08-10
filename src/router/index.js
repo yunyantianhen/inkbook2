@@ -10,7 +10,7 @@ const routes = [
     component: () => import('../views/HomePage')
   },
   {
-    path: '/',
+    path: '/register',
     name: 'RegisterPage',
     component: () => import('../views/Register')
   },
@@ -88,7 +88,12 @@ const routes = [
     path: '/recycle',
     name: 'Recycle',
     component: () => import('../views/Recycle')
-  }
+  },
+  {
+    path: '/',
+    name: 'GuidePage',
+    component: () => import('../views/GuidePage')
+  },
 ]
 const router = new VueRouter({
   mode: 'history',

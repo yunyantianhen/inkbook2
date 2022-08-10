@@ -1,8 +1,21 @@
 <template>
-  <div>
-    <div>
-      <div style="height: 1000px">
+  <div id="background">
+  <div id="diaphaneity">
+    <!--<div style="background-color: #333333; float: left; width: 500px; height: 700px">
+      <div style="height: 40px"></div>
+      <div style="height: 100px; text-align: right; margin-right: 30px">
+        <img style="height: 40px;" @click="toguidepage" src="../img/home.png">
+      </div>
+      <div>
+        <img style="height: 350px" src="../img/moshu3.png">
+      </div>
+    </div>-->
+    <div style="width: 1500px;">
+      <div style="height: 700px">
         <div class="warp" style="width: 400px; height: 280px; margin: auto;">
+          <div class="suffix2" style="">
+            <router-link to="/"><p style="color: gray;">返回首页</p></router-link>
+          </div>
           <div style="font-size: 25px; position: relative; top: 20px">登&nbsp;&nbsp;录</div>
           <el-form ref="form" :model="form" style="position: relative; top: 30px">
             <el-form-item prop="username">
@@ -12,15 +25,17 @@
               <el-input v-model="form.password" placeholder="密码" type="password" autocomplete="off" clearable show-password></el-input>
             </el-form-item>
             <el-form-item class="btn_login">
-              <el-button type="primary" @click="login">登&nbsp;&nbsp;录</el-button>
+              <el-button type="primary" @click="login" style="box-shadow: #42b983">登&nbsp;&nbsp;录</el-button>
             </el-form-item>
           </el-form>
-          <div class="suffix">
-            <router-link to="/logonpage"><p style="color: gray">注册帐号</p></router-link>
+          <div class="suffix" style="">
+            <router-link to="/logonpage"><p style="color: gray;">注册帐号</p></router-link>
+            <router-link to="/"><p style="color: gray;">注册帐号2</p></router-link>
           </div>
         </div>
       </div>
     </div>
+  </div>
   </div>
 </template>
 
@@ -38,6 +53,9 @@ export default {
     }
   },
   methods: {
+    toguidepage() {
+      this.$router.push('/');
+    },
     login() {
       this.$axios.post('/user/login/',qs.stringify(this.form)).then(
           res =>{
@@ -45,7 +63,7 @@ export default {
               case 1:
                 this.$message.success("登录成功！");
                 sessionStorage.setItem('userid',res.data.id);
-                this.$router.push('/homepage');
+                this.$router.push('/homepage2');
                 break;
 
               case 0:
@@ -77,12 +95,22 @@ export default {
   cursor: pointer;
   float:right;
 }
+.suffix2 {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  font-size:14px;
+  line-height:10px;
+  color:#999;
+  cursor: pointer;
+  float:right;
+}
 
 #background{
   width: 100%;
   height: 100%;
   border: 1px #1A4BAF;
-  background-image: url("../../src/img/星空4.jpg");
+  background-image: url("../../src/img/星空.png");
   background-size: cover;
   background-attachment: fixed;
 }
@@ -90,7 +118,7 @@ export default {
   width: 100%;
   height: 100%;
   background-color: white;
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.5);
   background-attachment: fixed;
 }
 .warp{
