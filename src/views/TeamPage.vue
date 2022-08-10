@@ -195,22 +195,11 @@
             </el-dialog>
             <div style="width: 600px; float: left; height: 50px; text-align: left">
               <br/>
-              <template>
-                <el-radio-group v-model="sorting_factor">
-                  <el-radio :label="1">按创建时间排序</el-radio>
-                  <el-radio :label="2">按最近修改时间排序</el-radio>
-                  <el-radio :label="3">按项目名称排序</el-radio>
-                </el-radio-group>
-              </template>
+
             </div>
             <div style="width: 300px; float: left; height: 50px; text-align: right">
               <br/>
-              <template>
-                <el-radio-group v-model="sorting_order">
-                  <el-radio :label="0">正序</el-radio>
-                  <el-radio :label="1">倒序</el-radio>
-                </el-radio-group>
-              </template>
+
             </div>
             <el-table
                 :data="projectlist"
@@ -427,19 +416,13 @@ export default {
         email: '',
       },
       addFormRules:{
-      name:[
-      {   required : true, message:'请输入被邀请人的邮箱' ,trigger:'blur'},
-      { min :1 ,max:15, message: '项目名的长度在1~15个字符之间', trigger: 'blur'}
-      ]
+
       },
       addForm1:{
         name:''
       },
       addFormRules1:{
-        name:[
-          { required : true, message:'请输入用户名' ,trigger:'blur'},
-          { min :1 ,max:15, message: '项目名的长度在1~15个字符之间', trigger: 'blur'}
-        ]
+
       },
       /*GroupList: [{
         nickname: '某科学的昵称1',
@@ -507,37 +490,14 @@ export default {
     }
   },
   created() {
+
+    this.showmember();
+    this.showproject();
     this.username = sessionStorage.getItem('username');
     this.teamname = sessionStorage.getItem('teamname');
     var i = 0;
-    this.$axios.post('/team/showMember/',{teamid:sessionStorage.getItem('teamid')}).then(
-        res =>{
-          for( i = 0; i < res.data.num; i++ )
-          {
-            this.memberlist.push({
-              username:res.data.list[i].username,
-              id:res.data.list[i].id,
-              name:res.data.list[i].name,
-              identity:res.data.list[i].identity,
-              mail:res.data.list[i].mail
-            })
-          }
-        }
-    )
-    this.$axios.post('/project/list_project/',{team_id:sessionStorage.getItem('teamid'),user_id:-1}).then(
-        res =>{
-          for( i = 0 ; i < res.data.data.number ; i++)
-          {
-            this.projectlist.push({
-              id:res.data.data.project[i].id,
-              name:res.data.data.project[i].name,
-              team:res.data.data.project[i].team,
-              Creation_time:res.data.data.project[i].create_time,
-              Time_last_modified:res.data.data.project[i].update_time,
-            })
-          }
-        }
-    )
+
+
     this.$axios.post('/project/recycle_bin/',{'team_id':sessionStorage.getItem('teamid')}).then(
         res =>{
           for( i = 0 ; i < res.data.data.number ; i++)
@@ -554,6 +514,42 @@ export default {
     )
   },
   methods: {
+    showmember(){
+      var i=0;
+      this.memberlist.length=0;
+      this.$axios.post('/team/showMember/',{teamid:sessionStorage.getItem('teamid')}).then(
+          res =>{
+            for( i = 0; i < res.data.num; i++ )
+            {
+              this.memberlist.push({
+                username:res.data.list[i].username,
+                id:res.data.list[i].id,
+                name:res.data.list[i].name,
+                identity:res.data.list[i].identity,
+                mail:res.data.list[i].mail
+              })
+            }
+          }
+      )
+    },
+    showproject(){
+      this.projectlist.length=0;
+      var i=0;
+      this.$axios.post('/project/list_project/',{team_id:sessionStorage.getItem('teamid'),user_id:-1}).then(
+          res =>{
+            for( i = 0 ; i < res.data.data.number ; i++)
+            {
+              this.projectlist.push({
+                id:res.data.data.project[i].id,
+                name:res.data.data.project[i].name,
+                team:res.data.data.project[i].team,
+                Creation_time:res.data.data.project[i].create_time,
+                Time_last_modified:res.data.data.project[i].update_time,
+              })
+            }
+          }
+      )
+    },
     reName(id)
     {
       this.rename_item = true;
@@ -584,7 +580,8 @@ export default {
             switch (res.data.result){
               case 1:
                 this.$message.success(res.data.msg);
-                this.addDialogVisible = false;
+                this.invite_user = false;
+                this.showmember();
                 break;
               case 0:
                 this.$message.error(res.data.msg);
@@ -689,6 +686,7 @@ export default {
             switch (res.data.result){
               case 1:
                 this.$message.success(res.data.msg);
+                this.showmember();
                 break;
               case 0:
                 this.$message.error(res.data.msg);
@@ -751,6 +749,7 @@ export default {
         if(res.result === 0) return this.$message.error(res.msg)
         this.$message.success("创建成功");
         this.addDialogVisible=false;
+        this.showproject();
       })
     },
   }
