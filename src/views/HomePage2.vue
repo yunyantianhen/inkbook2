@@ -1,6 +1,8 @@
 <template>
   <html>
   <body>
+  <div id="background" style="height: 120px; width: 1510px"></div>
+  <div></div>
   <el-row class="tac" style="float: left">
     <el-col :span="12">
       <el-menu
@@ -68,9 +70,9 @@
     </el-col>
   </el-row>
   <div>
-    <img style="height: 100px" src="../img/tubiao2.png">
-    <div style="width: 800px; height: 600px; background-color: #409EFF">
-      1234
+    <img style="height: 200px" src="../img/tubiao2.png">
+    <div style="width: 800px; height: 200px;">
+      1
     </div>
   </div>
   </body>
@@ -96,5 +98,12 @@ export default {
 </script>
 
 <style scoped>
-
+#background{
+  width: 100%;
+  height: 100%;
+  border: 1px #1A4BAF;
+  background-image: url("../../src/img/星空4.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+}
 </style>

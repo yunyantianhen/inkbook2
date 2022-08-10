@@ -1,7 +1,9 @@
 <template>
   <html>
   <body>
-  <div>
+  <div id="background">
+    <div id="diaphaneity">
+      <div style="height: 700px">
     <div class="wrap">
       <div style="font-size: 22px; position: absolute; top: 15px; right: 150px">注&nbsp;&nbsp;册</div>
       <el-form :model="form" ref="form" class="form" style="position: relative; top: 70px;">
@@ -38,6 +40,8 @@
           <p @click="toRegister">取消</p>
         </div>
       </el-form>
+    </div>
+      </div>
     </div>
   </div>
   </body>
@@ -101,6 +105,22 @@ export default {
   color:#999;
   cursor: pointer;
   float:right;
+}
+
+#background{
+  width: 100%;
+  height: 100%;
+  border: 1px #1A4BAF;
+  background-image: url("../../src/img/星空.png");
+  background-size: cover;
+  background-attachment: fixed;
+}
+#diaphaneity{
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  background: rgba(255, 255, 255, 0.5);
+  background-attachment: fixed;
 }
 
 .wrap{
