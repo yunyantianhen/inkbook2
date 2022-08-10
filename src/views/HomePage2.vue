@@ -176,7 +176,7 @@ export default {
   width: 100%;
   height: 100%;
   border: 1px #1A4BAF;
-  background-image: url("../img/星空2.jpg");
+  background-image: url("../img/星空4.jpg");
   background-size: cover;
   background-attachment: fixed;
 }
