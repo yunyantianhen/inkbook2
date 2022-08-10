@@ -563,7 +563,7 @@ export default {
       this.$router.push('/itempage');
     },
     back() {
-      this.$router.push('/homepage');
+      this.$router.push('/teamwork');
     },
     inviting() {
 
