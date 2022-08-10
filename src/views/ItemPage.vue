@@ -114,7 +114,7 @@
   <br/><br/>
   <el-divider></el-divider>
   <div style="margin-right: 700px; height: 50px">
-    <el-button type="info" plain @click="todesign()">设计原型</el-button>&nbsp;&nbsp;
+    <a href="http://81.70.132.82:16382/"><el-button type="info" plain>设计原型</el-button></a>&nbsp;&nbsp;
   <a href="https://app.diagrams.net/"><el-button type="info" plain>绘制图</el-button></a>&nbsp;&nbsp;
   <el-button type="info" @click="found_text=true" plain>创建文档</el-button>
     <el-dialog title="创建文档" :visible.sync="found_text" width="500px" @close="founding_text">
@@ -322,9 +322,7 @@ export default {
       sessionStorage.setItem('documentname',documentname);
       this.$router.push('/TextEditor');
     },
-    todesign(){
-      this.$router.push('/design');
-    },
+
     founding_text(){
     },
     renamedocument(){
