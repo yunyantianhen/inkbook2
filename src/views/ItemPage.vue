@@ -7,7 +7,7 @@
     <img class="head" src="../img/3.png">
   </div>
   <div style="position: relative; bottom: 97px; left: 250px; font-size: 20px; font-weight: bold; width: 100px">
-    云烟
+    {{this.username}}
   </div>
   <div style="position: relative; bottom: 122px; left: 1280px;width: 100px">
     <el-link type="info" @click="toregister" style="font-size: 18px">注销</el-link>
@@ -206,6 +206,7 @@ export default {
   name: "ItemPage",
   data(){
     return{
+      username:"",
       documentid:0,
       rename_item: false,
       addForm3:{
@@ -290,6 +291,7 @@ export default {
     }
   },
   created() {
+    this.username = sessionStorage.getItem('username');
     this.projectname = sessionStorage.getItem('projectname');
     this.showdocument();
 
