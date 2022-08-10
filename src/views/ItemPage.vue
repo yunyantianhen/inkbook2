@@ -147,7 +147,19 @@
         <template slot-scope="scope">
           <!--<el-button type="text" style="color: #409EFF; text-decoration-line: none" @click="123">设置为管理员</el-button>-->
           <el-button type="text" icon="el-icon-more-outline" @click="totext(scope.$index,scope.row.name)">文档详情</el-button>
-          <el-button type="text" icon="el-icon-edit" @click="12345">重命名</el-button>
+          <el-button type="text" icon="el-icon-edit" @click="rename_item=true">重命名</el-button>
+          <el-dialog title="重命名" :visible.sync="rename_item" width="550px">
+            <el-form :model="addForm3" :rules="addFormRules3" ref="addFormRef" label-width="100px">
+              <el-form-item label="新文档名" prop="name">
+                <el-input v-model="addForm3.name"></el-input>
+              </el-form-item>
+            </el-form>
+            <span slot="footer" class="dialog-footer">
+                      <el-button @click="rename_item = false">取 消</el-button>
+                      <el-button type="primary" @click="reName">确 定</el-button>
+                    </span>
+          </el-dialog>
+          &nbsp;
           <el-button type="text" icon="el-icon-delete" @click="deletedocument(scope.$index)">删除</el-button>
           <!--<el-button type="text" style="color: #409EFF; text-decoration-line: none" @click="123">移出队伍</el-button>-->
         </template>
@@ -178,6 +190,16 @@ export default {
   name: "ItemPage",
   data(){
     return{
+      rename_item: false,
+      addForm3:{
+        name: '',
+        mail: '',
+      },
+      addFormRules3:{
+        name:[{   required : true, message:'请输入修改后的文档名' ,trigger:'blur'},
+          { min :1 ,max:15, message: '项目名的长度在1~15个字符之间', trigger: 'blur'}
+        ]
+      },
       options: [{
         value: '1',
         label: '无需模板'
@@ -266,6 +288,9 @@ export default {
     )
   },
   methods: {
+    reName(){
+
+    },
     backteam(){
       this.$router.push('/teampage');
     },

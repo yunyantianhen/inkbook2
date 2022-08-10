@@ -18,7 +18,7 @@
       <div style="margin-right: 200px">
         <br/>
         <br/><br/>
-        <el-button style="background-color: khaki; height: 60px; width: 180px; font-size: 20px" round>点击体验 >></el-button>
+        <el-button style="background-color: khaki; height: 60px; width: 180px; font-size: 20px" @click="tologon" round>点击体验 >></el-button>
       </div>
     </div>
     <div style="width: 700px; float: left">
