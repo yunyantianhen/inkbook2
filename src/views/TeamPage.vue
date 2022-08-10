@@ -480,7 +480,7 @@ export default {
           }
         }
     )
-    this.$axios.post('/project/list_project/',{team_id:-1,user_id:sessionStorage.getItem('userid')}).then(
+    this.$axios.post('/project/list_project/',{team_id:sessionStorage.getItem('teamid'),user_id:-1}).then(
         res =>{
           for( i = 0 ; i < res.data.data.number ; i++)
           {
@@ -488,7 +488,8 @@ export default {
               id:res.data.data.project[i].id,
               name:res.data.data.project[i].name,
               team:res.data.data.project[i].team,
-
+              Creation_time:res.data.data.project[i].create_time,
+              Time_last_modified:res.data.data.project[i].update_time,
             })
           }
         }
@@ -500,7 +501,9 @@ export default {
             this.RecycleList.push({
               id:res.data.data.project[i].id,
               name:res.data.data.project[i].name,
-              team:res.data.data.project[i].team
+              team:res.data.data.project[i].team,
+              Creation_time:res.data.data.project[i].create_time,
+              Time_last_modified:res.data.data.project[i].update_time,
             })
           }
         }
