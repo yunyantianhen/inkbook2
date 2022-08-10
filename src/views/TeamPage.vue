@@ -596,6 +596,8 @@ export default {
             switch(res.data.result){
               case 1:
                 this.$message.success(res.data.msg);
+                this.rename_item = false;
+                this.showproject();
                 break;
               case 0:
                 this.$message.error(res.data.msg);
