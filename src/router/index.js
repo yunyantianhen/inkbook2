@@ -101,4 +101,16 @@ const router = new VueRouter({
   routes
 })
 
+router.beforeEach((to,from,next)=>{
+  if(to.path === '/') return next();
+  if(to.path === '/register') return next();
+  if(to.path === '/logonpage') return next();
+  if(to.path === '/homepage') return next();
+  if(to.path === '/homepage2') return next();
+  //获取token
+  const tokenStr = window.sessionStorage.getItem('userid')
+  if(!tokenStr) return next('/')
+  next()
+})
+
 export default router
