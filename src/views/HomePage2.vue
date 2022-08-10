@@ -3,14 +3,17 @@
   <body>
   <div id="background" style="height: 120px; "></div>
   <div style="height: 40px; box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)">
-    <div style="position: relative; bottom: 40px; left: 50px; width: 300px">
+    <div style="position: relative; bottom: 40px; left: 50px; width: 300px;">
       <img class="head" src="../img/3.png">
     </div>
-    <div style="position: relative; bottom: 97px; right: 450px; font-size: 20px; font-weight: bold">
+    <div style="position: relative; bottom: 97px; left: 250px; font-size: 20px; font-weight: bold; width: 100px">
       云烟
     </div>
-    <div style="position: relative; bottom: 122px; left: 580px;">
+    <div style="position: relative; bottom: 122px; left: 1280px;width: 100px">
       <el-link type="info" @click="toregister" style="font-size: 18px">注销</el-link>
+    </div>
+    <div style="position: relative; bottom: 265px; left: 1180px;width: 100px">
+      <img style="height: 100px" src="../img/baimoshu.png">
     </div>
   </div>
   <div style="height: 30px"></div>
@@ -81,7 +84,7 @@
     </el-col>
   </el-row>
   <div>
-    <img style="height: 200px" src="../img/tubiao2.png">
+    <!--<img style="height: 200px" src="../img/tubiao2.png">-->
     <div style="width: 1500px; height: 200px;">
       <div style="width: 50px; float: left">&nbsp;</div>
       <div style="width: 400px; float: left; box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)">
@@ -133,10 +136,6 @@
             </template>
           </el-table-column>
         </el-table>
-      </div>
-      <div>
-        <el-calendar v-model="date" style="width: 500px; height: 300px">
-        </el-calendar>
       </div>
     </div>
   </div>
