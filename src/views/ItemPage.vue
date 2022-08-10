@@ -342,7 +342,7 @@ export default {
     addText(){
       var m = "空白文档";
       if(this.value == 2)
-        m = "会议政要";
+        m = "会议纪要";
       else if(this.value == 3)
         m = "架构设计说明书";
       else if(this.value == 4)

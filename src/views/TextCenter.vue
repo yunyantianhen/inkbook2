@@ -101,6 +101,7 @@ export default {
   },
   methods:{
     goBack() {
+      this.$router.push('/TeamPage')
     },
     handleOpen(key, keyPath) {
       console.log(key, keyPath);
