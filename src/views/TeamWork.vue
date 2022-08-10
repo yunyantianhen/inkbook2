@@ -227,6 +227,7 @@ export default {
   },
   methods: {
     getTeamlist() {
+      this.teamlist.length=0;
       let i = 0;
       this.$axios.post('/team/showTeam/',{userid: sessionStorage.getItem('userid')}).then(
           res => {
@@ -260,6 +261,7 @@ export default {
               case 1:
                 this.$message.success(res.data.msg);
                 this.found_team =false;
+                this.getTeamlist();
                 break;
               case 2:
                 this.$message.error(res.data.msg);

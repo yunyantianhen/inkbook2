@@ -103,7 +103,7 @@
             <span style="color: white;">团队详情</span>
           </el-menu-item>
         </router-link>
-        <router-link to="/teampage" style="text-decoration-line: none;">
+        <router-link to="/TextCenter" style="text-decoration-line: none;">
           <el-menu-item index="6">
             <i class="el-icon-menu"></i>
             <span style="color: white;">文档中心</span>
@@ -166,7 +166,7 @@
                 <template slot-scope="scope">
                   <!--<el-button type="text" style="color: #409EFF; text-decoration-line: none" @click="123">设置为管理员</el-button>-->
                   <el-button type="text" icon="el-icon-user" @click="BecomeAdministrator(scope.row.mail)">设置管理员</el-button>
-                  <el-button type="text" icon="el-icon-delete" @click="leave(scope.$index)">移出</el-button>
+                  <el-button type="text" icon="el-icon-delete" @click="leave(scope.row.mail)">移出</el-button>
                   <!--<el-button type="text" style="color: #409EFF; text-decoration-line: none" @click="123">移出队伍</el-button>-->
                 </template>
               </el-table-column>
@@ -219,17 +219,20 @@
               <el-table-column
                   prop="name"
                   label="项目名称"
-                  width="220">
+                  width="220"
+                  sortable>
               </el-table-column>
               <el-table-column
                   prop="Creation_time"
                   label="创建时间"
-                  width="220">
+                  width="220"
+                  sortable>
               </el-table-column>
               <el-table-column
                   prop="Time_last_modified"
                   label="最近一次修改"
-                  width="220">
+                  width="220"
+                  sortable>
               </el-table-column>
               <el-table-column
                   width="">
@@ -579,6 +582,7 @@ export default {
             switch (res.data.result){
               case 1:
                 this.$message.success(res.data.msg);
+                this.addDialogVisible = false;
                 break;
               case 0:
                 this.$message.error(res.data.msg);
@@ -675,8 +679,9 @@ export default {
     leave(id) {
       this.$axios.post('/team/deleteMember/',{
         userid1:sessionStorage.getItem('userid'),
-        userid2:this.memberlist[id].id,
-        teamid:sessionStorage.getItem('teamid')
+        email:id,
+        teamid:sessionStorage.getItem('teamid'),
+
       }).then(
           res =>{
             switch (res.data.result){
