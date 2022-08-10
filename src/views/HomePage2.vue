@@ -84,17 +84,12 @@
     <img style="height: 200px" src="../img/tubiao2.png">
     <div style="width: 1500px; height: 200px;">
       <div style="width: 50px; float: left">&nbsp;</div>
-      <div style="width: 600px; float: left; box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)">
+      <div style="width: 400px; float: left; box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)">
         我的团队
         <el-table
             :data="teamlist"
             stripe
             style="width: 1000px; margin: auto">
-          <el-table-column
-              prop="date"
-              label="创建日期"
-              width="150">
-          </el-table-column>
           <el-table-column
               prop="name"
               label="团队名称"
@@ -107,7 +102,7 @@
           </el-table-column>
           <el-table-column
               label="详情"
-              width="150">
+              width="100">
             <template slot-scope="scope">
               <a href="TeamPage" style="color: #409EFF; text-decoration-line: none" @click="toteam(scope.$index,scope.row.name)">团队详情</a>
             </template>
@@ -115,17 +110,12 @@
         </el-table>
       </div>
       <div style="width: 50px; float: left">&nbsp;</div>
-      <div style="width: 600px; float: left; box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)">
+      <div style="width: 400px; float: left; box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)">
         我的项目
         <el-table
             :data="projectlist"
             stripe
             style="width: 1000px; margin: auto">
-          <el-table-column
-              prop="date"
-              label="创建日期"
-              width="150">
-          </el-table-column>
           <el-table-column
               prop="name"
               label="项目名称"
@@ -137,12 +127,16 @@
               width="150">
           </el-table-column>
           <el-table-column
-              width="150">
+              width="100">
             <template slot-scope="scope">
               <a href="ItemPage" style="color: #409EFF; text-decoration-line: none" @click="toitem(scope.$index,scope.row.name)">项目详情</a>
             </template>
           </el-table-column>
         </el-table>
+      </div>
+      <div>
+        <el-calendar v-model="date" style="width: 500px; height: 300px">
+        </el-calendar>
       </div>
     </div>
   </div>
@@ -155,6 +149,46 @@ export default {
   name: "NewPage",
   data() {
     return {
+      date: new Date(),
+      teamlist: [
+        {
+      date: '2016-05-02',
+      name: '创建者1的团队',
+      creator: '创建者1',
+      detail: '团队详情'
+    }, {
+      date: '2016-05-04',
+      name: '创建者2号的团队',
+      creator: '创建者2号'
+    }, {
+      date: '2016-05-01',
+      name: '3号的团队',
+      creator: '3号'
+    }, {
+      date: '2016-05-03',
+      name: '4号神秘人的团队',
+      creator: '4号神秘人'
+    }
+      ],
+      projectlist: [
+        {
+      date: '2016-05-02',
+      name: '项目1',
+      creator: '创建者1',
+    }, {
+      date: '2016-05-04',
+      name: '项目2',
+      creator: '创建者2号'
+    }, {
+      date: '2016-05-01',
+      name: '项目3',
+      creator: '3号'
+    }, {
+      date: '2016-05-03',
+      name: '项目4',
+      creator: '4号神秘人'
+    }
+      ],
     };
   },
   methods: {
@@ -176,8 +210,8 @@ export default {
   width: 100%;
   height: 100%;
   border: 1px #1A4BAF;
-  background-image: url("../img/星空4.jpg");
-  background-size: cover;
+  background-image: url("../img/xingkong3.jpg");
+  background-size: 750px;
   background-attachment: fixed;
 }
 .head{

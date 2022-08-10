@@ -76,7 +76,7 @@ export default {
             switch (res.data.result) {
               case 1:
                 this.$message.success("注册成功！");
-                this.$router.push('/');
+                this.$router.push('/register');
                 break;
 
               case 0:

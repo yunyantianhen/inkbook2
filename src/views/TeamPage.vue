@@ -220,7 +220,19 @@
                 <template slot-scope="scope">
                   <!--<el-button type="text" style="color: #409EFF; text-decoration-line: none" @click="123">设置为管理员</el-button>-->
                   <el-button type="text" icon="el-icon-more-outline" @click="toitem(scope.$index,scope.row.name)">项目详情</el-button>
-                  <el-button type="text" icon="el-icon-edit" @click="rename(scope.$index)">重命名</el-button>
+                  <el-button type="text" icon="el-icon-edit" @click="reName(scope.$index)">重命名</el-button>
+                  <el-dialog title="重命名" :visible.sync="rename_item" width="550px">
+                    <el-form :model="addForm2" :rules="addFormRules2" ref="addFormRef" label-width="100px">
+                      <el-form-item label="新项目名" prop="name">
+                        <el-input v-model="addForm2.name"></el-input>
+                      </el-form-item>
+                    </el-form>
+                    <span slot="footer" class="dialog-footer">
+                      <el-button @click="rename_item = false">取 消</el-button>
+                      <el-button type="primary" @click="renameitem">确 定</el-button>
+                    </span>
+                  </el-dialog>
+                  &nbsp;
                   <el-button type="text" icon="el-icon-delete" @click="deleteitem(scope.$index)">删除</el-button>
                   <el-button type="text" icon="el-icon-copy-document" @click="copy(scope.$index)">复制</el-button>
                   <!--<el-button type="text" style="color: #409EFF; text-decoration-line: none" @click="123">移出队伍</el-button>-->
@@ -331,6 +343,17 @@ export default {
   name: "TeamPage",
   data() {
     return{
+      itemid:0,
+      rename_item: false,
+      addForm2:{
+        name: '',
+        mail: '',
+      },
+      addFormRules2:{
+        name:[{   required : true, message:'请输入修改后的项目名' ,trigger:'blur'},
+          { min :1 ,max:15, message: '项目名的长度在1~15个字符之间', trigger: 'blur'}
+        ]
+      },
       input_search: '',//搜索团队输入框中的内容
       sorting_factor: '',//排序的因素
       sorting_order: '',//是正序还是倒序
@@ -510,23 +533,9 @@ export default {
     )
   },
   methods: {
-    rename(itemid) {
-      this.$prompt('请输入改动后的项目名', '重命名', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        inputPlaceholder: '',
-      }).then(({ value }) => {
-        this.$message({
-          type: 'success',
-          message: '修改成功' + value
-        });
-        this.renameitem(itemid);
-      }).catch(() => {
-        this.$message({
-          type: 'info',
-          message: '取消修改'
-        });
-      });
+    reName(id){
+      this.rename_item=true;
+      this.itemid=id;
     },
     toitem(projectid,projectname) {
       sessionStorage.setItem('projectid',this.projectlist[projectid].id);
@@ -558,9 +567,8 @@ export default {
           }
       )
     },//邀请成员
-    renameitem(id){
-      window.alert();
-      this.$axios.post('/project/rename/',{'id':this.projectlist[id].id,'name':this.value}).then(
+    renameitem(){
+      this.$axios.post('/project/rename/',{'id':this.projectlist[this.itemid].id,'name':this.addForm2.name}).then(
           res =>{
             switch(res.data.result){
               case 1:
